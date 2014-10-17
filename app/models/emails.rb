@@ -15,5 +15,9 @@
 #  index_emails_on_address  (address) UNIQUE
 #
 
+require 'securerandom'
 class Emails < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
+  belongs_to :user
 end

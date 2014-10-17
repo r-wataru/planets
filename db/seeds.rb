@@ -1,7 +1,25 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+unless Rails.env.production? || Rails.env.staging?
+  require 'database_cleaner'
+  DatabaseCleaner.strategy = :truncation
+  DatabaseCleaner.clean
+end
+
+table_names = %w(users import_data import_total_data rate)
+
+table_names.each do |table_name|
+  dir = case Rails.env
+  when 'development'
+    'development'
+  when 'staging'
+    'development' # 開発環境と同じにする
+  when 'production'
+    'production'
+  else
+    break
+  end
+  path = Rails.root.join('db', 'seeds', dir, "#{table_name}.rb")
+  if File.exist?(path)
+    puts "Creating #{table_name}...."
+    require(path)
+  end
+end
