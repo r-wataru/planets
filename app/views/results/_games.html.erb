@@ -1,0 +1,25 @@
+<div class="panel panel-custom full">
+  <div class="panel-heading">
+    <p>試合結果</p>
+  </div>
+  <div class="panel-body">
+    <table class="result" border="1">
+      <tr>
+        <th>試合日</th>
+        <th>試合名</th>
+        <th>勝敗</th>
+        <th>結果</th>
+        <th>コメント</th>
+      </tr>
+      <% @season.games.order("played_at DESC").each_with_index do |result, idx| %>
+        <tr>
+          <td style="white-space: nowrap;"><%= result.played_at.strftime("%Y/%m/%d") %></td>
+          <td style="white-space: nowrap;"><%= result.name %></td>
+          <td style="white-space: nowrap;"><%= result.display_winning %></td>
+          <td style="white-space: nowrap;"><%= result.total_result %></td>
+          <td><%= result.description %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
