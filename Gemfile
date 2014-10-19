@@ -6,8 +6,6 @@ gem 'rails', '4.1.6'
 gem 'mysql2'
 
 gem "json", "~> 1.8.1"
-gem 'jquery-rails'
-gem 'jquery-ui-rails', '~> 4.2.1'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -33,14 +31,14 @@ gem 'nokogiri', '~> 1.6.3'
 gem 'factory_girl_rails', '~> 4.4.1'
 
 # Asset related gems
-group :assets do
-  gem 'sass-rails',   '~> 4.0.3'
-  gem 'uglifier', '>= 1.3.0'
-  gem 'therubyracer', :platforms => :ruby
-  gem 'bootstrap-sass', '~> 3.2.0.2'
-  gem 'autoprefixer-rails'
-  gem 'font-awesome-rails'
-end
+gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'sass-rails',   '~> 4.0.3'
+gem 'uglifier', '>= 1.3.0'
+gem 'therubyracer', :platforms => :ruby
+gem 'bootstrap-sass', '~> 3.2.0.2'
+gem 'autoprefixer-rails'
+gem 'font-awesome-rails'
 
 # 本プロジェクトでは CoffeeScript を利用しないが、Tilt の警告を消すために必要。
 gem 'coffee-script', '>= 2.2.0'
