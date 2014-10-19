@@ -1,0 +1,45 @@
+<div class="panel panel-custom full">
+  <div class="panel-heading">
+    <p>投手成績</p>
+  </div>
+  <div class="panel-body">
+    <table class="result" border="1">
+      <tr>
+        <th>順位</th>
+        <th>選手名</th>
+        <th><%= link_to "防御率*", results_path(p_change: "earned_run_average") %></th>
+        <th><%= link_to "試合数", results_path(p_change: "set_games") %></th>
+        <th><%= link_to "勝", results_path(p_change: "winning") %></th>
+        <th><%= link_to "敗*", results_path(p_change: "defeat") %></th>
+        <th><%= link_to "ホールド", results_path(p_change: "hold_number") %></th>
+        <th><%= link_to "セーブ", results_path(p_change: "save_number") %></th>
+        <th><%= link_to "勝率*", results_path(p_change: "winning_rate") %></th>
+        <th><%= link_to "投球回数", results_path(p_change: "pitching_number") %></th>
+        <th><%= link_to "被安打*", results_path(p_change: "hit") %></th>
+        <th><%= link_to "奪三振", results_path(p_change: "strikeouts") %></th>
+        <th><%= link_to "奪三振率*", results_path(p_change: "struck_out_rate") %></th>
+        <th><%= link_to "失点", results_path(p_change: "run") %></th>
+        <th><%= link_to "自責点", results_path(p_change: "remorse_point") %></th>
+      </tr>
+      <% @pitchers.each_with_index do |result, idx| %>
+        <tr>
+          <td><%= idx + 1 %></td>
+          <td><%= result[:display_name] %></td>
+          <td><%= sprintf( "%.2f", result[:earned_run_average].to_f) %></td>
+          <td><%= result[:set_games] %></td>
+          <td><%= result[:winning] %></td>
+          <td><%= result[:defeat] %></td>
+          <td><%= result[:hold_number] %></td>
+          <td><%= result[:save_number] %></td>
+          <td><%= sprintf("%.3f", result[:winning_rate].to_f) %></td>
+          <td><%= result[:pitching_number] %></td>
+          <td><%= result[:hit] %></td>
+          <td><%= result[:strikeouts] %></td>
+          <td><%= result[:struck_out_rate] %></td>
+          <td><%= result[:run] %></td>
+          <td><%= result[:remorse_point] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

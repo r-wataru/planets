@@ -23,28 +23,30 @@ class Rate
       return total_bases(total).to_i.quo(total[:at_bats]).to_f.round(3)
     end
 
-    def number_of_batting(total)
-      #打席数	打数＋四死球＋犠打＋犠飛＋妨害出塁
-      four_and_dead = total.base_on_balls + total.hit_by_pitches
-      sacrifice = sacrifice_bunts + sacrifice_flies
-      return total.at_bats + four_and_dead + sacrifice
-    end
-
     def winning_rate(total)
       #勝率	勝数÷(勝数＋負数)
-      unless total.winning + total.defeat == 0
-        return total.winning.to_i.quo(total.winning + total.defeat).to_f.round(3)
+      if total[:winning] + total[:defeat] == 0
+        return 0
+      else
+        return total[:winning].to_i.quo(total[:winning] + total[:defeat]).to_f.round(3)
       end
     end
 
     def struck_out_rate(total)
       # 奪三振数 奪三振×9÷投球回
-      return (total.strikeouts * 9).quo(total.pitching_number).to_f.round(2)
+      return (total[:strikeouts] * 9).quo(total[:pitching_number]).to_f.round(2)
     end
 
     def earned_run_average(total)
       #防御率	自責点×９÷投球回数　[小数点３位以下四捨五入]
-      return (total.remorse_point * 9).quo(total.pitching_number).to_f.round(2)
+      return (total[:remorse_point] * 9).quo(total[:pitching_number]).to_f.round(2)
+    end
+
+    def number_of_batting(total)
+      #打席数	打数＋四死球＋犠打＋犠飛＋妨害出塁
+      four_and_dead = total.base_on_balls + total.hit_by_pitches
+      sacrifice = sacrifice_bunts + sacrifice_flies
+      return total.at_bats + four_and_dead + sacrifice
     end
 
     def provisions_bat(season)
