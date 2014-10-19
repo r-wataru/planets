@@ -2,8 +2,8 @@ class Rate
   class << self
     def batting_average(total)
       #打率	安打数÷打数　[小数点４位以下四捨五入]
-      hits = (total.single_hits + total.double_hits + total.triple_hits + total.home_run)
-      return hits.quo(total.at_bats).to_f.round(3)
+      hits = (total[:single_hits] + total[:double_hits] + total[:triple_hits] + total[:home_run])
+      return hits.quo(total[:at_bats]).to_f.round(3)
     end
 
     def base_percentage(total)
