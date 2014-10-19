@@ -8,9 +8,19 @@ class Rate
 
     def base_percentage(total)
       #出塁率	(四死球＋安打)÷(打数＋四死球＋犠飛)　[小数点４位以下四捨五入]
-      hits = (total.single_hits + total.double_hits + total.triple_hits + total.home_run)
-      four_and_dead = (total.base_on_balls + total.hit_by_pitches)
-      return (hits + four_and_dead).quo(total.at_bats + four_and_dead + total.sacrifice_flies).to_f.round(3)
+      hits = (total[:single_hits] + total[:double_hits] + total[:triple_hits] + total[:home_run])
+      four_and_dead = (total[:base_on_balls] + total[:hit_by_pitches])
+      return (hits + four_and_dead).quo(total[:at_bats] + four_and_dead + total[:sacrifice_flies]).to_f.round(3)
+    end
+
+    def total_bases(total)
+      #『塁打数＝<単打>×1＋二塁打×2＋三塁打×3＋本塁打×4
+      return (total[:single_hits] + total[:double_hits] * 2 + total[:triple_hits] * 3 + total[:home_run] * 4)
+    end
+
+    def slugging_percentage(total)
+      #長打率	塁打÷打数　[小数点４位以下四捨五入]
+      return total_bases(total).to_i.quo(total[:at_bats]).to_f.round(3)
     end
 
     def number_of_batting(total)
@@ -18,16 +28,6 @@ class Rate
       four_and_dead = total.base_on_balls + total.hit_by_pitches
       sacrifice = sacrifice_bunts + sacrifice_flies
       return total.at_bats + four_and_dead + sacrifice
-    end
-
-    def total_bases(total)
-      #『塁打数＝<単打>×1＋二塁打×2＋三塁打×3＋本塁打×4
-      return (total.single_hits + total.double_hits * 2 + total.triple_hits * 3 + total.home_run * 4)
-    end
-
-    def slugging_percentage(total)
-      #長打率	塁打÷打数　[小数点４位以下四捨五入]
-      return total_bases(total).to_i.quo(total.at_bats).to_f.round(3)
     end
 
     def winning_rate(total)

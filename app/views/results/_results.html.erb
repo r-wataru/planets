@@ -11,7 +11,7 @@
         <th><%= link_to "試合数", results_path(change: "game_count") %></th>
         <th><%= link_to "打席数", results_path(change: "plate_appearances") %></th>
         <th><%= link_to "打数", results_path(change: "at_bats") %></th>
-        <th><%= link_to "安打", results_path(change: "hits") %></th>
+        <th><%= link_to "安打", results_path(change: "total_hits") %></th>
         <th><%= link_to "二塁打", results_path(change: "double_hits") %></th>
         <th><%= link_to "三塁打", results_path(change: "triple_hits") %></th>
         <th><%= link_to "本塁打", results_path(change: "home_run") %></th>
@@ -32,6 +32,7 @@
           <td><%= idx + 1 %></td>
           <td><%= display[:display_name] %></td>
           <td><%= sprintf( "%.3f", display[:batting_average]) %></td>
+          <td><%= display[:game_count] %></td>
           <td><%= display[:plate_appearances] %></td>
           <td><%= display[:at_bats] %></td>
           <td><%= display[:total_hits] %></td>
@@ -47,8 +48,8 @@
           <td><%= display[:sacrifice_bunts] %></td>
           <td><%= display[:sacrifice_flies] %></td>
           <td><%= display[:stolen_bases] %></td>
-          <%#*<td><%= sprintf( "%.3f", result.base_percentage.to_f) %></td>%>
-          <%#*<td><%= sprintf( "%.3f", result.slugging_percentage.to_f) %></td>%>
+          <td><%= sprintf( "%.3f", display[:base_percentage]) %></td>
+          <td><%= sprintf( "%.3f", display[:slugging_percentage]) %></td>
         </tr>
       <% end %>
     </table>

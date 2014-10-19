@@ -1,7 +1,6 @@
 class ResultsController < ApplicationController
   def index
     @season = Season.last
-    @regulation_number = @season.games.count * 1.4
-    @display = ResultDisplay.new(@season).display
+    @display = ResultDisplay.new(@season, params[:change]).display
   end
 end
