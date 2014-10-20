@@ -14,7 +14,9 @@
       <% @season.games.order("played_at DESC").each_with_index do |result, idx| %>
         <tr>
           <td style="white-space: nowrap;"><%= result.played_at.strftime("%Y/%m/%d") %></td>
-          <td style="white-space: nowrap;"><%= result.name %></td>
+          <td style="white-space: nowrap;">
+            <%= link_to result.name, [ :edit, result ] %>
+          </td>
           <td style="white-space: nowrap;"><%= result.display_winning %></td>
           <td style="white-space: nowrap;"><%= result.total_result %></td>
           <td><%= result.description %></td>

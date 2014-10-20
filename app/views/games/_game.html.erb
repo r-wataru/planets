@@ -13,7 +13,9 @@
       </tr>
         <tr>
           <td style="white-space: nowrap;"><%= @game.played_at.strftime("%Y/%m/%d") %></td>
-          <td style="white-space: nowrap;"><%= @game.name %></td>
+          <td style="white-space: nowrap;">
+            <%= link_to @game.name, [ :edit, @game ] %>
+          </td>
           <td style="white-space: nowrap;"><%= @game.display_winning %></td>
           <td style="white-space: nowrap;"><%= @game.total_result %></td>
           <td><%= @game.description %></td>

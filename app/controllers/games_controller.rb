@@ -13,6 +13,12 @@ class GamesController < ApplicationController
       render action: :new
     end
   end
+  
+  def edit
+    @game = Game.find(params[:id])
+    @pitchers = @game.pitchers
+    @results = @game.results
+  end
 
   private
   def game_params
