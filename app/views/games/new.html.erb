@@ -1,0 +1,11 @@
+<div class="panel panel-custom full">
+  <div class="panel-heading">
+    <p>結果入力</p>
+  </div>
+  <div class="panel-body">
+    <%= form_for @game, url: :games, method: :post do |f| %>
+      <%= render "games/form", f: f %>
+      <%= f.submit "次へ" %>
+    <% end %>
+  </div>
+</div>

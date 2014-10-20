@@ -4,4 +4,50 @@ class ResultsController < ApplicationController
     @display = ResultDisplay.new(@season, params[:change]).display
     @pitchers = PitcherDisplay.new(@season, params[:p_change]).display
   end
+
+  def new
+    @game = Game.find(params[:game_id])
+    @season = @game.season
+    @result = @game.results.new
+    @pitcher = @game.pitchers.new
+    @results = @game.results
+    @pitchers = @game.pitchers
+  end
+
+  def create
+    @game = Game.find(params[:game_id])
+    @result = @game.results.new results_params
+    if @result.save
+      redirect_to [ :new, @game, :result ]
+    else
+      render action: :new
+    end
+  end
+
+  private
+  def results_params
+    params.require(:result).permit(
+      :user_id,
+      :plate_appearances,
+      :at_bats,
+      :single_hits,
+      :double_hits,
+      :triple_hits,
+      :home_run,
+      :base_on_balls,
+      :hit_by_pitches,
+      :sacrifice_bunts,
+      :sacrifice_flies,
+      :gaffe,
+      :infield_grounder,
+      :outfield_grounder,
+      :infield_fly,
+      :outfield_fly,
+      :infield_linera,
+      :out_linera,
+      :strikeouts,
+      :runs_batted_in,
+      :runs_scored,
+      :stolen_bases)
+  end
 end

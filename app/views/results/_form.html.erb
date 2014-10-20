@@ -1,0 +1,56 @@
+<%- num = Array(0..100) %>
+<% user = User.all.map{|u| u } %>
+<% users = user - @game.results.map{|i| i.user } %>
+
+<table border="1">
+  <tr>
+    <th><%= f.label :user_id, "選手" %>
+    <th><%= f.label :plate_appearances, "打席" %></th>
+    <th><%= f.label :at_bats, "打数" %></th>
+    <th><%= f.label :single_hits, "単打" %></th>
+    <th><%= f.label :double_hits, "二塁打" %></th>
+    <th><%= f.label :triple_hits, "三塁打" %></th>
+    <th><%= f.label :home_run, "本塁打" %></th>
+    <th><%= f.label :base_on_balls, "四球" %></th>
+    <th><%= f.label :hit_by_pitches, "死球" %></th>
+    <th><%= f.label :sacrifice_bunts, "犠打" %></th>
+    <th><%= f.label :sacrifice_flies, "犠飛" %></th>
+    <th><%= f.label :gaffe, "失策出塁" %></th>
+    <th><%= f.label :infield_grounder, "内ゴロ" %></th>
+    <th><%= f.label :outfield_grounder, "外ゴロ" %></th>
+    <th><%= f.label :infield_fly, "内飛" %></th>
+    <th><%= f.label :outfield_fly, "外飛" %></th>
+    <th><%= f.label :infield_linera, "内直" %></th>
+    <th><%= f.label :out_linera, "外直" %></th>
+    <th><%= f.label :strikeouts, "三振" %></th>
+    <th><%= f.label :runs_batted_in, "打点" %></th>
+    <th><%= f.label :runs_scored, "得点" %></th>
+    <th><%= f.label :stolen_bases, "盗塁" %></th>
+  </tr>
+  <tr>
+    <td>
+      <%= f.select :user_id, users.map{|u| [ u.display_name, u.id ]} %>
+    </td>
+    <td><%= f.select :plate_appearances, num %></td>
+    <td><%= f.select :at_bats, num %></td>
+    <td><%= f.select :single_hits, num %></td>
+    <td><%= f.select :double_hits, num %></td>
+    <td><%= f.select :triple_hits, num %></td>
+    <td><%= f.select :home_run, num %></td>
+    <td><%= f.select :base_on_balls, num %></td>
+    <td><%= f.select :hit_by_pitches, num %></td>
+    <td><%= f.select :sacrifice_bunts, num %></td>
+    <td><%= f.select :sacrifice_flies, num %></td>
+    <td><%= f.select :gaffe, num %></td>
+    <td><%= f.select :infield_grounder, num %></td>
+    <td><%= f.select :outfield_grounder, num %></td>
+    <td><%= f.select :infield_fly, num %></td>
+    <td><%= f.select :outfield_fly, num %></td>
+    <td><%= f.select :infield_linera, num %></td>
+    <td><%= f.select :out_linera, num %></td>
+    <td><%= f.select :strikeouts, num %></td>
+    <td><%= f.select :runs_batted_in, num %></td>
+    <td><%= f.select :runs_scored, num %></td>
+    <td><%= f.select :stolen_bases, num %></td>
+  </tr>
+</table>

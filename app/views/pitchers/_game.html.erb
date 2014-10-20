@@ -1,0 +1,38 @@
+<% if @pitchers.present? && @pitchers.count > 0 %>
+  <div class="panel panel-custom full">
+    <div class="panel-heading">
+      <p>投手成績</p>
+    </div>
+    <div class="panel-body">
+      <table border="1">
+        <tr>
+          <th>選手</th>
+          <th>投球回</th>
+          <th>被安打</th>
+          <th>失点</th>
+          <th>自責点</th>
+          <th>三振</th>
+          <th>勝</th>
+          <th>負</th>
+          <th>ホールド</th>
+          <th>セーブ</th>
+        </tr>
+        <% @pitchers.each do |p| %>
+          <% next if p.user.blank? %>
+          <tr>
+            <td><%= p.user.try(:display_name) %></td>
+            <td><%= p.pitching_number %></td>
+            <td><%= p.hit %></td>
+            <td><%= p.run %></td>
+            <td><%= p.remorse_point %></td>
+            <td><%= p.strikeouts %></td>
+            <td><%= p.winning %></td>
+            <td><%= p.defeat %></td>
+            <td><%= p.hold_number %></td>
+            <td><%= p.save_number %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>

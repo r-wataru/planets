@@ -1,0 +1,11 @@
+<div class="panel panel-custom full">
+  <div class="panel-heading">
+    <p>投手成績</p>
+  </div>
+  <div class="panel-body">
+    <%= form_for [ @game, @pitcher ], method: :post do |f| %>
+      <%= render "pitchers/form", f: f %>
+      <%= f.submit "追加" %>
+    <% end %>
+  </div>
+</div>

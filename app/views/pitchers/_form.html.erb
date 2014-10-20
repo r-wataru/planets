@@ -1,0 +1,33 @@
+<%= format_error_message(@pitcher, :pitching_number, f) %>
+<%- num = Array(0..30) %>
+<%- num_row = [0,1]%>
+<% user = User.all.map{|u| u } %>
+<% users = user - Game.find(@game.id).pitchers.map{|i| i.user } %>
+<table border="1">
+  <tr>
+    <th><%= f.label :user_id, "選手" %></th>
+    <th><%= f.label :pitching_number, "投球回" %></th>
+    <th><%= f.label :hit, "被安打" %></th>
+    <th><%= f.label :run, "失点" %></th>
+    <th><%= f.label :remorse_point, "自責点" %></th>
+    <th><%= f.label :strikeouts, "三振" %></th>
+    <th><%= f.label :winning, "勝" %></th>
+    <th><%= f.label :defeat, "負" %></th>
+    <th><%= f.label :hold_number, "ホールド" %></th>
+    <th><%= f.label :save_number, "セーブ" %></th>
+  </tr>
+  <tr>
+    <td>
+      <%= f.select :user_id, users.map{|u| [ u.display_name, u.id ]} %>
+    </td>
+    <td><%= f.select :pitching_number, num %></td>
+    <td><%= f.select :hit, num %></td>
+    <td><%= f.select :run, num %></td>
+    <td><%= f.select :remorse_point, num %></td>
+    <td><%= f.select :strikeouts, num %></td>
+    <td><%= f.select :winning, num_row %></td>
+    <td><%= f.select :defeat, num_row %></td>
+    <td><%= f.select :hold_number, num_row %></td>
+    <td><%= f.select :save_number, num_row %></td>
+  </tr>
+</table>

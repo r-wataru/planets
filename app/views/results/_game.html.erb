@@ -1,0 +1,77 @@
+<%= render "games/game" %>
+<%= render "pitchers/game" %>
+
+<div class="panel panel-custom full">
+  <div class="panel-heading">
+    <p>投手成績</p>
+  </div>
+  <div class="panel-body">
+    <%= form_for [ @game, @pitcher ], method: :post do |f| %>
+      <%= render "pitchers/form", f: f %>
+      <%= f.submit "追加" %>
+    <% end %>
+  </div>
+</div>
+
+<% if @results.present? && @results.count > 0 %>
+  <div class="panel panel-custom full">
+    <div class="panel-heading">
+      <p>野手成績</p>
+    </div>
+    <div class="panel-body">
+      <table border="1">
+        <tr>
+          <th>選手</th>
+          <th>打席</th>
+          <th>打数</th>
+          <th>単打</th>
+          <th>二塁打</th>
+          <th>三塁打</th>
+          <th>本塁打</th>
+          <th>四球</th>
+          <th>死球</th>
+          <th>犠打</th>
+          <th>犠飛</th>
+          <th>失策出塁</th>
+          <th>内ゴロ</th>
+          <th>外ゴロ</th>
+          <th>内飛</th>
+          <th>外飛</th>
+          <th>内直</th>
+          <th>外直</th>
+          <th>三振</th>
+          <th>打点</th>
+          <th>得点</th>
+          <th>盗塁</th>
+        </tr>
+        <% @results.each do |r| %>
+        <% next if r.id.nil? %>
+          <tr>
+            <td><%= r.user.try(:display_name) %></td>
+            <td><%= r.plate_appearances %></td>
+            <td><%= r.at_bats %></td>
+            <td><%= r.single_hits %></td>
+            <td><%= r.double_hits %></td>
+            <td><%= r.triple_hits %></td>
+            <td><%= r.home_run %></td>
+            <td><%= r.base_on_balls %></td>
+            <td><%= r.hit_by_pitches %></td>
+            <td><%= r.sacrifice_bunts %></td>
+            <td><%= r.sacrifice_flies %></td>
+            <td><%= r.gaffe %></td>
+            <td><%= r.infield_grounder %></td>
+            <td><%= r.outfield_grounder %></td>
+            <td><%= r.infield_fly %></td>
+            <td><%= r.outfield_fly %></td>
+            <td><%= r.infield_linera %></td>
+            <td><%= r.out_linera %></td>
+            <td><%= r.strikeouts %></td>
+            <td><%= r.runs_batted_in %></td>
+            <td><%= r.runs_scored %></td>
+            <td><%= r.stolen_bases %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>

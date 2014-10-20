@@ -1,0 +1,129 @@
+<%= f.label :season, "シーズン" %>
+<%- season = Season.all %>
+<%= f.select :season_id, season.map{|s| [ s.year, s.id]} %><br/>
+<%= f.label :name, "試合名" %>
+<%= format_error_message(@game, :name, f) %>
+<%= f.text_field :name %><br/>
+<%= f.label :played_at, "試合日" %>
+<%= format_error_message(@game, :played_at, f) %>
+<%= f.text_field :played_at, class: 'datepicker' %><br/>
+<%= f.label :total_result, "試合結果" %>
+<%= format_error_message(@game, :total_result, f) %>
+<%= f.text_field :total_result %><br/>
+<%= f.label :winning, "勝敗" %>
+<%= f.radio_button :winning, 0 %>
+<%= f.label :winning_0, "勝" %>
+<%= f.radio_button :winning, 1 %>
+<%= f.label :winning_1, "負" %>
+<%= f.radio_button :winning, 2 %>
+<%= f.label :winning_2, "分" %><br/>
+<%= f.label :description, "コメント" %>
+<%= f.text_area :description %><br/>
+<%- num = Array(0..100) %>
+
+<%= format_error_message(@game, :bottom, f) %>
+<%= format_error_message(@game, :top, f) %>
+<table border="1">
+  <tr>
+    <th>チーム名</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>8</th>
+    <th>9</th>
+    <th>T</th>
+  </tr>
+  <tr>
+    <td><%= f.text_field :top %></td>
+    <td><%= f.select :one, num %></td>
+    <td><%= f.select :two, num %></td>
+    <td><%= f.select :three, num %></td>
+    <td><%= f.select :four, num %></td>
+    <td><%= f.select :five, num %></td>
+    <td><%= f.select :six, num %></td>
+    <td><%= f.select :seven, num %></td>
+    <td><%= f.select :eight, num %></td>
+    <td><%= f.select :nine, num %></td>
+    <td><%= f.select :total, num %></td>
+  </tr>
+  <tr>
+    <td><%= f.text_field :bottom %></td>
+    <td><%= f.select :one_2, num %></td>
+    <td><%= f.select :two_2, num %></td>
+    <td><%= f.select :three_2, num %></td>
+    <td><%= f.select :four_2, num %></td>
+    <td><%= f.select :five_2, num %></td>
+    <td><%= f.select :six_2, num %></td>
+    <td><%= f.select :seven_2, num %></td>
+    <td><%= f.select :eight_2, num %></td>
+    <td><%= f.select :nine_2, num %></td>
+    <td><%= f.select :total_2, num %></td>
+  </tr>
+</table>
+<br/>
+<% unless @game.new_record? %>
+  <table border="1">
+    <tr>
+      <th>打席</th>
+      <th>打数</th>
+      <th>単打</th>
+      <th>二塁打</th>
+      <th>三塁打</th>
+      <th>本塁打</th>
+      <th>四球</th>
+      <th>死球</th>
+      <th>犠打</th>
+      <th>犠飛</th>
+      <th>失策出塁</th>
+    </tr>
+    <tr>
+      <td><%= f.select :plate_appearances, num %></td>
+      <td><%= f.select :at_bats, num %></td>
+      <td><%= f.select :single, num %></td>
+      <td><%= f.select :double, num %></td>
+      <td><%= f.select :triple, num %></td>
+      <td><%= f.select :home_run, num %></td>
+      <td><%= f.select :base_on_balls, num %></td>
+      <td><%= f.select :hit_by_pitches, num %></td>
+      <td><%= f.select :sacrifice_bunts, num %></td>
+      <td><%= f.select :sacrifice_flies, num %></td>
+      <td><%= f.select :gaffe, num %></td>
+    </tr>
+    <tr>
+      <th>内ゴロ</th>
+      <th>外ゴロ</th>
+      <th>内飛</th>
+      <th>外飛</th>
+      <th>内直</th>
+      <th>外直</th>
+      <th>三振</th>
+      <th>打点</th>
+      <th>得点</th>
+      <th>盗塁</th>
+      <th>投球回</th>
+      <th>被安打</th>
+      <th>失点</th>
+      <th>奪三振</th>
+    </tr>
+    <tr>
+      <td><%= f.select :infield_grounder, num %></td>
+      <td><%= f.select :outfield_grounder, num %></td>
+      <td><%= f.select :infield_fly, num %></td>
+      <td><%= f.select :outfield_fly, num %></td>
+      <td><%= f.select :infield_linera, num %></td>
+      <td><%= f.select :out_linera, num %></td>
+      <td><%= f.select :strikeouts, num %></td>
+      <td><%= f.select :runs_batted_in, num %></td>
+      <td><%= f.select :runs_scored, num %></td>
+      <td><%= f.select :stolen_bases, num %></td>
+      <td><%= f.select :pitching_number, num %></td>
+      <td><%= f.select :hit, num %></td>
+      <td><%= f.select :run, num %></td>
+      <td><%= f.select :get_strikeouts, num %></td>
+    </tr>
+  </table>
+<% end %>

@@ -1,0 +1,13 @@
+<%= render "results/game" %>
+
+<div class="panel panel-custom full">
+  <div class="panel-heading">
+    <p>野手成績</p>
+  </div>
+  <div class="panel-body">
+    <%= form_for [ @game, @result ], method: :post do |f| %>
+      <%= render "results/form", f: f %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>
