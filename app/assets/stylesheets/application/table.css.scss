@@ -1,0 +1,55 @@
+/* table */
+
+table {
+  display: table;
+  margin-bottom: 20px;
+  border-collapse: separate;
+  border-spacing: 0px;
+  width: 740px;
+  border-top: 3px solid #0F5995;
+  border-left: 1px solid #CCCCCC;
+  border-right: none;
+  border-bottom: none;
+  tr.statsTable01 { 
+    background-color: #EEEEEE; 
+    th { padding: 5px 1px;
+      line-height: 1.2;
+      text-align: center;
+      font-size: 10px;
+      border-top: 1px solid #FFFFFF;
+      border-right: 1px solid #CCCCCC;
+      border-bottom: 1px solid #CCCCCC;
+      border-left: 1px solid #FFFFFF;
+      background-position: top;
+      background-repeat: repeat-x;
+      background-color: #EEEEEE; 
+    }
+  }
+  tr {
+    td {
+      padding: 5px 1px;
+      line-height: 1.2;
+      text-align: center;
+      font-size: 10px;
+      border-top: 1px solid #FFFFFF;
+      border-right: 1px solid #CCCCCC;
+      border-bottom: 1px solid #CCCCCC;
+      border-left: 1px solid #FFFFFF;
+      word-break: break-all;
+    }
+  }
+  tr.odd {
+    td { background: #EEEEEE }
+  }
+}
+
+.table > thead > tr > th, .table > thead > tr > td, 
+.table > tbody > tr > th, .table > tbody > tr > td, 
+.table > tfoot > tr > th, .table > tfoot > tr > td {
+  border-top: none;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, 
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background: #EEEEEE;
+}

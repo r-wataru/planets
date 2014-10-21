@@ -1,41 +1,43 @@
-<div class="panel panel-custom full">
+<div class="panel panel-default">
   <div class="panel-heading">
-    <p>チーム全体</p>
+    <h3 class="panel-title">チーム全体</h3>
   </div>
   <div class="panel-body">
-    <table class="result" border="1">
-      <tr>
-        <th>シーズン</th>
-        <th>勝</th>
-        <th>負</th>
-        <th>引分</th>
-        <th>防御率</th>
-        <th>打率</th>
-      </tr>
-      <tr>
-        <td><%= @season.year %></td>
-        <td><%= @season.games.map(&:winning).count {|a| a == 0 } %></td>
-        <td><%= @season.games.map(&:winning).count {|a| a == 1 } %></td>
-        <td><%= @season.games.map(&:winning).count {|a| a == 2 } %></td>
-        <td>
-          <%=
-            b = @season.games.map{|g| g.pitchers.map(&:remorse_point)}.flatten.inject(:+)
-            c = @season.games.map{|g| g.pitchers.map(&:pitching_number)}.flatten.inject(:+)
-            d = (b * 9).quo(c).to_f.round(2)
-            d
-          %>
-        </td>
-        <td>
-          <%=
-            a = @season.games.map{|g| g.results.map(&:at_bats)}.flatten.inject(:+)
-            t = @season.games.map{|g| g.results.map(&:single_hits)}.flatten.inject(:+) +
-              @season.games.map{|g| g.results.map(&:double_hits)}.flatten.inject(:+) +
-              @season.games.map{|g| g.results.map(&:triple_hits)}.flatten.inject(:+) +
-              @season.games.map{|g| g.results.map(&:home_run)}.flatten.inject(:+)
-            sprintf( "%.3f", t.quo(a).to_f.round(3))
-          %>
-        </td>
-      </tr>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <tr class="statsTable01">
+          <th>シーズン</th>
+          <th>勝</th>
+          <th>負</th>
+          <th>引分</th>
+          <th>防御率</th>
+          <th>打率</th>
+        </tr>
+        <tr>
+          <td><%= @season.year %></td>
+          <td><%= @season.games.map(&:winning).count {|a| a == 0 } %></td>
+          <td><%= @season.games.map(&:winning).count {|a| a == 1 } %></td>
+          <td><%= @season.games.map(&:winning).count {|a| a == 2 } %></td>
+          <td>
+            <%=
+              b = @season.games.map{|g| g.pitchers.map(&:remorse_point)}.flatten.inject(:+)
+              c = @season.games.map{|g| g.pitchers.map(&:pitching_number)}.flatten.inject(:+)
+              d = (b * 9).quo(c).to_f.round(2)
+              d
+            %>
+          </td>
+          <td>
+            <%=
+              a = @season.games.map{|g| g.results.map(&:at_bats)}.flatten.inject(:+)
+              t = @season.games.map{|g| g.results.map(&:single_hits)}.flatten.inject(:+) +
+                @season.games.map{|g| g.results.map(&:double_hits)}.flatten.inject(:+) +
+                @season.games.map{|g| g.results.map(&:triple_hits)}.flatten.inject(:+) +
+                @season.games.map{|g| g.results.map(&:home_run)}.flatten.inject(:+)
+              sprintf( "%.3f", t.quo(a).to_f.round(3))
+            %>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
