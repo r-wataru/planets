@@ -10,8 +10,8 @@ table {
   border-left: 1px solid #CCCCCC;
   border-right: none;
   border-bottom: none;
-  tr.statsTable01 { 
-    background-color: #EEEEEE; 
+  tr.statsTable01 {
+    background-color: #EEEEEE;
     th { padding: 5px 1px;
       line-height: 1.2;
       text-align: center;
@@ -22,7 +22,7 @@ table {
       border-left: 1px solid #FFFFFF;
       background-position: top;
       background-repeat: repeat-x;
-      background-color: #EEEEEE; 
+      background-color: #EEEEEE;
     }
   }
   tr {
@@ -43,26 +43,26 @@ table {
   }
 }
 
-.table > thead > tr > th, .table > thead > tr > td, 
-.table > tbody > tr > th, .table > tbody > tr > td, 
+.table > thead > tr > th, .table > thead > tr > td,
+.table > tbody > tr > th, .table > tbody > tr > td,
 .table > tfoot > tr > th, .table > tfoot > tr > td {
   border-top: none;
 }
 
-.table-striped > tbody > tr:nth-child(odd) > td, 
+.table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
   background: #EEEEEE;
 }
 
 .col-sm-10 {
-  input[type=text] { width: 300px; }
-  input[type=radio] { width: 40px; vertical-align: super; }
-  select { width: 300px; }
-  button { width: 300px; }
-  textarea { width: 300px; height: 80px; }
+  input[type=text] { max-width: 300px; }
+  input[type=radio] { max-width: 40px; vertical-align: super; }
+  select { max-width: 300px; }
+  button { max-width: 300px; }
+  textarea { max-width: 300px; height: 80px; }
 }
-.radio-box { 
-  padding-top: 7px; 
+.radio-box {
+  padding-top: 7px;
   label { vertical-align: super; }
 }
 
@@ -78,4 +78,8 @@ ul.error-message {
 
 .has-feedback {
   display: inline;
+}
+
+.table-responsive {
+  select { width: 50px; }
 }

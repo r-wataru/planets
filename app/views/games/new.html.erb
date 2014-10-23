@@ -7,6 +7,10 @@
   seasons = Season.all
   num = Array(0..99)
   radios = [{value: 0, key: "勝"},{value: 1, key: "負"},{value: 2, key: "分"}]
+  scores = [[ :top, :one, :two, :three, :four, :five, :six, :seven, :eight, :nine, :total ],
+  [ :bottom, :one_2, :two_2, :three_2, :four_2, :five_2, :six_2, :seven_2, :eight_2, :nine_2, :total_2 ]]
+  error_target = [ :top, :bottom ]
+  field_names = [ "先攻", "後攻" ]
 %>
 
 <div class="panel panel-default">
@@ -22,6 +26,7 @@
           m << q.text_field_block(:total_result, '試合結果', columns: 10)
           m << q.radio_box_block(:winning, "勝敗", radios, columns: 10)
           m << q.text_area_block(:description, "コメント", columns: 10)
+          m << q.table_form_block(:result1, "スコアボード", scores, num, error_target, field_names, columns: 10)
         end
         m << p.submit_button
       end %>

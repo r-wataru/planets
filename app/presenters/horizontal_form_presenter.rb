@@ -36,7 +36,61 @@ class HorizontalFormPresenter
       end
     end
   end
-  
+
+  def normal_text_field_block(name, label_text, options = {})
+    markup do |m|
+      m << send("")
+    end
+  end
+
+  def table_form_block(name, label_text, keys_array, values, error_values, feilds, options)
+
+    main_options = {}
+    main_options[:include_blank] = options[:include_blank] || false
+    main_options[:prompt] = ''
+    html_options = {}
+    html_options[:class] = 'form-control'
+    html_options[:class] += " #{options[:class]}" if options[:class].present?
+    html_options[:required] = options[:required]
+    html_options[:placeholder] = options[:placeholder] || label_text
+
+    input_columns = calculate_columns(options)
+
+    markup(:div, class: 'form-group') do |m|
+      m << decorated_label(name, label_text, options)
+      m.div(class: "col-sm-#{input_columns}") do
+        m.div(class: "table-responsive", style: "overflow: scroll;") do
+          m.table(class: "table table-hover table-striped") do
+            m.tr(class: "statsTable01") do
+              m.td("チーム名")
+              (1..9).each do |n|
+                m.td(n)
+              end
+              m.td("T")
+            end
+            keys_array.each_with_index do |keys, i|
+              m.tr do
+                keys.each_with_index do |key, n|
+                  m.td do
+                    if n == 0
+                      html_options[:placeholder] = feilds[i]
+                      m << send("text_field", key, html_options)
+                    else
+                      m << select(key, values, main_options, html_options)
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+        error_values.each do |key|
+          m << error_messages_for(key)
+        end
+      end
+    end
+  end
+
   def radio_box_block(name, label_text, hash, options = {})
     input_columns = calculate_columns(options)
 
@@ -51,12 +105,12 @@ class HorizontalFormPresenter
        end
     end
   end
-  
+
   def text_area_block(name, label_text, options = {})
     html_options = {}
     html_options[:class] = 'form-control'
     input_columns = calculate_columns(options)
-    
+
     markup(:div, class: "form-group") do |m|
       m << decorated_label(name, label_text, options)
       m.div(class: "col-sm-#{input_columns} radio-box") do
@@ -98,7 +152,7 @@ class HorizontalFormPresenter
     type = object.persisted? ? type2 : type1
 
     markup(:div, class: 'form-group') do |m|
-      m.div(class: "col-sm-2")  
+      m.div(class: "col-sm-2")
       m.div(class: "col-sm-#{columns - 2}") do
         m.button(label_text, type: 'submit', class: "btn btn-#{type}")
       end

@@ -7,13 +7,14 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new game_params
+    @game.creating_game = true
     if @game.save
       redirect_to [ :new, @game, :pitcher ]
     else
       render action: :new
     end
   end
-  
+
   def edit
     @game = Game.find(params[:id])
     @pitchers = @game.pitchers

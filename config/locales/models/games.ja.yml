@@ -7,3 +7,5 @@ ja:
         season_id: シーズン
         total_result: 試合結果
         winning: 勝敗
+        top: 先攻
+        bottom: 後攻
