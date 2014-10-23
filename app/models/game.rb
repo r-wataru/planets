@@ -32,6 +32,12 @@ class Game < ActiveRecord::Base
   store :result1, accessors: [ :top, :one, :two, :three, :four, :five, :six, :seven, :eight, :nine, :total ]
   store :result2, accessors: [ :bottom, :one_2, :two_2, :three_2, :four_2, :five_2, :six_2, :seven_2, :eight_2, :nine_2, :total_2 ]
 
+  validates :season_id, presence: true
+  validates :name, presence: true
+  validates :played_at, presence: true
+  validates :winning, presence: true
+  validates :total_result, presence: true
+
   def display_winning
     display = ""
     if self.winning == 0

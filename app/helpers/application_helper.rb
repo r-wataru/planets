@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include HtmlBuilder
+  
   def format_error_message(model, field, form)
     messages = model.errors[field]
     messages = [ messages ].flatten

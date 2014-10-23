@@ -1,15 +1,19 @@
 <%= f.label :season, "シーズン" %>
 <%- season = Season.all %>
 <%= f.select :season_id, season.map{|s| [ s.year, s.id]} %><br/>
+
 <%= f.label :name, "試合名" %>
 <%= format_error_message(@game, :name, f) %>
 <%= f.text_field :name %><br/>
+
 <%= f.label :played_at, "試合日" %>
 <%= format_error_message(@game, :played_at, f) %>
 <%= f.text_field :played_at, class: 'datepicker' %><br/>
+
 <%= f.label :total_result, "試合結果" %>
 <%= format_error_message(@game, :total_result, f) %>
 <%= f.text_field :total_result %><br/>
+
 <%= f.label :winning, "勝敗" %>
 <%= f.radio_button :winning, 0 %>
 <%= f.label :winning_0, "勝" %>
@@ -17,6 +21,7 @@
 <%= f.label :winning_1, "負" %>
 <%= f.radio_button :winning, 2 %>
 <%= f.label :winning_2, "分" %><br/>
+
 <%= f.label :description, "コメント" %>
 <%= f.text_area :description %><br/>
 <%- num = Array(0..100) %>

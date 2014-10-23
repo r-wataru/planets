@@ -53,3 +53,29 @@ table {
 .table-striped > tbody > tr:nth-child(odd) > th {
   background: #EEEEEE;
 }
+
+.col-sm-10 {
+  input[type=text] { width: 300px; }
+  input[type=radio] { width: 40px; vertical-align: super; }
+  select { width: 300px; }
+  button { width: 300px; }
+  textarea { width: 300px; height: 80px; }
+}
+.radio-box { 
+  padding-top: 7px; 
+  label { vertical-align: super; }
+}
+
+ul.error-message {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  clear: both;
+  li {
+    color: #b94a48;
+  }
+}
+
+.has-feedback {
+  display: inline;
+}

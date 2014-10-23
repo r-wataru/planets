@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    attributes:
+      game:
+        name: 試合名
+        played_at: 試合日
+        season_id: シーズン
+        total_result: 試合結果
+        winning: 勝敗
