@@ -9,3 +9,9 @@ ja:
         winning: 勝敗
         top: 先攻
         bottom: 後攻
+    errors:
+      models:
+        game:
+          attributes:
+            played_at: 
+              not_a_date: は存在しない日付です

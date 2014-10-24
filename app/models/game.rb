@@ -34,8 +34,9 @@ class Game < ActiveRecord::Base
 
   attr_accessor :creating_game
 
-  validates :season_id, :name, :played_at, :winning, :total_result, presence: true
+  validates :season_id, :name, :winning, :total_result, presence: true
   validates :top, :bottom, presence: { if: -> { creating_game == true } }
+  validates :played_at, date: true
 
   def display_winning
     display = ""
