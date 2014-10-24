@@ -1,13 +1,16 @@
 class PitchersController < ApplicationController
   def new
     @game = Game.find(params[:game_id])
+    @pitchers = @game.pitchers
     @pitcher = @game.pitchers.new
     @users = User.all
   end
 
   def create
     @game = Game.find(params[:game_id])
+    @pitchers = @game.pitchers
     @pitcher = @game.pitchers.new pitcher_params
+    @users = User.all
     if @pitcher.save
       redirect_to [ :new, @game, :result ]
     else
@@ -26,7 +29,8 @@ class PitchersController < ApplicationController
       :winning,
       :defeat,
       :hold_number,
-      :save_number
+      :save_number,
+      :helper_member
     )
   end
 end

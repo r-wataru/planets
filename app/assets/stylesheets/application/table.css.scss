@@ -23,6 +23,7 @@ table {
       background-position: top;
       background-repeat: repeat-x;
       background-color: #EEEEEE;
+      white-space: nowrap;
     }
   }
   tr {
@@ -36,6 +37,7 @@ table {
       border-bottom: 1px solid #CCCCCC;
       border-left: 1px solid #FFFFFF;
       word-break: break-all;
+      white-space: nowrap;
     }
   }
   tr.odd {
@@ -55,7 +57,7 @@ table {
 }
 
 .col-sm-10 {
-  input[type=text] { max-width: 300px; }
+  input[type=text] { max-width: 300px; min-width: 200px; }
   input[type=radio] { max-width: 40px; vertical-align: super; }
   select { max-width: 300px; }
   button { max-width: 300px; }
@@ -81,5 +83,12 @@ ul.error-message {
 }
 
 .table-responsive {
+  overflow: scroll;
   select { width: 50px; }
+}
+
+select.name_selecter { width: 200px; }
+
+.helper_form_field {
+  margin-top: 10px;
 }

@@ -1,0 +1,5 @@
+ja:
+  activerecord:
+    attributes:
+      pitcher:
+        user_id: 投手名

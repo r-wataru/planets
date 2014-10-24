@@ -37,22 +37,66 @@ class HorizontalFormPresenter
     end
   end
 
-  def normal_text_field_block(name, label_text, options = {})
-    markup do |m|
-      m << send("")
-    end
-  end
-
-  def table_form_block(name, label_text, keys_array, values, error_values, feilds, options)
-
+  def table_form_block(names, label_texts, num_values, objects, options)
     main_options = {}
     main_options[:include_blank] = options[:include_blank] || false
     main_options[:prompt] = ''
+
     html_options = {}
     html_options[:class] = 'form-control'
     html_options[:class] += " #{options[:class]}" if options[:class].present?
     html_options[:required] = options[:required]
-    html_options[:placeholder] = options[:placeholder] || label_text
+
+    html_options2 = {}
+    html_options2[:class] = 'form-control name_selecter'
+    html_options2[:class] += " #{options[:class]}" if options[:class].present?
+    html_options2[:required] = options[:required]
+    
+    helper_options = {}
+    helper_options[:class] = 'form-control helper_form_field'
+    helper_options[:class] += " #{options[:class]}" if options[:class].present?
+    helper_options[:required] = options[:required]
+    helper_options[:placeholder] = "助っ人名"
+
+    choices = objects.map { |o| [ o.send(:display_name), o.id ] }
+    choices = choices << [ "助っ人", 0 ]
+    
+    markup(:div) do |m|
+      m.div(class: "table-responsive", style: "overflow: scroll") do
+        m.table(class: "table table-hover table-striped") do
+          m.tr(class: "statsTable01") do
+            label_texts.each do |label|
+              m.th(label)
+            end
+            m.tr do
+              names.each_with_index do |name, i|
+                m.td do
+                  if i == 0
+                    m << select(name, choices, main_options, html_options2)
+                    m << send("text_field", :helper_member, helper_options)
+                  else
+                    m << select(name, num_values, main_options, html_options)
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+      names.each do |key|
+        m << error_messages_for(key)
+      end
+    end
+  end
+
+  def table_score_form_block(name, label_text, keys_array, num_values, error_values, feilds, options)
+    main_options = {}
+    main_options[:include_blank] = false
+
+    html_options = {}
+    html_options[:class] = 'form-control'
+    html_options[:class] += " #{options[:class]}" if options[:class].present?
+    html_options[:required] = options[:required]
 
     input_columns = calculate_columns(options)
 
@@ -76,7 +120,7 @@ class HorizontalFormPresenter
                       html_options[:placeholder] = feilds[i]
                       m << send("text_field", key, html_options)
                     else
-                      m << select(key, values, main_options, html_options)
+                      m << select(key, num_values, main_options, html_options)
                     end
                   end
                 end
@@ -150,10 +194,12 @@ class HorizontalFormPresenter
 
     label_text = object.persisted? ? label_text2 : label_text1
     type = object.persisted? ? type2 : type1
+    
+    columns_num = columns == 12 ? 0 : 2
 
     markup(:div, class: 'form-group') do |m|
-      m.div(class: "col-sm-2")
-      m.div(class: "col-sm-#{columns - 2}") do
+      m.div(class: "col-sm-#{columns_num}")
+      m.div(class: "col-sm-#{columns - columns_num}") do
         m.button(label_text, type: 'submit', class: "btn btn-#{type}")
       end
     end

@@ -29,7 +29,22 @@ require 'nkf'
 class Pitcher < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
-  
+
+  validates :user_id, :game_id, :pitching_number, :hit, :run, :remorse_point,
+    :strikeouts, :winning, :defeat, :hold_number, :save_number, presence: true
+  validate :check_helper_member
+
+  attr_accessor :helper_member
+
+  def check_helper_member
+    if user_id == 0
+      if helper_member.blank?
+        errors.add(:helper_member)
+        errors.add(:user_id)
+      end
+    end
+  end
+
   class << self
     def import_csv
       path = Rails.root.join("db", "seeds", "data", "mla_export_p_pitcher.csv")
