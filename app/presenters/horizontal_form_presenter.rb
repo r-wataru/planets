@@ -97,6 +97,11 @@ class HorizontalFormPresenter
     html_options[:class] = 'form-control'
     html_options[:class] += " #{options[:class]}" if options[:class].present?
     html_options[:required] = options[:required]
+    
+    select_options = {}
+    select_options[:class] = 'form-control'
+    select_options[:class] += " #{options[:class]}" if options[:class].present?
+    select_options[:required] = false
 
     input_columns = calculate_columns(options)
 
@@ -120,7 +125,7 @@ class HorizontalFormPresenter
                       html_options[:placeholder] = feilds[i]
                       m << send("text_field", key, html_options)
                     else
-                      m << select(key, num_values, main_options, html_options)
+                      m << select(key, num_values, main_options, select_options)
                     end
                   end
                 end

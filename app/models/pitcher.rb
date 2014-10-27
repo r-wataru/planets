@@ -36,6 +36,13 @@ class Pitcher < ActiveRecord::Base
 
   attr_accessor :helper_member
 
+  before_create do
+    if self.user_id == 0
+      u = User.create_helper_user(self.helper_member)
+      self.user_id = u.id
+    end
+  end
+
   def check_helper_member
     if user_id == 0
       if helper_member.blank?

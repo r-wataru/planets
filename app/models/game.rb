@@ -37,6 +37,8 @@ class Game < ActiveRecord::Base
   validates :season_id, :name, :winning, :total_result, presence: true
   validates :top, :bottom, presence: { if: -> { creating_game == true } }
   validates :played_at, date: true
+  validate :check_total
+  validate :check_total_2
 
   def display_winning
     display = ""
@@ -82,6 +84,19 @@ class Game < ActiveRecord::Base
       else
         return false
       end
+    end
+  end
+  
+  private
+  def check_total
+    if (one.to_i + two.to_i + three.to_i + four.to_i + five.to_i + six.to_i + seven.to_i + eight.to_i + nine.to_i) != total.to_i
+      errors.add(:total, :invalid)
+    end
+  end
+  
+  def check_total_2
+    if (one_2.to_i + two_2.to_i + three_2.to_i + four_2.to_i + five_2.to_i + six_2.to_i + seven_2.to_i + eight_2.to_i + nine_2.to_i) != total_2.to_i
+      errors.add(:total_2, :invalid)
     end
   end
 end

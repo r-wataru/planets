@@ -9,6 +9,8 @@ ja:
         winning: 勝敗
         top: 先攻
         bottom: 後攻
+        total: 先攻の合計
+        total_2: 後攻の合計
     errors:
       models:
         game:

@@ -30,6 +30,7 @@ class PitchersController < ApplicationController
       :defeat,
       :hold_number,
       :save_number,
+      :helper_member,
       :helper_member
     )
   end

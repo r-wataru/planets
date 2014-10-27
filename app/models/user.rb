@@ -52,4 +52,14 @@ class User < ActiveRecord::Base
   def email=(address)
     self.emails.build(address: address)
   end
+
+  class << self
+    def create_helper_user(name)
+      self.create(
+        number: 100,
+        login_name: "helper",
+        display_name: name,
+        helper: true)
+    end
+  end
 end
