@@ -26,12 +26,4 @@ class NavbarPresenter < Presenter
       m << link_to('Planets', :root, class: 'navbar-brand')
     end
   end
-
-  def navbar_menu_left
-    markup(:ul, class: 'nav navbar-nav') do |m|
-      m.li { m << link_to(fa_icon('home', text: 'メイン'), "") }
-      m.li { m << link_to(fa_icon('gear', text: '設定'), "") }
-      m.li { m << link_to(fa_icon('question-circle', text: 'ヘルプ'), "") }
-    end
-  end
 end

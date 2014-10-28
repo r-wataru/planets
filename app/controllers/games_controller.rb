@@ -1,4 +1,13 @@
 class GamesController < ApplicationController
+  def show
+    @game = Game.find(params[:id])
+    @pitchers = @game.pitchers
+    @pitcher = @game.pitchers.new
+    @results = @game.results
+    @result = @game.results.new
+    @season = @game.season
+  end
+  
   def new
     @game = Game.new
     @pitcher = Pitcher.new
@@ -19,6 +28,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @pitchers = @game.pitchers
     @results = @game.results
+    @season = @game.season
   end
 
   def update_reflection

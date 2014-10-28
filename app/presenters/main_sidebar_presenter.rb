@@ -28,7 +28,7 @@ class MainSidebarPresenter < Presenter
   def result
     html_class = params[:controller] == 'results' ? 'active' : ''
     markup(:li, class: html_class) do |m|
-      m << link_to(fa_icon('list', text: '成績表'), view_context.results_path)
+      m << link_to(fa_icon('line-chart', text: '成績表'), view_context.results_path)
     end
   end
   

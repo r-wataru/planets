@@ -1,9 +1,10 @@
 <!-- 全体 -->
-<%= render "results/team_average" %>
+<%= render "results/averages/team_average" %>
 <!-- 試合 -->
-<%= render "results/games" %>
+<%= render "results/averages/games" %>
 <!-- 投手 -->
-<%= render "results/pitcher" %>
+<%= render "results/averages/pitcher" %>
 <!-- 野手 -->
-<%= render "results/average" %>
-<%= link_to "新規作成", :new_game %>
+<%= render "results/averages/average" %>
+
+<%= link_to "新規作成", :new_game, class: "btn btn-primary", role: "button" %>
