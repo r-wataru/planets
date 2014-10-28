@@ -1,9 +1,9 @@
 class ResultDisplay
   def initialize(season, sort_params)
     @season = season
-    @games = season.games
+    @games = season.games.active
     users_id = @games.map{|g| g.results.map{|r| r.user_id }}.flatten.uniq
-    @users = User.where(id: users_id)
+    @users = User.alive.where(id: users_id)
     @sort = sort_params
     @regulation = @games.count * 1.4
   end
@@ -12,7 +12,7 @@ class ResultDisplay
     array = []
     @users.each do |users|
       hash = {}
-      results = users.results.where(game_id: @games.map(&:id))
+      results = users.results.alive.active.where(game_id: @games.map(&:id))
       hash[:display_name] = users.display_name
       hash[:batting_average] = batting_average(results)
       hash[:game_count] = results.count

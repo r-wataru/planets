@@ -51,7 +51,7 @@ class HorizontalFormPresenter
     html_options2[:class] = 'form-control name_selecter'
     html_options2[:class] += " #{options[:class]}" if options[:class].present?
     html_options2[:required] = options[:required]
-    
+
     helper_options = {}
     helper_options[:class] = 'form-control helper_form_field'
     helper_options[:class] += " #{options[:class]}" if options[:class].present?
@@ -60,7 +60,7 @@ class HorizontalFormPresenter
 
     choices = objects.map { |o| [ o.send(:display_name), o.id ] }
     choices = choices << [ "助っ人", 0 ]
-    
+
     markup(:div) do |m|
       m.div(class: "table-responsive", style: "overflow: scroll") do
         m.table(class: "table table-hover table-striped") do
@@ -97,7 +97,7 @@ class HorizontalFormPresenter
     html_options[:class] = 'form-control'
     html_options[:class] += " #{options[:class]}" if options[:class].present?
     html_options[:required] = options[:required]
-    
+
     select_options = {}
     select_options[:class] = 'form-control'
     select_options[:class] += " #{options[:class]}" if options[:class].present?
@@ -199,7 +199,7 @@ class HorizontalFormPresenter
 
     label_text = object.persisted? ? label_text2 : label_text1
     type = object.persisted? ? type2 : type1
-    
+
     columns_num = columns == 12 ? 0 : 2
 
     markup(:div, class: 'form-group') do |m|

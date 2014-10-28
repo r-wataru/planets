@@ -60,6 +60,17 @@ class Game < ActiveRecord::Base
     self.save
   end
 
+  def update_reflection
+    transaction do
+      self.results.each do |result|
+        result.update_column(:reflection, true)
+      end
+      self.pitchers.each do |pitcher|
+        pitcher.update_column(:reflection, true)
+      end
+    end
+  end
+
   class << self
     def import_csv
       path = Rails.root.join("db", "seeds", "data", "mla_export_p_game.csv")
@@ -86,14 +97,14 @@ class Game < ActiveRecord::Base
       end
     end
   end
-  
+
   private
   def check_total
     if (one.to_i + two.to_i + three.to_i + four.to_i + five.to_i + six.to_i + seven.to_i + eight.to_i + nine.to_i) != total.to_i
       errors.add(:total, :invalid)
     end
   end
-  
+
   def check_total_2
     if (one_2.to_i + two_2.to_i + three_2.to_i + four_2.to_i + five_2.to_i + six_2.to_i + seven_2.to_i + eight_2.to_i + nine_2.to_i) != total_2.to_i
       errors.add(:total_2, :invalid)

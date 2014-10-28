@@ -21,6 +21,12 @@ class GamesController < ApplicationController
     @results = @game.results
   end
 
+  def update_reflection
+    @game = Game.find(params[:id])
+    @game.update_reflection
+    redirect_to :results
+  end
+
   private
   def game_params
     params.require(:game).permit(

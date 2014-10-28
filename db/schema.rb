@@ -41,17 +41,18 @@ ActiveRecord::Schema.define(version: 20141017234558) do
   add_index "games", ["season_id"], name: "index_games_on_season_id", using: :btree
 
   create_table "pitchers", force: true do |t|
-    t.integer  "user_id",                     null: false
-    t.integer  "game_id",                     null: false
-    t.integer  "pitching_number", default: 0, null: false
-    t.integer  "hit",             default: 0, null: false
-    t.integer  "run",             default: 0, null: false
-    t.integer  "remorse_point",   default: 0, null: false
-    t.integer  "strikeouts",      default: 0, null: false
-    t.integer  "winning",         default: 0, null: false
-    t.integer  "defeat",          default: 0, null: false
-    t.integer  "hold_number",     default: 0, null: false
-    t.integer  "save_number",     default: 0, null: false
+    t.integer  "user_id",                         null: false
+    t.integer  "game_id",                         null: false
+    t.integer  "pitching_number", default: 0,     null: false
+    t.integer  "hit",             default: 0,     null: false
+    t.integer  "run",             default: 0,     null: false
+    t.integer  "remorse_point",   default: 0,     null: false
+    t.integer  "strikeouts",      default: 0,     null: false
+    t.integer  "winning",         default: 0,     null: false
+    t.integer  "defeat",          default: 0,     null: false
+    t.integer  "hold_number",     default: 0,     null: false
+    t.integer  "save_number",     default: 0,     null: false
+    t.boolean  "reflection",      default: false, null: false
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -60,29 +61,30 @@ ActiveRecord::Schema.define(version: 20141017234558) do
   add_index "pitchers", ["user_id"], name: "index_pitchers_on_user_id", using: :btree
 
   create_table "results", force: true do |t|
-    t.integer  "user_id",                       null: false
-    t.integer  "game_id",                       null: false
-    t.integer  "plate_appearances", default: 0, null: false
-    t.integer  "at_bats",           default: 0, null: false
-    t.integer  "single_hits",       default: 0, null: false
-    t.integer  "double_hits",       default: 0, null: false
-    t.integer  "triple_hits",       default: 0, null: false
-    t.integer  "home_run",          default: 0, null: false
-    t.integer  "base_on_balls",     default: 0, null: false
-    t.integer  "hit_by_pitches",    default: 0, null: false
-    t.integer  "sacrifice_bunts",   default: 0, null: false
-    t.integer  "sacrifice_flies",   default: 0, null: false
-    t.integer  "gaffe",             default: 0, null: false
-    t.integer  "infield_grounder",  default: 0, null: false
-    t.integer  "outfield_grounder", default: 0, null: false
-    t.integer  "infield_fly",       default: 0, null: false
-    t.integer  "outfield_fly",      default: 0, null: false
-    t.integer  "infield_linera",    default: 0, null: false
-    t.integer  "out_linera",        default: 0, null: false
-    t.integer  "strikeouts",        default: 0, null: false
-    t.integer  "runs_batted_in",    default: 0, null: false
-    t.integer  "runs_scored",       default: 0, null: false
-    t.integer  "stolen_bases",      default: 0, null: false
+    t.integer  "user_id",                           null: false
+    t.integer  "game_id",                           null: false
+    t.integer  "plate_appearances", default: 0,     null: false
+    t.integer  "at_bats",           default: 0,     null: false
+    t.integer  "single_hits",       default: 0,     null: false
+    t.integer  "double_hits",       default: 0,     null: false
+    t.integer  "triple_hits",       default: 0,     null: false
+    t.integer  "home_run",          default: 0,     null: false
+    t.integer  "base_on_balls",     default: 0,     null: false
+    t.integer  "hit_by_pitches",    default: 0,     null: false
+    t.integer  "sacrifice_bunts",   default: 0,     null: false
+    t.integer  "sacrifice_flies",   default: 0,     null: false
+    t.integer  "gaffe",             default: 0,     null: false
+    t.integer  "infield_grounder",  default: 0,     null: false
+    t.integer  "outfield_grounder", default: 0,     null: false
+    t.integer  "infield_fly",       default: 0,     null: false
+    t.integer  "outfield_fly",      default: 0,     null: false
+    t.integer  "infield_linera",    default: 0,     null: false
+    t.integer  "out_linera",        default: 0,     null: false
+    t.integer  "strikeouts",        default: 0,     null: false
+    t.integer  "runs_batted_in",    default: 0,     null: false
+    t.integer  "runs_scored",       default: 0,     null: false
+    t.integer  "stolen_bases",      default: 0,     null: false
+    t.boolean  "reflection",        default: false, null: false
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"

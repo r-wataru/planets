@@ -14,6 +14,7 @@
 #  defeat          :integer          default(0), not null
 #  hold_number     :integer          default(0), not null
 #  save_number     :integer          default(0), not null
+#  reflection      :boolean          default(FALSE), not null
 #  deleted_at      :datetime
 #  created_at      :datetime
 #  updated_at      :datetime
@@ -36,19 +37,13 @@ class Pitcher < ActiveRecord::Base
 
   attr_accessor :helper_member
 
+  scope :active, -> { where(reflection: true) }
+  scope :alive, ->{ where(deleted_at: nil) }
+
   before_create do
     if self.user_id == 0
       u = User.create_helper_user(self.helper_member)
       self.user_id = u.id
-    end
-  end
-
-  def check_helper_member
-    if user_id == 0
-      if helper_member.blank?
-        errors.add(:helper_member)
-        errors.add(:user_id)
-      end
     end
   end
 
@@ -74,12 +69,23 @@ class Pitcher < ActiveRecord::Base
                 winning: data_arr[8],
                 defeat: data_arr[9],
                 hold_number: data_arr[10],
-                save_number: data_arr[11])
+                save_number: data_arr[11],
+                reflection: true)
             end
           end
         end
       else
         return false
+      end
+    end
+  end
+
+  private
+  def check_helper_member
+    if user_id == 0
+      if helper_member.blank?
+        errors.add(:helper_member)
+        errors.add(:user_id)
       end
     end
   end

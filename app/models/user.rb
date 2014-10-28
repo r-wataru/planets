@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
   has_many :pitchers
   has_many :results
 
+  validate :display_name, presence: true
+
+  scope :alive, ->{ where(deleted_at: nil) }
+
   before_save do
     unless self.birthday.nil?
       self.age = age_calculation

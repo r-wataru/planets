@@ -12,6 +12,7 @@ class CreatePitchers < ActiveRecord::Migration
       t.integer :defeat, null: false, default: 0
       t.integer :hold_number, null: false, default: 0
       t.integer :save_number, null: false, default: 0
+      t.boolean :reflection, null: false, default: false
       t.datetime :deleted_at
 
       t.timestamps

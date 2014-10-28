@@ -1,8 +1,21 @@
 <%
-  form_options = {
+  pitcher_form_options = {
+    url: :game_pitchers,
     method: :post,
     html: { class: "form-horizontal", role: 'form' }
   }
+
+  batter_form_options = {
+    url: :game_results,
+    method: :post,
+    html: { class: "form-horizontal", role: 'form' }
+  }
+
+  game_form_options = {
+    method: :patch,
+    html: { class: "form-horizontal", role: 'form' }
+  }
+
   num = Array(0..99)
   names = User.all
   b_keys = [:user_id, :plate_appearances, :at_bats, :single_hits, :double_hits,
@@ -15,7 +28,7 @@
   keys = [:user_id, :pitching_number, :hit, :run, :remorse_point,
       :strikeouts, :winning, :defeat, :hold_number, :save_number ]
   labels = [ "選手", "投球回", "被安打", "失点", "自責点", "三振", "勝", "負", "ホールド", "セーブ"  ]
-  
+
 %>
 
 <!-- 試合結果 -->
@@ -27,7 +40,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">投手成績入力</div>
   <div class="panel-body">
-    <%= form_for [ @game, @pitcher ], form_options do |f| %>
+    <%= form_for [ @game, @pitcher ], pitcher_form_options do |f| %>
       <%= markup do |m|
         p = HorizontalFormPresenter.new(f, self)
         p.with_options(required: true) do |q|
@@ -46,7 +59,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">野手成績</div>
   <div class="panel-body">
-    <%= form_for [ @game, @result ], form_options do |f| %>
+    <%= form_for [ @game, @result ], batter_form_options do |f| %>
       <%= markup do |m|
         p = HorizontalFormPresenter.new(f, self)
         p.with_options(required: true) do |q|
@@ -57,3 +70,10 @@
     <% end %>
   </div>
 </div>
+
+<%= form_for [ :update_reflection, @game ], game_form_options do |f| %>
+  <%= markup do |m|
+    p = HorizontalFormPresenter.new(f, self)
+    m << p.submit_button(columns: 12)
+  end %>
+<% end %>

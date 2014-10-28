@@ -24,11 +24,12 @@ class CreateResults < ActiveRecord::Migration
       t.integer :runs_batted_in, null: false, default: 0      # 打点
       t.integer :runs_scored, null: false, default: 0         # 得点
       t.integer :stolen_bases, null: false, default: 0        # 盗塁
+      t.boolean :reflection, null: false, default: false      # 統計に反映
       t.datetime :deleted_at
-      
+
       t.timestamps
     end
-    
+
     add_index :results, :user_id
   end
 end

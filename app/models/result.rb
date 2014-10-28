@@ -26,6 +26,7 @@
 #  runs_batted_in    :integer          default(0), not null
 #  runs_scored       :integer          default(0), not null
 #  stolen_bases      :integer          default(0), not null
+#  reflection        :boolean          default(FALSE), not null
 #  deleted_at        :datetime
 #  created_at        :datetime
 #  updated_at        :datetime
@@ -41,9 +42,14 @@ require 'nkf'
 class Result < ActiveRecord::Base
   belongs_to :game
   belongs_to :user
-  
+
+  validate :check_helper_member
+
   attr_accessor :helper_member
-  
+
+  scope :active, -> { where(reflection: true) }
+  scope :alive, ->{ where(deleted_at: nil) }
+
   before_create do
     if self.user_id == 0
       u = User.create_helper_user(self.helper_member)
@@ -92,11 +98,22 @@ class Result < ActiveRecord::Base
               strikeouts: data_arr[20].to_i,
               runs_batted_in: data_arr[21].to_i,
               runs_scored: data_arr[22].to_i,
-              stolen_bases: data_arr[23].to_i)
+              stolen_bases: data_arr[23].to_i,
+              reflection: true)
           end
         end
       else
         return false
+      end
+    end
+  end
+
+  private
+  def check_helper_member
+    if user_id == 0
+      if helper_member.blank?
+        errors.add(:helper_member)
+        errors.add(:user_id)
       end
     end
   end
