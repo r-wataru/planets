@@ -7,7 +7,7 @@ class GamesController < ApplicationController
     @result = @game.results.new
     @season = @game.season
   end
-  
+
   def new
     @game = Game.new
     @pitcher = Pitcher.new

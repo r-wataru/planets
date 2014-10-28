@@ -25,6 +25,13 @@ class ResultsController < ApplicationController
     end
   end
 
+  def edit
+    @game = Game.find(params[:game_id])
+    @results = @game.results
+    @result = @results.find(params[:id])
+    @pitchers = @game.pitchers
+  end
+
   private
   def results_params
     params.require(:result).permit(

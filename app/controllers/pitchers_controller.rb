@@ -18,6 +18,13 @@ class PitchersController < ApplicationController
     end
   end
 
+  def edit
+    @game = Game.find(params[:game_id])
+    @pitchers = @game.pitchers
+    @pitcher = @game.pitchers.find(params[:id])
+    @results = @game.results
+  end
+
   def pitcher_params
     params.require(:pitcher).permit(
       :user_id,

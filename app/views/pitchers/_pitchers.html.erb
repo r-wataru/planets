@@ -19,7 +19,7 @@
           <% @pitchers.each do |p| %>
             <% next if p.user.blank? %>
             <tr>
-              <td><%= p.user.try(:display_name) %></td>
+              <td><%= link_to p.user.try(:display_name), [ :edit, @game, p ] %></td>
               <td><%= p.pitching_number %></td>
               <td><%= p.hit %></td>
               <td><%= p.run %></td>
