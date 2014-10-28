@@ -1,59 +1,64 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">野手成績</h3>
-  </div>
-  <div class="panel-body">
-    <div class="table-responsive">
-      <table class="table table-hover table-striped">
-        <tr class="statsTable01">
-          <th>順位</th>
-          <th>選手名</th>
-          <th><%= link_to "打率*", results_path(change: "batting_average") %></th>
-          <th><%= link_to "試合数", results_path(change: "game_count") %></th>
-          <th><%= link_to "打席数", results_path(change: "plate_appearances") %></th>
-          <th><%= link_to "打数", results_path(change: "at_bats") %></th>
-          <th><%= link_to "安打", results_path(change: "total_hits") %></th>
-          <th><%= link_to "二塁打", results_path(change: "double_hits") %></th>
-          <th><%= link_to "三塁打", results_path(change: "triple_hits") %></th>
-          <th><%= link_to "本塁打", results_path(change: "home_run") %></th>
-          <th><%= link_to "塁打数", results_path(change: "total_bases") %></th>
-          <th><%= link_to "打点", results_path(change: "runs_batted_in") %></th>
-          <th><%= link_to "得点", results_path(change: "runs_scored") %></th>
-          <th><%= link_to "三振", results_path(change: "strikeouts") %></th>
-          <th><%= link_to "四球", results_path(change: "base_on_balls") %></th>
-          <th><%= link_to "死球", results_path(change: "hit_by_pitches") %></th>
-          <th><%= link_to "犠打", results_path(change: "sacrifice_bunts") %></th>
-          <th><%= link_to "犠飛", results_path(change: "sacrifice_flies") %></th>
-          <th><%= link_to "盗塁", results_path(change: "stolen_bases") %></th>
-          <th><%= link_to "出塁率*", results_path(change: "base_percentage") %></th>
-          <th><%= link_to "長打率*", results_path(change: "slugging_percentage") %></th>
-        </tr>
-        <% @display.each_with_index do |display, idx| %>
-          <tr class="<%= cycle("even", "odd") %>">
-            <td><%= idx + 1 %></td>
-            <td><%= display[:display_name] %></td>
-            <td><%= sprintf( "%.3f", display[:batting_average]) %></td>
-            <td><%= display[:game_count] %></td>
-            <td><%= display[:plate_appearances] %></td>
-            <td><%= display[:at_bats] %></td>
-            <td><%= display[:total_hits] %></td>
-            <td><%= display[:double_hits] %></td>
-            <td><%= display[:triple_hits] %></td>
-            <td><%= display[:home_run] %></td>
-            <td><%= display[:total_bases] %></td>
-            <td><%= display[:runs_batted_in] %></td>
-            <td><%= display[:runs_scored] %></td>
-            <td><%= display[:strikeouts] %></td>
-            <td><%= display[:base_on_balls] %></td>
-            <td><%= display[:hit_by_pitches] %></td>
-            <td><%= display[:sacrifice_bunts] %></td>
-            <td><%= display[:sacrifice_flies] %></td>
-            <td><%= display[:stolen_bases] %></td>
-            <td><%= sprintf( "%.3f", display[:base_percentage]) %></td>
-            <td><%= sprintf( "%.3f", display[:slugging_percentage]) %></td>
+<% if @results.present? && @results.count > 0 %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">野手成績</h3>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <tr class="statsTable01">
+            <th>選手</th>
+            <th>打席</th>
+            <th>打数</th>
+            <th>単打</th>
+            <th>二塁打</th>
+            <th>三塁打</th>
+            <th>本塁打</th>
+            <th>四球</th>
+            <th>死球</th>
+            <th>犠打</th>
+            <th>犠飛</th>
+            <th>失策出塁</th>
+            <th>内ゴロ</th>
+            <th>外ゴロ</th>
+            <th>内飛</th>
+            <th>外飛</th>
+            <th>内直</th>
+            <th>外直</th>
+            <th>三振</th>
+            <th>打点</th>
+            <th>得点</th>
+            <th>盗塁</th>
           </tr>
-        <% end %>
-      </table>
+          <% @results.each_with_index do |result, idx| %>
+          <% next if result.user.blank? %>
+            <tr>
+              <td><%= result.user.display_name %></td>
+              <td><%= result.plate_appearances %></td>
+              <td><%= result.at_bats %></td>
+              <td><%= result.single_hits %></td> 
+              <td><%= result.double_hits %></td>
+              <td><%= result.triple_hits %></td>
+              <td><%= result.home_run %></td>
+              <td><%= result.base_on_balls %></td>
+              <td><%= result.hit_by_pitches %></td>
+              <td><%= result.sacrifice_bunts %></td>
+              <td><%= result.sacrifice_flies %></td>
+              <td><%= result.gaffe %></td>
+              <td><%= result.infield_grounder %></td> 
+              <td><%= result.outfield_grounder %></td>
+              <td><%= result.infield_fly %></td>
+              <td><%= result.outfield_fly %></td>
+              <td><%= result.infield_linera %></td>
+              <td><%= result.out_linera %></td>
+              <td><%= result.strikeouts %></td>
+              <td><%= result.runs_batted_in %></td>
+              <td><%= result.runs_scored %></td>
+              <td><%= result.stolen_bases %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

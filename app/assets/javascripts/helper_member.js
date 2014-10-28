@@ -16,15 +16,15 @@ $(document).ready(function() {
     var display_text_field = function(selected, event) {
       if (selected === "0") {
         if (event === "show") {
-          $(field).show();
+          $(field).removeAttr('required').show();
         } else {
-          $(field).slideDown(500);
+          $(field).prop('required',true).slideDown(500);
         }
       } else {
         if (event === "show") {
-          $(field).hide();
+          $(field).prop('required',true).hide();
         } else {
-          $(field).slideUp(500);
+          $(field).removeAttr('required').slideUp(500);
         }
       }
     };

@@ -1,42 +1,58 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">チーム全体</h3>
+    <h3 class="panel-title">野手成績</h3>
   </div>
   <div class="panel-body">
     <div class="table-responsive">
       <table class="table table-hover table-striped">
         <tr class="statsTable01">
-          <th>シーズン</th>
-          <th>勝</th>
-          <th>負</th>
-          <th>引分</th>
-          <th>防御率</th>
-          <th>打率</th>
+          <th>順位</th>
+          <th>選手名</th>
+          <th><%= link_to "打率*", results_path(change: "batting_average") %></th>
+          <th><%= link_to "試合数", results_path(change: "game_count") %></th>
+          <th><%= link_to "打席数", results_path(change: "plate_appearances") %></th>
+          <th><%= link_to "打数", results_path(change: "at_bats") %></th>
+          <th><%= link_to "安打", results_path(change: "total_hits") %></th>
+          <th><%= link_to "二塁打", results_path(change: "double_hits") %></th>
+          <th><%= link_to "三塁打", results_path(change: "triple_hits") %></th>
+          <th><%= link_to "本塁打", results_path(change: "home_run") %></th>
+          <th><%= link_to "塁打数", results_path(change: "total_bases") %></th>
+          <th><%= link_to "打点", results_path(change: "runs_batted_in") %></th>
+          <th><%= link_to "得点", results_path(change: "runs_scored") %></th>
+          <th><%= link_to "三振", results_path(change: "strikeouts") %></th>
+          <th><%= link_to "四球", results_path(change: "base_on_balls") %></th>
+          <th><%= link_to "死球", results_path(change: "hit_by_pitches") %></th>
+          <th><%= link_to "犠打", results_path(change: "sacrifice_bunts") %></th>
+          <th><%= link_to "犠飛", results_path(change: "sacrifice_flies") %></th>
+          <th><%= link_to "盗塁", results_path(change: "stolen_bases") %></th>
+          <th><%= link_to "出塁率*", results_path(change: "base_percentage") %></th>
+          <th><%= link_to "長打率*", results_path(change: "slugging_percentage") %></th>
         </tr>
-        <tr>
-          <td><%= @season.year %></td>
-          <td><%= @season.games.map(&:winning).count {|a| a == 0 } %></td>
-          <td><%= @season.games.map(&:winning).count {|a| a == 1 } %></td>
-          <td><%= @season.games.map(&:winning).count {|a| a == 2 } %></td>
-          <td>
-            <%=
-              b = @season.games.map{|g| g.pitchers.map(&:remorse_point)}.flatten.inject(:+)
-              c = @season.games.map{|g| g.pitchers.map(&:pitching_number)}.flatten.inject(:+)
-              d = (b * 9).quo(c).to_f.round(2)
-              d
-            %>
-          </td>
-          <td>
-            <%=
-              a = @season.games.map{|g| g.results.map(&:at_bats)}.flatten.inject(:+)
-              t = @season.games.map{|g| g.results.map(&:single_hits)}.flatten.inject(:+) +
-                @season.games.map{|g| g.results.map(&:double_hits)}.flatten.inject(:+) +
-                @season.games.map{|g| g.results.map(&:triple_hits)}.flatten.inject(:+) +
-                @season.games.map{|g| g.results.map(&:home_run)}.flatten.inject(:+)
-              sprintf( "%.3f", t.quo(a).to_f.round(3))
-            %>
-          </td>
-        </tr>
+        <% @display.each_with_index do |display, idx| %>
+          <tr class="<%= cycle("even", "odd") %>">
+            <td><%= idx + 1 %></td>
+            <td><%= display[:display_name] %></td>
+            <td><%= sprintf( "%.3f", display[:batting_average]) %></td>
+            <td><%= display[:game_count] %></td>
+            <td><%= display[:plate_appearances] %></td>
+            <td><%= display[:at_bats] %></td>
+            <td><%= display[:total_hits] %></td>
+            <td><%= display[:double_hits] %></td>
+            <td><%= display[:triple_hits] %></td>
+            <td><%= display[:home_run] %></td>
+            <td><%= display[:total_bases] %></td>
+            <td><%= display[:runs_batted_in] %></td>
+            <td><%= display[:runs_scored] %></td>
+            <td><%= display[:strikeouts] %></td>
+            <td><%= display[:base_on_balls] %></td>
+            <td><%= display[:hit_by_pitches] %></td>
+            <td><%= display[:sacrifice_bunts] %></td>
+            <td><%= display[:sacrifice_flies] %></td>
+            <td><%= display[:stolen_bases] %></td>
+            <td><%= sprintf( "%.3f", display[:base_percentage]) %></td>
+            <td><%= sprintf( "%.3f", display[:slugging_percentage]) %></td>
+          </tr>
+        <% end %>
       </table>
     </div>
   </div>

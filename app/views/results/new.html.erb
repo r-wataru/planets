@@ -1,13 +1,59 @@
-<%#= render "results/game" %>
+<%
+  form_options = {
+    method: :post,
+    html: { class: "form-horizontal", role: 'form' }
+  }
+  num = Array(0..99)
+  names = User.all
+  b_keys = [:user_id, :plate_appearances, :at_bats, :single_hits, :double_hits,
+      :triple_hits, :home_run, :base_on_balls, :hit_by_pitches, :sacrifice_bunts,
+      :sacrifice_flies, :gaffe, :infield_grounder, :outfield_grounder, :infield_fly,
+    :outfield_fly, :infield_linera, :out_linera, :strikeouts, :runs_batted_in, :runs_scored, :stolen_bases ]
+  b_labels = [ "選手", "打席", "打数", "単打", "二塁打", "三塁打", "本塁打", "四球", "死球", "犠打",
+    "犠飛", "失策出塁", "内ゴロ", "外ゴロ", "内飛", "外飛", "内直", "外直", "三振", "打点", "得点", "盗塁"]
 
-<div class="panel panel-custom full">
-  <div class="panel-heading">
-    <p>野手成績</p>
-  </div>
+  keys = [:user_id, :pitching_number, :hit, :run, :remorse_point,
+      :strikeouts, :winning, :defeat, :hold_number, :save_number ]
+  labels = [ "選手", "投球回", "被安打", "失点", "自責点", "三振", "勝", "負", "ホールド", "セーブ"  ]
+  
+%>
+
+<!-- 試合結果 -->
+<%= render "games/game" %>
+<!-- 投手結果 -->
+<%= render "pitchers/pitchers" %>
+
+<div class="result-form-js"></div>
+<div class="panel panel-default">
+  <div class="panel-heading">投手成績入力</div>
   <div class="panel-body">
-    <%= form_for [ @game, @result ], method: :post do |f| %>
-      <%= render "results/form", f: f %>
-      <%= f.submit %>
+    <%= form_for [ @game, @pitcher ], form_options do |f| %>
+      <%= markup do |m|
+        p = HorizontalFormPresenter.new(f, self)
+        p.with_options(required: true) do |q|
+          m << q.table_form_block(keys, labels, num, names, columns: 12)
+        end
+        m << p.submit_button(columns: 12)
+      end %>
+    <% end %>
+  </div>
+</div>
+
+<!-- 野手結果 -->
+<%= render "results/results" %>
+
+<div class="result-form-js"></div>
+<div class="panel panel-default">
+  <div class="panel-heading">野手成績</div>
+  <div class="panel-body">
+    <%= form_for [ @game, @result ], form_options do |f| %>
+      <%= markup do |m|
+        p = HorizontalFormPresenter.new(f, self)
+        p.with_options(required: true) do |q|
+          m << q.table_form_block(b_keys, b_labels, num, names, columns: 12)
+        end
+        m << p.submit_button(columns: 12)
+      end %>
     <% end %>
   </div>
 </div>

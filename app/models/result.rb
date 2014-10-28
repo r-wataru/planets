@@ -41,6 +41,15 @@ require 'nkf'
 class Result < ActiveRecord::Base
   belongs_to :game
   belongs_to :user
+  
+  attr_accessor :helper_member
+  
+  before_create do
+    if self.user_id == 0
+      u = User.create_helper_user(self.helper_member)
+      self.user_id = u.id
+    end
+  end
 
   def total_hits
     self.single_hits.to_i + self.double_hits.to_i + self.triple_hits.to_i + self.home_run.to_i

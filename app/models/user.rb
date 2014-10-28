@@ -55,8 +55,10 @@ class User < ActiveRecord::Base
 
   class << self
     def create_helper_user(name)
+      number = User.all.map(&:number).max
+      number = number + 1
       self.create(
-        number: 100,
+        number: number,
         login_name: "helper",
         display_name: name,
         helper: true)

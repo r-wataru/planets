@@ -7,11 +7,12 @@ class ResultsController < ApplicationController
 
   def new
     @game = Game.find(params[:game_id])
+    @pitchers = @game.pitchers
+    @results = @game.results
+    @users = User.all
     @season = @game.season
     @result = @game.results.new
     @pitcher = @game.pitchers.new
-    @results = @game.results
-    @pitchers = @game.pitchers
   end
 
   def create
@@ -48,6 +49,8 @@ class ResultsController < ApplicationController
       :strikeouts,
       :runs_batted_in,
       :runs_scored,
-      :stolen_bases)
+      :stolen_bases,
+      :helper_member
+    )
   end
 end

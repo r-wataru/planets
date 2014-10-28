@@ -55,7 +55,7 @@ class HorizontalFormPresenter
     helper_options = {}
     helper_options[:class] = 'form-control helper_form_field'
     helper_options[:class] += " #{options[:class]}" if options[:class].present?
-    helper_options[:required] = options[:required]
+    helper_options[:required] = false
     helper_options[:placeholder] = "助っ人名"
 
     choices = objects.map { |o| [ o.send(:display_name), o.id ] }
