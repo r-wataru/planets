@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration
       t.references :season, null: false
       t.string :name, null: false
       t.text :description
-      t.datetime :played_at, null: false
+      t.date :played_at, null: false
       t.string :total_result, null: false
       t.integer :winning, null: false
       t.text :result1

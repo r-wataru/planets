@@ -1,0 +1,14 @@
+<%= markup do |m|
+  p = HorizontalFormPresenter.new(f, self)
+  p.with_options(required: true) do |q|
+    m << p.select_box(:season_id, 'シーズン', @seasons, :year, columns: 10)
+    m << q.text_field_block(:name, '試合名', columns: 10)
+    m << q.text_field_block(:played_at, '試合日', columns: 10, class: "datepicker")
+    m << q.text_field_block(:total_result, '試合結果', columns: 10)
+    m << q.radio_box_block(:winning, "勝敗", @radios, columns: 10)
+    m << q.text_area_block(:description, "コメント", columns: 10)
+    m << q.table_score_form_block(:result1, "スコアボード", 
+      @scores, @num, @error_target, @field_names, columns: 10, include_blank: false)
+  end
+  m << p.submit_button
+end %>

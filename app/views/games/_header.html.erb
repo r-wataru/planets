@@ -1,0 +1,8 @@
+<%
+  @radios = [{value: 0, key: "勝"},{value: 1, key: "負"},{value: 2, key: "分"}]
+  @scores = Game.score_keys
+  @error_target = [ :top, :bottom, :total, :total_2 ]
+  @field_names = [ "先攻", "後攻" ]
+  @seasons = Season.all
+  @num = Array(0..99)
+%>

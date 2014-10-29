@@ -31,6 +31,15 @@ class GamesController < ApplicationController
     @season = @game.season
   end
 
+  def update
+    @game = Game.find(params[:id])
+    if @game.update_attributes game_params
+      redirect_to @game
+    else
+      render action: :new
+    end
+  end
+
   def update_reflection
     @game = Game.find(params[:id])
     @game.update_reflection

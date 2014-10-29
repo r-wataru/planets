@@ -6,7 +6,7 @@
 #  season_id    :integer          not null
 #  name         :string(255)      not null
 #  description  :text
-#  played_at    :datetime         not null
+#  played_at    :date             not null
 #  total_result :string(255)      not null
 #  winning      :integer          not null
 #  result1      :text
@@ -19,6 +19,7 @@
 #
 #  index_games_on_season_id  (season_id)
 #
+
 require 'csv'
 require "kconv"
 require 'nkf'
@@ -72,6 +73,11 @@ class Game < ActiveRecord::Base
   end
 
   class << self
+    def score_keys
+      [[ :top, :one, :two, :three, :four, :five, :six, :seven, :eight, :nine, :total ],
+       [ :bottom, :one_2, :two_2, :three_2, :four_2, :five_2, :six_2, :seven_2, :eight_2, :nine_2, :total_2 ]]
+    end
+    
     def import_csv
       path = Rails.root.join("db", "seeds", "data", "mla_export_p_game.csv")
       if File.exists?(path)
