@@ -66,6 +66,18 @@ class Result < ActiveRecord::Base
   end
 
   class << self
+    def result_keys
+      [ :user_id, :plate_appearances, :at_bats, :single_hits, :double_hits, :triple_hits,
+        :home_run, :base_on_balls, :hit_by_pitches, :sacrifice_bunts, :sacrifice_flies, :gaffe,
+        :infield_grounder, :outfield_grounder, :infield_fly, :outfield_fly, :infield_linera,
+        :out_linera, :strikeouts, :runs_batted_in, :runs_scored, :stolen_bases ]
+    end
+
+    def result_labels
+      [ "選手", "打席", "打数", "単打", "二塁打", "三塁打", "本塁打", "四球", "死球", "犠打", "犠飛",
+        "失策出塁", "内ゴロ", "外ゴロ", "内飛", "外飛", "内直", "外直", "三振", "打点", "得点", "盗塁"]
+    end
+
     def import_csv
       path = Rails.root.join("db", "seeds", "data", "mla_export_p_batter.csv")
       if File.exists?(path)

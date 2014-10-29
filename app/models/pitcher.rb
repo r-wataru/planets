@@ -48,6 +48,15 @@ class Pitcher < ActiveRecord::Base
   end
 
   class << self
+    def pitcher_labels
+      ["選手", "投球回", "被安打", "失点", "自責点", "三振", "勝", "負", "ホールド", "セーブ"]
+    end
+
+    def pitcher_keys
+      [ :user_id, :pitching_number, :hit, :run, :remorse_point,
+        :strikeouts, :winning, :defeat, :hold_number, :save_number ]
+    end
+
     def import_csv
       path = Rails.root.join("db", "seeds", "data", "mla_export_p_pitcher.csv")
       if File.exist?(path)

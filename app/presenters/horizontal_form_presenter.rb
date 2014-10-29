@@ -4,7 +4,8 @@ class HorizontalFormPresenter
   attr_reader :form_builder, :view_context
   delegate :label, :text_field, :password_field, :check_box, :radio_button,
     :email_field, :number_field, :password_field, :text_area, :hidden_field,
-    :object, :select, to: :form_builder
+    :object, :select, :link_to, to: :form_builder
+  delegate :link_to, to: :view_context
 
   def initialize(form_builder, view_context, default_label_columns = 2)
     @form_builder = form_builder
@@ -48,12 +49,12 @@ class HorizontalFormPresenter
     html_options[:required] = options[:required]
 
     html_options2 = {}
-    html_options2[:class] = 'form-control name_selecter'
+    html_options2[:class] = "form-control name_#{options[:data]}_selecter"
     html_options2[:class] += " #{options[:class]}" if options[:class].present?
     html_options2[:required] = options[:required]
 
     helper_options = {}
-    helper_options[:class] = 'form-control helper_form_field'
+    helper_options[:class] = "form-control helper_#{options[:data]}_form_field"
     helper_options[:class] += " #{options[:class]}" if options[:class].present?
     helper_options[:required] = false
     helper_options[:placeholder] = "助っ人名"
@@ -186,6 +187,22 @@ class HorizontalFormPresenter
       m.div(class: "col-sm-#{input_columns}") do
         m << select(name, choices, main_options, html_options)
         m << error_messages_for(name)
+      end
+    end
+  end
+
+  def delete_and_submit_button(path, options = {})
+    label_text = options[:label_text1] || '更新'
+    type = options[:type1] || 'primary'
+    columns = options[:columns] || @maximum_columns
+
+    columns_num = columns == 12 ? 0 : 2
+
+    markup(:div, class: 'form-group') do |m|
+      m.div(class: "col-sm-#{columns_num}")
+      m.div(class: "col-sm-#{columns - columns_num}") do
+        m.button(label_text, type: 'submit', class: "btn btn-#{type}")
+        m << link_to("削除", path, class: "btn btn-danger", method: :delete, data: { confirm: "Are You Sure?"})
       end
     end
   end

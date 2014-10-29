@@ -9,10 +9,9 @@ class ResultsController < ApplicationController
     @game = Game.find(params[:game_id])
     @pitchers = @game.pitchers
     @results = @game.results
-    @users = User.all
     @season = @game.season
-    @result = @game.results.new
-    @pitcher = @game.pitchers.new
+    @new_result = @game.results.new
+    @new_pitcher = @game.pitchers.new
   end
 
   def create
@@ -27,9 +26,32 @@ class ResultsController < ApplicationController
 
   def edit
     @game = Game.find(params[:game_id])
+    @result = @game.results.find(params[:id])
     @results = @game.results
-    @result = @results.find(params[:id])
     @pitchers = @game.pitchers
+    @new_result = @game.results.new
+    @new_pitcher = @game.pitchers.new
+  end
+
+  def update
+    @game = Game.find(params[:game_id])
+    @result = @game.results.find(params[:id])
+    @results = @game.results
+    @pitchers = @game.pitchers
+    @new_result = @game.results.new
+    @new_pitcher = @game.pitchers.new
+    if @result.update_attributes results_params
+      redirect_to @game
+    else
+      render action: :edit
+    end
+  end
+
+  def destroy
+    @game = Game.find(params[:game_id])
+    @result = @game.results.find(params[:id])
+    @result.destroy
+    redirect_to @game
   end
 
   private

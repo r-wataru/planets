@@ -87,8 +87,15 @@ ul.error-message {
   select { width: 50px; }
 }
 
-select.name_selecter { width: 200px; }
+select.name_pitcher_selecter,
+select.name_batter_selecter { width: 200px; }
 
-.helper_form_field {
+.helper_pitcher_form_field,
+.helper_batter_form_field {
   margin-top: 10px;
+  width: 200px;
+}
+
+.btn-danger {
+  margin-left: 10px;
 }

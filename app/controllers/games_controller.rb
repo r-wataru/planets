@@ -2,9 +2,9 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @pitchers = @game.pitchers
-    @pitcher = @game.pitchers.new
     @results = @game.results
-    @result = @game.results.new
+    @new_result = @game.results.new
+    @new_pitcher = @game.pitchers.new
     @season = @game.season
   end
 

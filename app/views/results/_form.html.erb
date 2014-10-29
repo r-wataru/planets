@@ -1,0 +1,11 @@
+<%= markup do |m|
+  p = HorizontalFormPresenter.new(f, self)
+  p.with_options(required: true) do |q|
+    m << q.table_form_block(@b_keys, @b_labels, @num, @names, columns: 12, data: "batter")
+    end
+  if result.new_record?
+    m << p.submit_button(columns: 12)
+  else
+    m << p.delete_and_submit_button([ @game, @result ], columns: 12)
+  end
+end %>

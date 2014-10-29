@@ -57,6 +57,11 @@
           <% end %>
         </table>
       </div>
+      <% if params[:action] == "edit" && params[:controller] == "results" %>
+        <%= form_for [ @game, @result ], @edit_b_form_options do |f| %>
+          <%= render "results/form", f: f, result: @result %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>

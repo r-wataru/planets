@@ -1,9 +1,4 @@
 <%
-  @radios = [{value: 0, key: "勝"},{value: 1, key: "負"},{value: 2, key: "分"}]
-  @scores = Game.score_keys
-  @error_target = [ :top, :bottom, :total, :total_2 ]
-  @field_names = [ "先攻", "後攻" ]
-  @seasons = Season.all
   @num = Array(0..99)
   @names = User.all
   @b_keys = Result.result_keys
@@ -17,6 +12,16 @@
   }
   @new_b_form_options = {
     method: :post,
+    html: { class: "form-horizontal", role: 'form' }
+  }
+
+  @edit_b_form_options = {
+    method: :patch,
+    html: { class: "form-horizontal", role: 'form' }
+  }
+
+  @game_form_options = {
+    method: :patch,
     html: { class: "form-horizontal", role: 'form' }
   }
 %>
