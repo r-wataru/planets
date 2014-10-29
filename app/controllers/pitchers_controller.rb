@@ -20,10 +20,11 @@ class PitchersController < ApplicationController
     @game = Game.find(params[:game_id])
     @pitcher = @game.pitchers.find(params[:id])
     @pitchers = @game.pitchers
-    @new_pitcher = @game.pitchers.new
     @results = @game.results
+    @new_pitcher = @game.pitchers.new
+    @new_result = @game.results.new
   end
-  
+
   def update
     @game = Game.find(params[:game_id])
     @pitcher = @game.pitchers.find(params[:id])
@@ -36,7 +37,7 @@ class PitchersController < ApplicationController
       render action: :edit
     end
   end
-  
+
   def destroy
     @game = Game.find(params[:game_id])
     @pitcher = @game.pitchers.find(params[:id])

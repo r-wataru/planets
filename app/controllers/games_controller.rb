@@ -28,6 +28,8 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @pitchers = @game.pitchers
     @results = @game.results
+    @new_pitcher = @game.pitchers.new
+    @new_result = @game.results.new
     @season = @game.season
   end
 

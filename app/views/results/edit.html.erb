@@ -3,6 +3,17 @@
 <%= render "games/game" %>
 <!-- 投手結果 -->
 <%= render "pitchers/pitchers" %>
+
+<div class="result-p-form-js"></div>
+<div class="panel panel-default">
+  <div class="panel-heading">投手成績入力</div>
+  <div class="panel-body">
+    <%= form_for [ @game, @new_pitcher ], @new_p_form_options do |f| %>
+      <%= render "pitchers/form", f: f, pitcher: @new_pitcher %>
+    <% end %>
+  </div>
+</div>
+
 <!-- 野手結果 -->
 <%= render "results/results" %>
 
