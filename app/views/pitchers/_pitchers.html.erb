@@ -33,6 +33,13 @@
           <% end %>
         </table>
       </div>
+
+      <% if params[:controller] == "pitchers" && params[:action] == "edit" %>
+        <%= form_for [ @game, @pitcher ], @edit_p_form_options do |f| %>
+          <%= render "pitchers/form", f: f, pitcher: @pitcher %>
+        <% end %>
+      <% end %>
+
     </div>
   </div>
 <% end %>

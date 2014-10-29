@@ -1,0 +1,15 @@
+<%
+@p_keys = Pitcher.pitcher_keys
+@p_labels = Pitcher.pitcher_labels
+@num = Array(0..99)
+@names = User.all
+
+@edit_p_form_options = {
+  method: :patch,
+  html: { class: "form-horizontal", role: 'form' }
+}
+@new_p_form_options = {
+  method: :post,
+  html: { class: "form-horizontal", role: 'form' }
+}
+%>
