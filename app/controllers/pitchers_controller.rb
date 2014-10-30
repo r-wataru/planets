@@ -3,6 +3,7 @@ class PitchersController < ApplicationController
     @game = Game.find(params[:game_id])
     @pitchers = @game.pitchers
     @new_pitcher = @game.pitchers.new
+    @new_result = @game.results.new
   end
 
   def create

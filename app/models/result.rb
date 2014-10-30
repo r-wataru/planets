@@ -59,7 +59,8 @@ class Result < ActiveRecord::Base
   end
 
   after_save do
-    if Result.where(self.game_id).map(&:reflection).include?(true)
+    if Result.where(game_id: self.game_id).map(&:reflection).include?(true) ||
+        Pitcher.where(game_id: self.game_id).map(&:reflection).include?(true)
       self.update_column(:reflection, true)
     end
   end
@@ -83,6 +84,10 @@ class Result < ActiveRecord::Base
     def result_labels
       [ "選手", "打席", "打数", "単打", "二塁打", "三塁打", "本塁打", "四球", "死球", "犠打", "犠飛",
         "失策出塁", "内ゴロ", "外ゴロ", "内飛", "外飛", "内直", "外直", "三振", "打点", "得点", "盗塁"]
+    end
+
+    def reflection_yet?(game)
+      Result.where(game_id: game.id).map(&:reflection).include?(true)
     end
 
     def import_csv

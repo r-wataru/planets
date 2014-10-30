@@ -28,9 +28,12 @@
   </div>
 </div>
 
-<%= form_for [ :update_reflection, @game ], @game_form_options do |f| %>
-  <%= markup do |m|
-    p = HorizontalFormPresenter.new(f, self)
-    m << p.submit_button(columns: 12)
-  end %>
+<% if !Result.reflection_yet?(@game) || !Pitcher.reflection_yet?(@game) %>
+  <p>まだ全体の成績に反映されていません</p>
+  <%= form_for [ :update_reflection, @game ], @game_form_options do |f| %>
+    <%= markup do |m|
+      p = HorizontalFormPresenter.new(f, self)
+      m << p.submit_button(columns: 12)
+    end %>
+  <% end %>
 <% end %>

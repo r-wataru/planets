@@ -49,7 +49,8 @@ class Pitcher < ActiveRecord::Base
   end
 
   after_save do
-    if Pitcher.where(self.game_id).map(&:reflection).include?(true)
+    if Result.where(game_id: self.game_id).map(&:reflection).include?(true) ||
+        Pitcher.where(game_id: self.game_id).map(&:reflection).include?(true)
       self.update_column(:reflection, true)
     end
   end
@@ -62,6 +63,10 @@ class Pitcher < ActiveRecord::Base
     def pitcher_keys
       [ :user_id, :pitching_number, :hit, :run, :remorse_point,
         :strikeouts, :winning, :defeat, :hold_number, :save_number ]
+    end
+
+    def reflection_yet?(game)
+      Pitcher.where(game_id: game.id).map(&:reflection).include?(true)
     end
 
     def import_csv
