@@ -44,6 +44,7 @@ class Result < ActiveRecord::Base
   belongs_to :user
 
   validate :check_helper_member
+  validates :user_id, uniqueness: { scope: :game_id }
 
   attr_accessor :helper_member
 
@@ -54,6 +55,12 @@ class Result < ActiveRecord::Base
     if self.user_id == 0
       u = User.create_helper_user(self.helper_member)
       self.user_id = u.id
+    end
+  end
+
+  after_save do
+    if Result.where(self.game_id).map(&:reflection).include?(true)
+      self.update_column(:reflection, true)
     end
   end
 

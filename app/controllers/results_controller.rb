@@ -16,8 +16,12 @@ class ResultsController < ApplicationController
 
   def create
     @game = Game.find(params[:game_id])
-    @result = @game.results.new results_params
-    if @result.save
+    @season = @game.season
+    @results = @game.results
+    @pitchers = @game.pitchers
+    @new_pitcher = @game.pitchers.new
+    @new_result = @game.results.new results_params
+    if @new_result.save
       redirect_to [ :new, @game, :result ]
     else
       render action: :new

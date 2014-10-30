@@ -17,7 +17,7 @@
             <th>セーブ</th>
           </tr>
           <% @pitchers.each do |p| %>
-            <% next if p.user.blank? %>
+            <% next if p.id.blank? %>
             <tr>
               <td><%= link_to p.user.try(:display_name), [ :edit, @game, p ] %></td>
               <td><%= p.pitching_number %></td>
@@ -33,13 +33,11 @@
           <% end %>
         </table>
       </div>
-
-      <% if params[:controller] == "pitchers" && params[:action] == "edit" %>
+      <% if params[:controller] == "pitchers" && (params[:action] == "edit" || params[:action] == "update") %>
         <%= form_for [ @game, @pitcher ], @edit_p_form_options do |f| %>
           <%= render "pitchers/form", f: f, pitcher: @pitcher %>
         <% end %>
       <% end %>
-
     </div>
   </div>
 <% end %>

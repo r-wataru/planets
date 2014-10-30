@@ -59,7 +59,7 @@ class HorizontalFormPresenter
     helper_options[:required] = false
     helper_options[:placeholder] = "助っ人名"
 
-    choices = objects.map { |o| [ o.send(:display_name), o.id ] }
+    choices = objects.map { |o| [ o.send(:display_user_name), o.id ] }
     choices = choices << [ "助っ人", 0 ]
 
     markup(:div) do |m|

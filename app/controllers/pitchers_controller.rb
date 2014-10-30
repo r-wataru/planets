@@ -7,9 +7,11 @@ class PitchersController < ApplicationController
 
   def create
     @game = Game.find(params[:game_id])
+    @new_pitcher = @game.pitchers.new pitcher_params
+    @new_result = @game.results.new
     @pitchers = @game.pitchers
-    @pitcher = @game.pitchers.new pitcher_params
-    if @pitcher.save
+    @results = @game.results
+    if @new_pitcher.save
       redirect_to [ :new, @game, :result ]
     else
       render action: :new
@@ -29,8 +31,9 @@ class PitchersController < ApplicationController
     @game = Game.find(params[:game_id])
     @pitcher = @game.pitchers.find(params[:id])
     @pitchers = @game.pitchers
-    @new_pitcher = @game.pitchers.new
     @results = @game.results
+    @new_pitcher = @game.pitchers.new
+    @new_result = @game.results.new
     if @pitcher.update_attributes pitcher_params
       redirect_to @game
     else

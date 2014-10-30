@@ -29,7 +29,7 @@
             <th>盗塁</th>
           </tr>
           <% @results.each_with_index do |result, idx| %>
-          <% next if result.user.blank? %>
+          <% next if result.id.blank? %>
             <tr>
               <td><%= link_to result.user.display_name, [ :edit, @game, result ] %></td>
               <td><%= result.plate_appearances %></td>
@@ -57,7 +57,7 @@
           <% end %>
         </table>
       </div>
-      <% if params[:action] == "edit" && params[:controller] == "results" %>
+      <% if (params[:action] == "edit" || params[:action] == "update") && params[:controller] == "results" %>
         <%= form_for [ @game, @result ], @edit_b_form_options do |f| %>
           <%= render "results/form", f: f, result: @result %>
         <% end %>

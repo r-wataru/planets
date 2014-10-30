@@ -1,0 +1,5 @@
+ja:
+  activerecord:
+    attributes:
+      result:
+        user_id: 選手

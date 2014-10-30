@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     self.emails.build(address: address)
   end
 
+  def display_user_name
+    self.helper ? self.display_name + "(助)" : self.display_name
+  end
+
   class << self
     def create_helper_user(name)
       number = User.all.map(&:number).max

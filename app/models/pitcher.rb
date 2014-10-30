@@ -34,6 +34,7 @@ class Pitcher < ActiveRecord::Base
   validates :user_id, :game_id, :pitching_number, :hit, :run, :remorse_point,
     :strikeouts, :winning, :defeat, :hold_number, :save_number, presence: true
   validate :check_helper_member
+  validates :user_id, uniqueness: { scope: :game_id }
 
   attr_accessor :helper_member
 
@@ -44,6 +45,12 @@ class Pitcher < ActiveRecord::Base
     if self.user_id == 0
       u = User.create_helper_user(self.helper_member)
       self.user_id = u.id
+    end
+  end
+
+  after_save do
+    if Pitcher.where(self.game_id).map(&:reflection).include?(true)
+      self.update_column(:reflection, true)
     end
   end
 
