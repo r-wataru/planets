@@ -24,18 +24,18 @@ class MainSidebarPresenter < Presenter
       m << link_to(fa_icon('dashboard', text: 'ダッシュボード'), view_context.root_path)
     end
   end
-  
+
   def result
     html_class = params[:controller] == 'results' ? 'active' : ''
     markup(:li, class: html_class) do |m|
       m << link_to(fa_icon('line-chart', text: '成績表'), view_context.results_path)
     end
   end
-  
+
   def member
     html_class = params[:controller] == '' ? 'active' : ''
     markup(:li, class: html_class) do |m|
-      m << link_to(fa_icon('list', text: 'メンバー'), "")
+      m << link_to(fa_icon('list', text: 'メンバー'), view_context.users_path)
     end
   end
 end

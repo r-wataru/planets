@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   validate :display_name, presence: true
 
   scope :alive, ->{ where(deleted_at: nil) }
+  scope :member, -> { where(helper: false) }
 
   before_save do
     unless self.birthday.nil?

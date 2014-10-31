@@ -104,3 +104,34 @@ select.name_batter_selecter { width: 200px; }
   width: 100px;
   margin-bottom: 20px;
 }
+
+.user-info {
+  min-width: 100px;
+  height: 100px;
+  overflow: scroll;
+}
+
+.user-img {
+  min-width: 100px;
+  height: 100px;
+  overflow: hidden;
+  padding: 0;
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.user-link {
+  color: #000;
+}
+.user-link:hover {
+  color: #000;
+  
+}
+
+/*.panel-warning > .panel-heading {
+  color: #fff;
+  background-color: DodgerBlue;
+  border-color: #000;
+}*/

@@ -1,0 +1,21 @@
+<div class="row">
+  <% @users.each do |user| %>
+    <div class="col-md-4">
+      <div class="result-p-form-js"></div>
+      <div class="panel panel-default" style="min-width: 240px;">
+        <div class="panel-heading">
+          <strong># <%= user.number %></strong>
+          <%= link_to user.display_name, user, class: "user-link" %>
+        </div>
+        <div class="panel-body">
+          <div class="col-xs-6 user-img">
+            <%= image_tag "user.png", alt: "logo" %>
+          </div>
+          <div class="col-xs-6 user-info">
+            <%= user.description %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

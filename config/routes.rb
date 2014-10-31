@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     resources :results
   end
   resources :pitchers
+  resources :users
 end
