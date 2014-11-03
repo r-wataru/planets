@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong># <%= @user.number %></strong>
+          <%= @user.display_name %>(野手)
+        </div>
+        <div class="panel-body">
+          <%= render "users/d_slider" %>
+          <%= render "users/d_selecter" %>
+        </div>
+      </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong># <%= @user.number %></strong>
+          <%= @user.display_name %>(投手)
+        </div>
+        <div class="panel-body">
+          <%= render "users/p_slider" %>
+          <%= render "users/p_selecter" %>
+        </div>
+      </div>
+  </div>
+</div>

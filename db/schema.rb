@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141017234558) do
+ActiveRecord::Schema.define(version: 20141031151009) do
+
+  create_table "character_user_links", force: true do |t|
+    t.integer  "user_id",      null: false
+    t.integer  "character_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "characters", force: true do |t|
+    t.string   "name",                        null: false
+    t.text     "description"
+    t.integer  "condition",   default: 0,     null: false
+    t.boolean  "use_type",    default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "emails", force: true do |t|
     t.integer  "user_id",                    null: false
@@ -145,6 +161,7 @@ ActiveRecord::Schema.define(version: 20141017234558) do
     t.boolean  "checked",         default: false, null: false
     t.datetime "deleted_at"
     t.boolean  "helper",          default: false, null: false
+    t.text     "ability"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

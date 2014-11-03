@@ -1,0 +1,24 @@
+<%
+  slider_array = [ { :speed => "球速" }, { :control => "コントロール"}, { :stamina => "スタミナ" } ]
+%>
+
+<% slider_array.each_with_index do |array, i| %>
+  <% val = @user.display_ability(array.keys.first)  %>
+  <div class="col-md-12">
+    <div class="col-md-4">
+      <%= array.values.first %>
+    </div>
+    <div class="col-md-4">
+      <div id="jquery-ui-slider-<%= i + 6 %>" class="jquery-ui-slider" data-int="<%= i + 6 %>"></div>
+    </div>
+    <div class="col-md-4">
+      <%= text_field_tag array.keys.first,
+        val,
+        id: "jquery-ui-slider-value-#{i + 6}",
+        class: "form-control jquery-ui-slider-value",
+        data: { int: "#{i + 6}" },
+        readonly: "readonly"
+      %>
+    </div>
+  </div>
+<% end %>

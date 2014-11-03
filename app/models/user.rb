@@ -15,6 +15,7 @@
 #  checked         :boolean          default(FALSE), not null
 #  deleted_at      :datetime
 #  helper          :boolean          default(FALSE), not null
+#  ability         :text
 #  created_at      :datetime
 #  updated_at      :datetime
 #
@@ -30,16 +31,29 @@ class User < ActiveRecord::Base
   has_many :emails
   has_many :pitchers
   has_many :results
+  has_many :character_user_links
+  has_many :characters, through: :character_user_links, source: :character
 
   validate :display_name, presence: true
 
   scope :alive, ->{ where(deleted_at: nil) }
   scope :member, -> { where(helper: false) }
 
+  store :ability, accessors: [ :shot, :meet, :power, :run, :shoulder, :defend, :stamina, :speed, :control ]
+
   before_save do
     unless self.birthday.nil?
       self.age = age_calculation
     end
+  end
+
+  def update_ability(feild, value)
+    eval("self.#{feild} = #{value}")
+    self.save
+  end
+
+  def display_ability(key)
+    self.send(key).to_i
   end
 
   def age_calculation

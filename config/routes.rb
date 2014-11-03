@@ -7,5 +7,8 @@ Rails.application.routes.draw do
     resources :results
   end
   resources :pitchers
-  resources :users
+  resources :users do
+    put :update_ability, on: :member
+    resources :characters
+  end
 end

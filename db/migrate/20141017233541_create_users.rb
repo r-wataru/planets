@@ -13,6 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :checked, null: false, default: false
       t.datetime :deleted_at
       t.boolean :helper, null: false, default: false
+      t.text :ability
 
       t.timestamps
     end

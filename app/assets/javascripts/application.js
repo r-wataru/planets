@@ -14,5 +14,8 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require jquery.ui.datepicker-ja
+//= require jquery.ui.slider
+//= require jquery.ui.widget
+//= require jquery.ui.mouse
 //= require bootstrap-sprockets
 //= require_tree .

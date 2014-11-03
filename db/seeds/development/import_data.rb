@@ -1,3 +1,5 @@
+# キャラクター作成
+Character.import_csv
 # シーズン作成
 Season.import_csv
 # ゲーム作成

@@ -1,0 +1,25 @@
+<%
+  slider_array = [ { :shot => "弾丸"}, { :meet => "ミート" }, { :power => "パワー" },
+    { :run => "走力" }, { :shoulder => "肩力" }, { :defend => "守力" } ]
+%>
+
+<% slider_array.each_with_index do |array, i| %>
+  <% val = @user.display_ability(array.keys.first)  %>
+  <div class="col-md-12">
+    <div class="col-md-4">
+      <%= array.values.first %>
+    </div>
+    <div class="col-md-4">
+      <div id="jquery-ui-slider-<%= i %>" class="jquery-ui-slider" data-int="<%= i %>"></div>
+    </div>
+    <div class="col-md-4">
+      <%= text_field_tag array.keys.first,
+        val,
+        id: "jquery-ui-slider-value-#{i}",
+        class: "form-control jquery-ui-slider-value",
+        data: { int: "#{i}" },
+        readonly: "readonly"
+      %>
+    </div>
+  </div>
+<% end %>
