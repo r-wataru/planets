@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031151009) do
+ActiveRecord::Schema.define(version: 20141104081138) do
+
+  create_table "breaking_ball_user_links", force: true do |t|
+    t.integer  "user_id",                      null: false
+    t.integer  "breaking_ball_id",             null: false
+    t.integer  "level",            default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "breaking_balls", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "character_user_links", force: true do |t|
     t.integer  "user_id",      null: false

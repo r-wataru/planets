@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   has_many :results
   has_many :character_user_links
   has_many :characters, through: :character_user_links, source: :character
+  has_many :breaking_ball_user_links
+  has_many :breaking_balls, through: :breaking_ball_user_links, source: :breaking_ball
 
   validate :display_name, presence: true
 

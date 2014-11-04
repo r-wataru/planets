@@ -6,16 +6,17 @@
 <div class="col-md-12">
   <div class="col-md-4">
     <%= select_tag :selecting_name,
-      options_for_select(select_array, ""), class: "form-control selecting-condition", size: "6" %>
+      options_for_select(select_array, ""), class: "form-control selecting-condition selecting-dafense", size: "6" %>
   </div>
   <div class="col-md-4">
     <div style="text-align: center;">
-      <button type="button" class="btn btn-default navbar-btn add-button">追加</button>
-      <button type="button" class="btn btn-default navbar-btn remove-button">削除</button>
+      <span class="jquery-title">属性</span><br/>
+      <button type="button" class="btn btn-default navbar-btn add-button" data-int="1">追加</button>
+      <button type="button" class="btn btn-default navbar-btn remove-button" data-int="1">削除</button>
     </div>
   </div>
   <div class="col-md-4">
     <%= select_tag :selected_name,
-      options_for_select(selected_array, ""), class: "form-control selected-condition", size: "6" %>
+      options_for_select(selected_array, ""), class: "form-control selected-condition selected-defense", size: "6" %>
   </div>
 </div>

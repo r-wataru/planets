@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   resources :users do
     put :update_ability, on: :member
     resources :characters
+    resources :breaking_balls
+    resources :breaking_ball_user_links
   end
 end

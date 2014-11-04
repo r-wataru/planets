@@ -127,7 +127,41 @@ select.name_batter_selecter { width: 200px; }
 }
 .user-link:hover {
   color: #000;
-  
+}
+
+.jquery-title {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-color: #eeeded;
+  -webkit-box-shadow: inset 1px 1px 1px rgba(9,2,4,.16);
+  -moz-box-shadow: inset 1px 1px 1px rgba(9,2,4,.16);
+  box-shadow: inset 1px 1px 1px rgba(9,2,4,.16);
+  margin:0 0 14px;
+  vertical-align: top;
+  font-size: 13px;
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  display: inline-block;
+  height:30px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.jquery-ui-slider {
+  margin: 20px 0;
+}
+
+.check_or_radio {
+  margin: 15px 0;
+}
+
+.breaking-select {
+  display: inline-block;
+  width: auto;
 }
 
 /*.panel-warning > .panel-heading {

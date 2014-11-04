@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @characters = Character.result
     @picher_characters = Character.pitcher
+    @breaking_balls = BreakingBall.all
   end
 
   def update_ability

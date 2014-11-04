@@ -1,0 +1,33 @@
+<%
+  balls = @breaking_balls.map{|a| [ a.name, a.id ]}
+  balls = balls << [ "新規作成", 0 ]
+  levels = (0..7)
+%>
+
+<% @user.breaking_ball_user_links.each_with_index do |ball, i| %>
+  <div class="col-md-12">
+    <div class="col-md-4">
+      <span class="jquery-title">球種<%= i + 1 %></span>
+    </div>
+    <div class="col-md-8">
+      <%= select_tag :breaking_ball,
+        options_for_select(balls, ball.breaking_ball_id), class: "form-control breaking-ball-#{ball.id} breaking-select" %>
+      <%= select_tag :breaking_ball_level,
+        options_for_select(levels, ball.level), class: "form-control breaking-level-#{ball.id} breaking-select" %>
+      <button type="button" class="btn btn-default navbar-btn add-breaking-button" data-int="<%= ball.id %>">更新</button>
+    </div>
+  </div>
+<% end %>
+
+<div class="col-md-12">
+  <div class="col-md-4">
+    <span class="jquery-title">新球種</span>
+  </div>
+  <div class="col-md-8">
+    <%= select_tag :breaking_ball,
+      options_for_select(balls, ""), class: "form-control breaking-ball-0 breaking-select" %>
+    <%= select_tag :breaking_ball_level,
+      options_for_select(levels, ""), class: "form-control breaking-level-0 breaking-select" %>
+    <button type="button" class="btn btn-default navbar-btn add-breaking-button" data-int="0">追加</button>
+  </div>
+</div>

@@ -4,7 +4,7 @@ unless Rails.env.production? || Rails.env.staging?
   DatabaseCleaner.clean
 end
 
-table_names = %w(users import_data)
+table_names = %w(users import_data breaking_ball)
 
 table_names.each do |table_name|
   dir = case Rails.env
