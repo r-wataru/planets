@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20141031151009) do
     t.datetime "deleted_at"
     t.boolean  "helper",          default: false, null: false
     t.text     "ability"
+    t.text     "range"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

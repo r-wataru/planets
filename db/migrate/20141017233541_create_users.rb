@@ -14,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime :deleted_at
       t.boolean :helper, null: false, default: false
       t.text :ability
+      t.text :range
 
       t.timestamps
     end

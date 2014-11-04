@@ -16,6 +16,7 @@
 #  deleted_at      :datetime
 #  helper          :boolean          default(FALSE), not null
 #  ability         :text
+#  range           :text
 #  created_at      :datetime
 #  updated_at      :datetime
 #
@@ -39,7 +40,8 @@ class User < ActiveRecord::Base
   scope :alive, ->{ where(deleted_at: nil) }
   scope :member, -> { where(helper: false) }
 
-  store :ability, accessors: [ :shot, :meet, :power, :run, :shoulder, :defend, :stamina, :speed, :control ]
+  store :ability, accessors: [ :shot, :meet, :power, :run, :shoulder, :defend, :stamina, :speed, :control, :throw, :hit ]
+  store :range, accessors: [ :one, :two, :three, :four, :five, :six, :seven, :eight, :nine ]
 
   before_save do
     unless self.birthday.nil?

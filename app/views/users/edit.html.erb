@@ -6,6 +6,8 @@
           <%= @user.display_name %>(野手)
         </div>
         <div class="panel-body">
+          <%= render "users/d_check" %>
+          <%= render "users/d_radio" %>
           <%= render "users/d_slider" %>
           <%= render "users/d_selecter" %>
         </div>
@@ -19,6 +21,7 @@
           <%= @user.display_name %>(投手)
         </div>
         <div class="panel-body">
+          <%= render "users/p_radio" %>
           <%= render "users/p_slider" %>
           <%= render "users/p_selecter" %>
         </div>

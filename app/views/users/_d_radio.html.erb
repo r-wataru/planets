@@ -1,0 +1,9 @@
+<div class="col-md-12">
+  <span class="jquery-title">スタイル</span>
+  <%= radio_button_tag :hit, "1", @user.hit == 1, class: "jquery_throw_button" %>
+  <%= label_tag :hit_1, "右打ち" %>
+  <%= radio_button_tag :hit, "2", @user.hit == 2, class: "jquery_throw_button" %>
+  <%= label_tag :hit_2, "左打ち" %>
+  <%= radio_button_tag :hit, "3", @user.hit == 3, class: "jquery_throw_button" %>
+  <%= label_tag :hit_3, "両打ち" %>
+</div>

@@ -17,10 +17,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     field = params[:users][:field]
     value = params[:users][:value]
-    if @user.update_ability(field, value)
-      render text: "OK"
-    else
-      render text: "NG"
-    end
+      if @user.update_ability(field, value)
+        render text: "OK"
+      else
+        render text: "NG"
+      end
   end
 end
