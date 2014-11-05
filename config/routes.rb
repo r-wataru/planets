@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   resources :pitchers
   resources :users do
     put :update_ability, on: :member
-    resources :characters
-    resources :breaking_balls
-    resources :breaking_ball_user_links
+    resources :characters do
+      post :create_and_links, on: :collection
+    end
+    resources :breaking_ball_user_links do
+      post :create_breaking_ball, on: :collection
+    end
   end
 end

@@ -164,6 +164,30 @@ select.name_batter_selecter { width: 200px; }
   width: auto;
 }
 
+.new-breaking-ball-form {
+  width: 200px;
+  display: none;
+}
+
+.has-field-error {
+  border: 1px solid #a94442;
+}
+
+.error-message-span {
+  color: #a94442;
+}
+
+.new-selecting-field,
+.new-selecting-field-p {
+  width: 150px;
+  display: inline-block;
+}
+
+.new-selecting-form-d,
+.new-selecting-form-p {
+  display: none;
+}
+
 /*.panel-warning > .panel-heading {
   color: #fff;
   background-color: DodgerBlue;

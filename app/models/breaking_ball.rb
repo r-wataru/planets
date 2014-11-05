@@ -11,4 +11,6 @@
 class BreakingBall < ActiveRecord::Base
   has_many :breaking_ball_user_links
   has_many :users, through: :breaking_ball_user_links, source: :user
+
+  validates :name, presence: true
 end

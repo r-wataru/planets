@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    attributes:
+      character:
+        name: 属性
+        description: 属性の説明
+    errors:
+      models:
+        character:
+          attributes:
+            name:
+              blank: 属性を入力してください。
+            description:
+              blank: 属性の説明を入力してください。

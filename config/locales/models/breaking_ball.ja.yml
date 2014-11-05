@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      breaking_ball:
+        name: 変化球
+    errors:
+      models:
+        breaking_ball:
+          attributes:
+            name:
+              blank: 変化球を入力してください。

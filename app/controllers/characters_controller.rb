@@ -18,4 +18,22 @@ class CharactersController < ApplicationController
       render text: "NG"
     end
   end
+
+  def create_and_links
+    @user = User.find(params[:user_id])
+    success,error_message,error_keys,id= Character.new_charcter(params[:users])
+    if success
+      if CharacterUserLink.create_character_user_links(id, @user.id)
+        render text: "OK"
+      else
+        render text: "NG"
+      end
+    else
+      render json: {
+        success: false,
+        error_message: error_message,
+        error_keys: error_keys
+      }
+    end
+  end
 end

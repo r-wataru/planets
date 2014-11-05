@@ -2,6 +2,7 @@
   select_array = @picher_characters.map{|a| [ a.name, a.id ]}
   selected_array = @user.characters.pitcher.map{|b| [ b.name, b.id ]}
   select_array = select_array - selected_array
+  array = [["良い",0],["良い/悪い",1],["悪い",2]]
 %>
 <div class="col-md-12">
   <div class="col-md-4">
@@ -13,10 +14,29 @@
       <span class="jquery-title">属性</span><br/>
       <button type="button" class="btn btn-default navbar-btn add-button" data-int="2">追加</button>
       <button type="button" class="btn btn-default navbar-btn remove-button" data-int="2">削除</button>
+      <button type="button" class="btn btn-default navbar-btn new-selecting-form-show-button" data-int="1">新規作成</button>
     </div>
   </div>
   <div class="col-md-4">
     <%= select_tag :selected_name,
       options_for_select(selected_array, ""), class: "form-control selected-condition selected-pitcher", size: "6" %>
+  </div>
+</div>
+
+<div class="col-md-12 new-selecting-form-p" style="margin-top: 10px;">
+  <div class="col-md-4">
+    <span class="jquery-title">親属性</span>
+  </div>
+
+  <div class="col-md-8">
+    <span class="error-message-span new-select-des-p"></span>
+    <%= text_field_tag :new_selecting_description, "", placeholder: "属性の説明",
+      class: "form-control new-selecting-field-d-p" %>
+    <span class="error-message-span new-select-name-p"></span>
+    <%= text_field_tag :new_selecting_name, "", placeholder: "属性名",
+      class: "form-control new-selecting-field-p" %>
+    <%= select_tag :new_selection_condition,
+      options_for_select(array, ""), class: "form-control breaking-select new-selecting-condition-p" %>
+    <button type="button" class="btn btn-default navbar-btn add-selecting-button" data-str="new-selectin-p">追加</button>
   </div>
 </div>

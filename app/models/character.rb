@@ -18,6 +18,8 @@ class Character < ActiveRecord::Base
   has_many :character_user_links
   has_many :users, through: :character_user_links, source: :user
 
+  validates :name, :description, presence: true
+
   scope :pitcher, -> { where(use_type: true) }
   scope :result, -> { where(use_type: false) }
 
@@ -42,6 +44,27 @@ class Character < ActiveRecord::Base
       else
         return false
       end
+    end
+
+    def new_charcter(params)
+      type = params[:type] == "d" ? false : true
+      n = self.new(
+        name: params[:value],
+        description: params[:description],
+        condition: params[:condition],
+        use_type: type
+      )
+      if n.save
+        success = true
+        error_message = []
+        error_keys = []
+        c_id = n.id
+      else
+        success = false
+        error_message = n.errors.messages
+        error_keys = n.errors.messages.map{|k,v| k}
+      end
+      return success, error_message, error_keys, c_id
     end
   end
 end

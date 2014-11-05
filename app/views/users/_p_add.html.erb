@@ -15,6 +15,7 @@
       <%= select_tag :breaking_ball_level,
         options_for_select(levels, ball.level), class: "form-control breaking-level-#{ball.id} breaking-select" %>
       <button type="button" class="btn btn-default navbar-btn add-breaking-button" data-int="<%= ball.id %>">更新</button>
+      <button type="button" class="btn btn-danger navbar-btn delete-breaking-button" data-int="<%= ball.id %>">削除</button>
     </div>
   </div>
 <% end %>
@@ -29,5 +30,9 @@
     <%= select_tag :breaking_ball_level,
       options_for_select(levels, ""), class: "form-control breaking-level-0 breaking-select" %>
     <button type="button" class="btn btn-default navbar-btn add-breaking-button" data-int="0">追加</button>
+    <br/>
+    <span class="error-message-new-breaking-ball error-message-span"></span>
+    <%= text_field_tag :new_breaking_ball, "", placeholder: "新球種",
+      class: "form-control new-breaking-ball-form" %>
   </div>
 </div>
