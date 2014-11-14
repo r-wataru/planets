@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   has_many :characters, through: :character_user_links, source: :character
   has_many :breaking_ball_user_links
   has_many :breaking_balls, through: :breaking_ball_user_links, source: :breaking_ball
+  has_one :image, class_name: "UserImage", dependent: :destroy
 
   validate :display_name, presence: true
 

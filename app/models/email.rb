@@ -16,7 +16,7 @@
 #
 
 require 'securerandom'
-class Emails < ActiveRecord::Base
+class Email < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :user

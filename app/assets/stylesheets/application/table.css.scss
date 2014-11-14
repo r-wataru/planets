@@ -59,9 +59,31 @@ table {
 .col-sm-10 {
   input[type=text] { max-width: 300px; min-width: 200px; }
   input[type=radio] { max-width: 40px; vertical-align: super; }
-  select { max-width: 300px; }
+  select.normal-select { max-width: 300px; }
+  select.date-select {
+    display: inline-block;
+    max-width: 80px;
+  }
   button { max-width: 300px; }
   textarea { max-width: 300px; height: 80px; }
+/*  .file-input-wrapper {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    input[type=file] {
+      opacity: 0;
+      z-index: 99;
+      outline: 0;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      height: 40px;
+    }
+  }*/
 }
 .radio-box {
   padding-top: 7px;

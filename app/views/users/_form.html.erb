@@ -1,0 +1,29 @@
+<%
+ thumbnail_path = @user.image.thumbnail.present? ? thumbnail_user_path(@user, format: @user.image.extension) : nil
+ cover_path = @user.image.data.present? ? cover_user_path(@user, format: @user.image.thumbnail_extension) : nil
+ alt = @user.number
+%>
+
+<%= f.fields_for :user, f.object.user do |ff| %>
+  <%= markup do |m|
+    p = HorizontalFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.text_field_block(:number, '背番号', columns: 10)
+      m << q.text_field_block(:login_name, 'ログイン名', columns: 10)
+      m << q.text_field_block(:display_name, '表示名', columns: 10)
+      m << q.text_area_block(:description, "紹介", columns: 10)
+      m << q.date_select_block(:birthday, "生年月日", columns: 10)
+    end
+  end %>
+<% end %>
+
+<%= f.fields_for :image, f.object.user.image do |fff| %>
+  <%= markup do |m|
+    p = HorizontalFormPresenter.new(fff, self)
+    p.with_options(required: true) do |q|
+      m << q.file_block(:uploaded_thumbnail, "サムネイル", thumbnail_path, alt, columns: 10)
+      m << q.file_block(:uploaded_image, "カバー", cover_path, alt, collumns: 10)
+    end
+    m << p.submit_button
+  end %>
+<% end %>

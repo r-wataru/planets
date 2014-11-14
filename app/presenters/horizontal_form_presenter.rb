@@ -4,8 +4,8 @@ class HorizontalFormPresenter
   attr_reader :form_builder, :view_context
   delegate :label, :text_field, :password_field, :check_box, :radio_button,
     :email_field, :number_field, :password_field, :text_area, :hidden_field,
-    :object, :select, :link_to, to: :form_builder
-  delegate :link_to, to: :view_context
+    :date_select, :file_field, :object, :select, to: :form_builder
+  delegate :link_to, :image_tag, to: :view_context
 
   def initialize(form_builder, view_context, default_label_columns = 2)
     @form_builder = form_builder
@@ -33,6 +33,46 @@ class HorizontalFormPresenter
       m << decorated_label(name, label_text, options)
       m.div(class: "col-sm-#{input_columns}") do
         m << send("#{type}_field", name, html_options)
+        m << error_messages_for(name)
+      end
+    end
+  end
+
+  def date_select_block(name, label_text, options = {})
+    html_options = {}
+    html_options[:class] = 'form-control date-select'
+    html_options[:class] += " #{options[:class]}" if options[:class].present?
+    [ :disabled, :max, :maxlength, :min, :pattern, :readonly, :required, :step ].each do |attr|
+      html_options[attr] = options[attr] if options[attr]
+    end
+    select_options = {}
+    select_options[:start_year] = 1940
+    select_options[:end_year] = Time.now.year
+    input_columns = calculate_columns(options)
+
+    markup(:div, class: 'form-group') do |m|
+      m << decorated_label(name, label_text, options)
+      m.div(class: "col-sm-#{input_columns}") do
+        m << date_select(name, select_options, html_options)
+        m << error_messages_for(name)
+      end
+    end
+  end
+
+  def file_block(name, label_text, path, alt, options = {})
+    html_options = {}
+    html_options[:title] = "Search for a file to add"
+    input_columns = calculate_columns(options)
+
+    markup(:div, class: 'form-group') do |m|
+      m << decorated_label(name, label_text, options)
+      m.div(class: "col-sm-#{input_columns}") do
+        if object.errors.empty? && path.present?
+          m << image_tag(path, alt: alt, width: "100px")
+          m << check_box("#{name}_destroy", html_options)
+          m << checkbox_label("#{name}_destroy", "削除", options)
+        end
+        m << file_field(name, html_options)
         m << error_messages_for(name)
       end
     end
@@ -174,7 +214,7 @@ class HorizontalFormPresenter
     main_options[:include_blank] = options[:include_blank] || false
     main_options[:prompt] = ''
     html_options = {}
-    html_options[:class] = 'form-control'
+    html_options[:class] = 'form-control normal-select'
     html_options[:class] += " #{options[:class]}" if options[:class].present?
     html_options[:required] = options[:required]
     html_options[:placeholder] = options[:placeholder] || label_text
@@ -244,6 +284,12 @@ class HorizontalFormPresenter
   def decorated_label(name, label_text, options = {})
     label_columns = options[:label_columns] || @default_label_columns
     html_class = "col-sm-#{label_columns} control-label"
+    html_class << ' required' if options[:required]
+    label(name, label_text, class: html_class)
+  end
+
+  def checkbox_label(name, label_text, options = {})
+    html_class = "control-label"
     html_class << ' required' if options[:required]
     label(name, label_text, class: html_class)
   end

@@ -6,6 +6,16 @@ body {
   font-size: 13px;
 }
 
+html {
+  // 背景を全体に
+/*  background: url(image_path('re_003.jpg')) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+}
+
+
 #wrapper {
   padding-left: 40px;
   transition: all 0.5s ease;
@@ -43,15 +53,15 @@ body {
   #wrapper {
     padding-left: 240px;
   }
-
+  
   #sidebar-wrapper {
     width: 240px;
   }
-
+  
   #page-content-wrapper {
     padding: 20px;
   }
-
+  
   #wrapper.toggled {
     padding-left: 40px;
     #sidebar-wrapper {

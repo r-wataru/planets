@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        user_image:
+          attributes:
+            uploaded_thumbnail:
+              too_big_image: のサイズがオーバーです。
+            uploaded_image:
+              too_big_image: のサイズがオーバーです。
+    attributes:
+      user_image:
+        uploaded_thumbnail: サムネイル
+        uploaded_image: カバー

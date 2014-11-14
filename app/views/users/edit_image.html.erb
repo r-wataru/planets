@@ -1,0 +1,24 @@
+<%
+  new_form_options = {
+    url: [:update_image, @user],
+    html: { class: "form-horizontal", role: 'form' }
+  }
+%>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong># <%= @user.number %></strong>
+        <%= @user.display_name %>(野手)
+      </div>
+      <div class="panel-body">
+        <div id="generic-form">
+          <%= form_for @user_form, new_form_options do |f| %>
+            <%= render 'form', f: f %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

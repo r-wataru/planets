@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
   resources :pitchers
   resources :users do
+    get :edit_image, :thumbnail, :cover, on: :member
+    patch :update_image, on: :member
     put :update_ability, on: :member
     resources :characters do
       post :create_and_links, on: :collection
