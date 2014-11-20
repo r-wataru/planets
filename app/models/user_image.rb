@@ -25,7 +25,8 @@ class UserImage < ActiveRecord::Base
   validate :check_image
   validate :check_thumbnail
 
-  IMAGE_WIDTH = 380
+  IMAGE_WIDTH = 1024
+  IMAGE_HEIGHT = 315
   THUMBNAIL_WIDTH = 100
   THUMBNAIL_HEIGHT = 100
   IMAGE_TYPES = { "image/jpeg" => "jpg", "image/gif" => "gif","image/png" => "png" }
@@ -33,9 +34,7 @@ class UserImage < ActiveRecord::Base
   before_save do
     # Coverのカット
     if data_changed? and !data.nil?
-      image = Magick::Image.from_blob(data).first
-      height = (image.rows.to_f * IMAGE_WIDTH.to_f / image.columns.to_f).to_i
-      image = image.resize_to_fit(IMAGE_WIDTH, height)
+      image = Magick::Image.from_blob(data).first.resize_to_fill(IMAGE_WIDTH, IMAGE_HEIGHT, Magick::CenterGravity)
       self.data = image.to_blob
     end
     # Thumbnailのカット

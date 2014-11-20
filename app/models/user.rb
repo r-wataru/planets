@@ -81,6 +81,32 @@ class User < ActiveRecord::Base
     self.helper ? self.display_name + "(助)" : self.display_name
   end
 
+  def hitting_name
+    if ability.has_key?(:hit)
+      case ability[:hit]
+      when 1
+        "右打"
+      when 2
+        "左打"
+      when 3
+        "両打"
+      end
+    end
+  end
+
+  def throwing_name
+    if ability.has_key?(:throw)
+      case ability[:throw]
+      when 1
+        "右投"
+      when 2
+        "左投"
+      when 3
+        "両投"
+      end
+    end
+  end
+
   class << self
     def create_helper_user(name)
       number = User.all.map(&:number).max
@@ -90,6 +116,10 @@ class User < ActiveRecord::Base
         login_name: "helper",
         display_name: name,
         helper: true)
+    end
+    
+    def test_mailer
+      AccountMailer.test_user.deliver
     end
   end
 end

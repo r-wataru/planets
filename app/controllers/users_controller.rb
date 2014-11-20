@@ -5,6 +5,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.member.find(params[:id])
+    @characters = @user.characters
+    @breaking_ball_links = @user.breaking_ball_user_links
+    @results = @user.results.order("id DESC")
+    @pitchers = @user.pitchers.order("id DESC")
   end
 
   def edit

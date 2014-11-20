@@ -210,6 +210,12 @@ select.name_batter_selecter { width: 200px; }
   display: none;
 }
 
+.member-list {
+  display: inline-block;
+  list-style-type: none;
+  padding-left: 20px;
+}
+
 /*.panel-warning > .panel-heading {
   color: #fff;
   background-color: DodgerBlue;

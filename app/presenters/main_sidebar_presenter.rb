@@ -5,6 +5,10 @@ class MainSidebarPresenter < Presenter
         m << dashboard
         m << result
         m << member
+        m << schedule
+        m << blog
+        m << vote
+        m << attendance
       end
     end
   end
@@ -33,9 +37,37 @@ class MainSidebarPresenter < Presenter
   end
 
   def member
-    html_class = params[:controller] == '' ? 'active' : ''
+    html_class = params[:controller] == 'users' ? 'active' : ''
     markup(:li, class: html_class) do |m|
       m << link_to(fa_icon('list', text: 'メンバー'), view_context.users_path)
+    end
+  end
+
+  def schedule
+    #html_class = params[:controller] == 'schedules' ? 'active' : ''
+    markup(:li, class: "disabled not_yet") do |m|
+      m << link_to(fa_icon('table', text: 'スケジュール'), "")
+    end
+  end
+
+  def blog
+    #html_class = params[:controller] == 'schedules' ? 'active' : ''
+    markup(:li, class: "disabled not_yet") do |m|
+      m << link_to(fa_icon('book', text: 'ブログ'), "")
+    end
+  end
+
+  def vote
+    #html_class = params[:controller] == 'schedules' ? 'active' : ''
+    markup(:li, class: "disabled not_yet") do |m|
+      m << link_to(fa_icon('bullhorn', text: '投票'), "")
+    end
+  end
+
+  def attendance
+    #html_class = params[:controller] == 'schedules' ? 'active' : ''
+    markup(:li, class: "disabled not_yet") do |m|
+      m << link_to(fa_icon('send', text: '出席表'), "")
     end
   end
 end

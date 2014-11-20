@@ -1,13 +1,244 @@
 <div class="row">
+  <!-- ユーザー情報とデータ -->
   <div class="col-md-12">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong># <%= @user.number %></strong>
-          <%= @user.display_name %>
-        </div>
-        <div class="panel-body">
-          
+    <% if @user.image && @user.image.data.present? %>
+      <div style="width: 100%; margin-bottom: 20px;">
+        <%= image_tag cover_user_path(@user, format: @user.image.extension), width: "100%" %>
+      </div>
+    <% end %>
+    <div class="col-md-6">
+      <div class="col-md-12" style="margin-bottom: 20px;">
+        <% @user.range.each do |r| %>
+          <span class="label label-<%= color_position(r) %>"><%= display_position(r) %></span>
+        <% end %>
+        <%= content_tag :span, @user.hitting_name, class: "label label-danger" if @user.ability.has_key?(:hit) %>
+        <%= content_tag :span, @user.throwing_name, class: "label label-primary" if @user.ability.has_key?(:throw) %>
+      </div>
+      <div class="col-md-12" style="padding: 0;">
+        <% if @user.image && @user.image.thumbnail.present? %>
+          <%= image_tag thumbnail_user_path(@user, format: @user.image.extension) %>
+        <% else %>
+          <%= image_tag "user.png", alt: "logo", size: "100x100" %>
+        <% end %>
+        <ul class="member-list">
+          <li>
+            <%= fa_icon('dot-circle-o', text: @user.number) %>番
+            (<%= link_to "編集", [ :edit_image, @user ] %>)
+          </li>
+          <li><%= fa_icon('dot-circle-o', text: @user.display_name) %></li>
+          <li><%= fa_icon('dot-circle-o', text: @user.age) %>歳</li>
+        </ul>
+      </div>
+      <div class="col-md-12" style="margin: 20px 0;">
+        <%= @user.description %>
+      </div>
+
+      <div class="col-md-12" style="padding: 0;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong># <%= @user.number %></strong>
+            <%= @user.display_name %>のデータ
+            (<%= link_to "編集", [ :edit, @user ] %>)
+          </div>
+          <div class="panel-body">
+            <% if @characters.pitcher.present? %>
+              <div class="col-md-12" style="margin-bottom: 20px;">
+                <% @characters.pitcher.each do |character| %>
+                  <%= content_tag :span, character.name, class: "label label-success" if character.condition == 0 %>
+                  <%= content_tag :span, character.name, class: "label label-default" if character.condition == 1 %>
+                  <%= content_tag :span, character.name, class: "label label-warning" if character.condition == 2 %>
+                <% end %>
+              </div>
+            <% end %>
+            <!-- 投手能力 -->
+            <% hash = {"速球"=>"speed", "コントロール"=>"control", "スタミナ"=>"stamina"} %>
+            <% hash.each do |h| %>
+              <% next if !@user.ability.has_key?(h.last.to_sym) %>
+              <span class="jquery-title"><%= h.first %></span>
+              <div class="progress">
+                <div class="progress-bar progress-bar-primary progress-bar-striped"
+                     role="progressbar" aria-valuenow="<%= @user.ability[h.last] %>"
+                     aria-valuemin="0" aria-valuemax="100"
+                     style="width: <%= @user.ability[h.last].to_s + '%' %>;">
+                  <span class="sr-only">40% Complete (success)</span>
+                </div>
+              </div>
+            <% end %>
+            <!-- 変化球能力 -->
+            <% @breaking_ball_links.each do |link| %>
+              <span class="jquery-title"><%= link.breaking_ball.name %></span>
+              <div class="progress">
+                <div class="progress-bar progress-bar-warning progress-bar-striped"
+                     role="progressbar" aria-valuenow="<%= link.level %>"
+                     aria-valuemin="0" aria-valuemax="100"
+                     style="width: <%= link.level.to_s + '0%' %>;">
+                  <span class="sr-only">40% Complete (success)</span>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong># <%= @user.number %></strong>
+          <%= @user.display_name %>のデータ
+          (<%= link_to "編集", [ :edit, @user ] %>)
+        </div>
+        <div class="panel-body">
+          <% if @characters.result.present? %>
+            <div class="col-md-12" style="margin-bottom: 20px;">
+              <% @characters.result.each do |character| %>
+                <%= content_tag :span, character.name, class: "label label-success" if character.condition == 0 %>
+                <%= content_tag :span, character.name, class: "label label-default" if character.condition == 1 %>
+                <%= content_tag :span, character.name, class: "label label-warning" if character.condition == 2 %>
+              <% end %>
+            </div>
+          <% end %>
+          <% hash = {"弾丸"=>"shot", "ミート"=>"meet", "パワー"=>"power", "走力"=>"run", "肩力"=>"shoulder", "守力"=>"defend"} %>
+          <% hash.each do |h| %>
+            <% next if !@user.ability.has_key?(h.last.to_sym) %>
+            <span class="jquery-title"><%= h.first %></span>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success progress-bar-striped"
+                   role="progressbar" aria-valuenow="<%= @user.ability[h.last] %>"
+                   aria-valuemin="0" aria-valuemax="100"
+                   style="width: <%= @user.ability[h.last].to_s + '%' %>;">
+                <span class="sr-only">40% Complete (success)</span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ユーザー情報とデータ end -->
+
+  <!-- ユーザーの成績 -->
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        投手成績
+      </div>
+      <div class="panel-body">
+        <% if @pitcher.present? %>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <tr class="statsTable01">
+                <th>試合日</th>
+                <th>試合名</th>
+                <th>防御率</th>
+                <th>投球回</th>
+                <th>被安打</th>
+                <th>失点</th>
+                <th>自責点</th>
+                <th>三振</th>
+                <th>勝</th>
+                <th>負</th>
+                <th>ホールド</th>
+                <th>セーブ</th>
+              </tr>
+              <% @pitchers.each do |p| %>
+                <% next if p.id.blank? %>
+                <tr>
+                  <td><%= p.game.played_at.strftime("%Y/%m/%d") %></td>
+                  <td><%= p.game.name %></td>
+                  <td><%= Rate.earned_run_average(p) %></td>
+                  <td><%= p.pitching_number %></td>
+                  <td><%= p.hit %></td>
+                  <td><%= p.run %></td>
+                  <td><%= p.remorse_point %></td>
+                  <td><%= p.strikeouts %></td>
+                  <td><%= p.winning == 1 ? "●" : "" %></td>
+                  <td><%= p.defeat == 1 ? "●" : "" %></td>
+                  <td><%= p.hold_number == 1 ? "●" : "" %></td>
+                  <td><%= p.save_number == 1 ? "●" : "" %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        <% else %>
+        <p>データがありません。</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        野手成績
+      </div>
+      <div class="panel-body">
+        <% if @results.present? %>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <tr class="statsTable01">
+                <th>試合日</th>
+                <th>試合名</th>
+                <th>打率</th>
+                <th>打席</th>
+                <th>打数</th>
+                <th>単打</th>
+                <th>二塁打</th>
+                <th>三塁打</th>
+                <th>本塁打</th>
+                <th>四球</th>
+                <th>死球</th>
+                <th>犠打</th>
+                <th>犠飛</th>
+                <th>失策出塁</th>
+                <th>出塁率</th>
+                <th>長打率</th>
+                <th>内ゴロ</th>
+                <th>外ゴロ</th>
+                <th>内飛</th>
+                <th>外飛</th>
+                <th>内直</th>
+                <th>外直</th>
+                <th>三振</th>
+                <th>打点</th>
+                <th>得点</th>
+                <th>盗塁</th>
+              </tr>
+              <% @results.each_with_index do |result, idx| %>
+              <% next if result.id.blank? %>
+                <tr>
+                  <td><%= result.game.played_at.strftime("%Y/%m/%d") %></td>
+                  <td><%= result.game.name %></td>
+                  <td><%= Rate.batting_average(result) %></td>
+                  <td><%= result.plate_appearances %></td>
+                  <td><%= result.at_bats %></td>
+                  <td><%= result.single_hits %></td>
+                  <td><%= result.double_hits %></td>
+                  <td><%= result.triple_hits %></td>
+                  <td><%= result.home_run %></td>
+                  <td><%= result.base_on_balls %></td>
+                  <td><%= result.hit_by_pitches %></td>
+                  <td><%= result.sacrifice_bunts %></td>
+                  <td><%= result.sacrifice_flies %></td>
+                  <td><%= result.gaffe %></td>
+                  <td><%= Rate.slugging_percentage(result) %></td>
+                  <td><%= Rate.base_percentage(result) %></td>
+                  <td><%= result.infield_grounder %></td>
+                  <td><%= result.outfield_grounder %></td>
+                  <td><%= result.infield_fly %></td>
+                  <td><%= result.outfield_fly %></td>
+                  <td><%= result.infield_linera %></td>
+                  <td><%= result.out_linera %></td>
+                  <td><%= result.strikeouts %></td>
+                  <td><%= result.runs_batted_in %></td>
+                  <td><%= result.runs_scored %></td>
+                  <td><%= result.stolen_bases %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        <% else %>
+        <p>データがありません</p>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

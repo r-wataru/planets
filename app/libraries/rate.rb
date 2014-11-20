@@ -2,25 +2,53 @@ class Rate
   class << self
     def batting_average(total)
       #打率	安打数÷打数　[小数点４位以下四捨五入]
-      hits = (total[:single_hits] + total[:double_hits] + total[:triple_hits] + total[:home_run])
-      return hits.quo(total[:at_bats]).to_f.round(3)
+      if total.kind_of?(Hash)
+        hits = (total[:single_hits] + total[:double_hits] + total[:triple_hits] + total[:home_run])
+        return hits.quo(total[:at_bats]).to_f.round(3)
+      else
+        hits = (total.single_hits + total.double_hits + total.triple_hits + total.home_run)
+        if total.at_bats == 0
+          return 0
+        else
+          return hits.quo(total.at_bats).to_f.round(3)
+        end
+
+      end
     end
 
     def base_percentage(total)
       #出塁率	(四死球＋安打)÷(打数＋四死球＋犠飛)　[小数点４位以下四捨五入]
-      hits = (total[:single_hits] + total[:double_hits] + total[:triple_hits] + total[:home_run])
-      four_and_dead = (total[:base_on_balls] + total[:hit_by_pitches])
-      return (hits + four_and_dead).quo(total[:at_bats] + four_and_dead + total[:sacrifice_flies]).to_f.round(3)
+      if total.kind_of?(Hash)
+        hits = (total[:single_hits] + total[:double_hits] + total[:triple_hits] + total[:home_run])
+        four_and_dead = (total[:base_on_balls] + total[:hit_by_pitches])
+        return (hits + four_and_dead).quo(total[:at_bats] + four_and_dead + total[:sacrifice_flies]).to_f.round(3)
+      else
+        hits = (total.single_hits + total.double_hits + total.triple_hits + total.home_run)
+        four_and_dead = (total.base_on_balls + total.hit_by_pitches)
+        return (hits + four_and_dead).quo(total.at_bats + four_and_dead + total.sacrifice_flies).to_f.round(3)
+      end
     end
 
     def total_bases(total)
-      #『塁打数＝<単打>×1＋二塁打×2＋三塁打×3＋本塁打×4
-      return (total[:single_hits] + total[:double_hits] * 2 + total[:triple_hits] * 3 + total[:home_run] * 4)
+      if total.kind_of?(Hash)
+        #『塁打数＝<単打>×1＋二塁打×2＋三塁打×3＋本塁打×4
+        return (total[:single_hits] + total[:double_hits] * 2 + total[:triple_hits] * 3 + total[:home_run] * 4)
+      else
+        return (total.single_hits + total.double_hits * 2 + total.triple_hits * 3 + total.home_run * 4)
+      end
     end
 
     def slugging_percentage(total)
       #長打率	塁打÷打数　[小数点４位以下四捨五入]
-      return total_bases(total).to_i.quo(total[:at_bats]).to_f.round(3)
+      if total.kind_of?(Hash)
+        return total_bases(total).to_i.quo(total[:at_bats]).to_f.round(3)
+      else
+        if total.at_bats == 0
+          return 0
+        else
+          return total_bases(total).to_i.quo(total.at_bats).to_f.round(3)
+        end
+      end
     end
 
     def winning_rate(total)
@@ -39,7 +67,15 @@ class Rate
 
     def earned_run_average(total)
       #防御率	自責点×９÷投球回数　[小数点３位以下四捨五入]
-      return (total[:remorse_point] * 9).quo(total[:pitching_number]).to_f.round(2)
+      if total.kind_of?(Hash)
+        return (total[:remorse_point] * 9).quo(total[:pitching_number]).to_f.round(3)
+      else
+        if total.pitching_number == 0
+          return 0
+        else
+          return (total.remorse_point * 9).quo(total.pitching_number).to_f.round(3)
+        end
+      end
     end
 
     def number_of_batting(total)

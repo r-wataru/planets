@@ -13,7 +13,7 @@ table_names.each do |table_name|
   when 'staging'
     'development' # 開発環境と同じにする
   when 'production'
-    'production'
+    'development' # 開発環境と同じにする
   else
     break
   end

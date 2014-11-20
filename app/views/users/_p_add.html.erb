@@ -1,7 +1,7 @@
 <%
   balls = @breaking_balls.map{|a| [ a.name, a.id ]}
   balls = balls << [ "新規作成", 0 ]
-  levels = (0..7)
+  levels = (0..10)
 %>
 
 <% @user.breaking_ball_user_links.each_with_index do |ball, i| %>
