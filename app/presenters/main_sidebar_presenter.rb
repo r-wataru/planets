@@ -1,20 +1,26 @@
 class MainSidebarPresenter < Presenter
+  delegate :current_user, to: :view_context
+
   def render
     markup(:div, class: 'sidebar-nav') do |m|
       m.ul(class: 'nav nav-sidebar') do
         m << dashboard
-        m << result
-        m << member
-        m << schedule
-        m << blog
-        m << vote
-        m << attendance
+        if current_user
+          m << result
+          m << member
+          m << schedule
+          m << blog
+          m << vote
+          m << attendance
+          m << power_off
+        else
+          m << power
+        end
       end
     end
   end
 
   private
-
   def dashboard
     html_class =
       case action_name
@@ -26,6 +32,19 @@ class MainSidebarPresenter < Presenter
 
     markup(:li, class: html_class) do |m|
       m << link_to(fa_icon('dashboard', text: 'ダッシュボード'), view_context.root_path)
+    end
+  end
+  
+  def power
+    markup(:li, class: '') do |m|
+      m << link_to(fa_icon('power-off', text: 'ログイン'), view_context.new_session_path)
+    end
+  end
+  
+  def power_off
+    markup(:li, class: '') do |m|
+      m << link_to(fa_icon('power-off', text: 'ログアウト'), view_context.session_path, 
+        method: :delete, data: { confirm: "Are You Sure?" })
     end
   end
 

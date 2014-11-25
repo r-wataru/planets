@@ -29,6 +29,8 @@ require 'csv'
 require "kconv"
 require 'nkf'
 class User < ActiveRecord::Base
+  include PasswordHolder
+
   has_many :emails
   has_many :pitchers
   has_many :results

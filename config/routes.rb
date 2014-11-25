@@ -18,4 +18,5 @@ Rails.application.routes.draw do
       post :create_breaking_ball, on: :collection
     end
   end
+  resource :session, only: [ :new, :create, :destroy ]
 end

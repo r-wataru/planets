@@ -13,7 +13,6 @@ class NavbarPresenter < Presenter
   end
 
   private
-
   def navbar_header
     markup(:div, class: 'navbar-header') do |m|
       m.a(id: 'main-menu-toggle') do
