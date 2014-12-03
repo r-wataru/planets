@@ -1,0 +1,229 @@
+/* table */
+
+table {
+  display: table;
+  margin-bottom: 20px;
+  border-collapse: separate;
+  border-spacing: 0px;
+  width: 740px;
+  border-top: 3px solid #0F5995;
+  border-left: 1px solid #CCCCCC;
+  border-right: none;
+  border-bottom: none;
+  tr.statsTable01 {
+    background-color: #EEEEEE;
+    th { padding: 5px 1px;
+      line-height: 1.2;
+      text-align: center;
+      font-size: 10px;
+      border-top: 1px solid #FFFFFF;
+      border-right: 1px solid #CCCCCC;
+      border-bottom: 1px solid #CCCCCC;
+      border-left: 1px solid #FFFFFF;
+      background-position: top;
+      background-repeat: repeat-x;
+      background-color: #EEEEEE;
+      white-space: nowrap;
+    }
+  }
+  tr {
+    td {
+      padding: 5px 1px;
+      line-height: 1.2;
+      text-align: center;
+      font-size: 10px;
+      border-top: 1px solid #FFFFFF;
+      border-right: 1px solid #CCCCCC;
+      border-bottom: 1px solid #CCCCCC;
+      border-left: 1px solid #FFFFFF;
+      word-break: break-all;
+      white-space: nowrap;
+    }
+  }
+  tr.odd {
+    td { background: #EEEEEE }
+  }
+}
+
+.table > thead > tr > th, .table > thead > tr > td,
+.table > tbody > tr > th, .table > tbody > tr > td,
+.table > tfoot > tr > th, .table > tfoot > tr > td {
+  border-top: none;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background: #EEEEEE;
+}
+.col-sm-12 {
+  select.date-select {
+    display: inline-block;
+    max-width: 75px;
+  }
+}
+
+.col-sm-10 {
+  input[type=text] { max-width: 300px; min-width: 200px; }
+  input[type=radio] { max-width: 40px; vertical-align: super; }
+  select.normal-select { max-width: 300px; }
+  select.date-select {
+    display: inline-block;
+    max-width: 80px;
+  }
+  button { max-width: 300px; }
+  textarea { max-width: 300px; height: 80px; }
+/*  .file-input-wrapper {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    input[type=file] {
+      opacity: 0;
+      z-index: 99;
+      outline: 0;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      height: 40px;
+    }
+  }*/
+}
+.radio-box {
+  padding-top: 7px;
+  label { vertical-align: super; }
+}
+
+ul.error-message {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  clear: both;
+  li {
+    color: #b94a48;
+  }
+}
+
+.has-feedback {
+  display: inline;
+}
+
+.table-responsive {
+  overflow: scroll;
+  select { width: 50px; }
+}
+
+select.name_pitcher_selecter,
+select.name_batter_selecter { width: 200px; }
+
+.helper_pitcher_form_field,
+.helper_batter_form_field {
+  margin-top: 10px;
+  width: 200px;
+}
+
+.btn-danger {
+  margin-left: 10px;
+}
+
+.select-year {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.user-info {
+  min-width: 100px;
+  height: 100px;
+  overflow: scroll;
+}
+
+.user-img {
+  min-width: 100px;
+  height: 100px;
+  overflow: hidden;
+  padding: 0;
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.user-link {
+  color: #000;
+}
+.user-link:hover {
+  color: #000;
+}
+
+.jquery-title {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-color: #eeeded;
+  -webkit-box-shadow: inset 1px 1px 1px rgba(9,2,4,.16);
+  -moz-box-shadow: inset 1px 1px 1px rgba(9,2,4,.16);
+  box-shadow: inset 1px 1px 1px rgba(9,2,4,.16);
+  margin:0 0 14px;
+  vertical-align: top;
+  font-size: 13px;
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  display: inline-block;
+  height:30px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.jquery-ui-slider {
+  margin: 20px 0;
+}
+
+.check_or_radio {
+  margin: 15px 0;
+}
+
+.breaking-select {
+  display: inline-block;
+  width: auto;
+}
+
+.new-breaking-ball-form {
+  width: 200px;
+  display: none;
+}
+
+.has-field-error {
+  border: 1px solid #a94442;
+}
+
+.error-message-span {
+  color: #a94442;
+}
+
+.new-selecting-field,
+.new-selecting-field-p {
+  width: 150px;
+  display: inline-block;
+}
+
+.new-selecting-form-d,
+.new-selecting-form-p {
+  display: none;
+}
+
+.member-list {
+  display: inline-block;
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+/*.panel-warning > .panel-heading {
+  color: #fff;
+  background-color: DodgerBlue;
+  border-color: #000;
+}*/

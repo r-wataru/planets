@@ -86,35 +86,52 @@
     </div>
 
     <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong># <%= @user.number %></strong>
-          <%= @user.display_name %>のデータ
-          (<%= link_to "編集", [ :edit, @user ] %>)
+      <% if current_user == @user %>
+        <div class="col-md-12" style="margin: 20px 0;">
+          <p>メールアドレス一覧</p>
+          <ul>
+            <% @user.emails.each do |email| %>
+              <li><%= email.address %></li>
+            <% end %>
+          </ul>
+          <p>ログインパスワード</p>
+          <p>表示出来ません  <%= link_to "パスワード編集", "#" %></p>
         </div>
-        <div class="panel-body">
-          <% if @characters.result.present? %>
-            <div class="col-md-12" style="margin-bottom: 20px;">
-              <% @characters.result.each do |character| %>
-                <%= content_tag :span, character.name, class: "label label-success" if character.condition == 0 %>
-                <%= content_tag :span, character.name, class: "label label-default" if character.condition == 1 %>
-                <%= content_tag :span, character.name, class: "label label-warning" if character.condition == 2 %>
-              <% end %>
-            </div>
-          <% end %>
-          <% hash = {"弾丸"=>"shot", "ミート"=>"meet", "パワー"=>"power", "走力"=>"run", "肩力"=>"shoulder", "守力"=>"defend"} %>
-          <% hash.each do |h| %>
-            <% next if !@user.ability.has_key?(h.last.to_sym) %>
-            <span class="jquery-title"><%= h.first %></span>
-            <div class="progress">
-              <div class="progress-bar progress-bar-success progress-bar-striped"
-                   role="progressbar" aria-valuenow="<%= @user.ability[h.last] %>"
-                   aria-valuemin="0" aria-valuemax="100"
-                   style="width: <%= @user.ability[h.last].to_s + '%' %>;">
-                <span class="sr-only">40% Complete (success)</span>
+      <% end %>
+      
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong># <%= @user.number %></strong>
+            <%= @user.display_name %>のデータ
+            <% if current_user == @user %>
+              (<%= link_to "編集", [ :edit, current_user ] %>)
+            <% end %>
+          </div>
+          <div class="panel-body">
+            <% if @characters.result.present? %>
+              <div class="col-md-12" style="margin-bottom: 20px;">
+                <% @characters.result.each do |character| %>
+                  <%= content_tag :span, character.name, class: "label label-success" if character.condition == 0 %>
+                  <%= content_tag :span, character.name, class: "label label-default" if character.condition == 1 %>
+                  <%= content_tag :span, character.name, class: "label label-warning" if character.condition == 2 %>
+                <% end %>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+            <% hash = {"弾丸"=>"shot", "ミート"=>"meet", "パワー"=>"power", "走力"=>"run", "肩力"=>"shoulder", "守力"=>"defend"} %>
+            <% hash.each do |h| %>
+              <% next if !@user.ability.has_key?(h.last.to_sym) %>
+              <span class="jquery-title"><%= h.first %></span>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped"
+                     role="progressbar" aria-valuenow="<%= @user.ability[h.last] %>"
+                     aria-valuemin="0" aria-valuemax="100"
+                     style="width: <%= @user.ability[h.last].to_s + '%' %>;">
+                  <span class="sr-only">40% Complete (success)</span>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
