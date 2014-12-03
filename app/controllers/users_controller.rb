@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
     @characters = Character.result
     @picher_characters = Character.pitcher
     @breaking_balls = BreakingBall.all
@@ -30,12 +30,12 @@ class UsersController < ApplicationController
   end
 
   def edit_image
-    @user = User.find(params[:id])
+    @user = current_user
     @user_form = UserForm.new(@user)
   end
 
   def update_image
-    @user = User.find(params[:id])
+    @user = current_user
     @user_form = UserForm.new(@user)
     @user_form.assign_attributes(params[:user_form])
     if @user_form.save

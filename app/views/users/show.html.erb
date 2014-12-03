@@ -23,7 +23,9 @@
         <ul class="member-list">
           <li>
             <%= fa_icon('dot-circle-o', text: @user.number) %>番
-            (<%= link_to "編集", [ :edit_image, @user ] %>)
+            <% if current_user == @user %>
+              (<%= link_to "編集", [ :edit_image, current_user ] %>)
+            <% end %>
           </li>
           <li><%= fa_icon('dot-circle-o', text: @user.display_name) %></li>
           <li><%= fa_icon('dot-circle-o', text: @user.age) %>歳</li>
@@ -38,7 +40,9 @@
           <div class="panel-heading">
             <strong># <%= @user.number %></strong>
             <%= @user.display_name %>のデータ
-            (<%= link_to "編集", [ :edit, @user ] %>)
+            <% if current_user == @user %>
+              (<%= link_to "編集", [ :edit, @user ] %>)
+            <% end %>
           </div>
           <div class="panel-body">
             <% if @characters.pitcher.present? %>
