@@ -45,13 +45,13 @@ users = [
 
 users.each_with_index do |user, i|
   if user[2].nil?
-    User.create(
+    User.create!(
       number: user[0],
       display_name: user[1],
       description: user[3]
     )
   else
-    User.create(
+    User.create!(
       number: user[0],
       display_name: user[1],
       birthday: user[2],
@@ -59,3 +59,7 @@ users.each_with_index do |user, i|
     )
   end
 end
+
+p = Password.new
+p.password = "password"
+p.save

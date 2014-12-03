@@ -7,9 +7,14 @@ Rails.application.routes.draw do
     resources :results
   end
   resources :pitchers
+  resource :new_email, only: [ :new, :create ] do
+    get :thanks, on: :collection
+  end
   resources :users do
     get :edit_image, :thumbnail, :cover, on: :member
     patch :update_image, on: :member
+    post :step2, on: :collection
+    post :step3, on: :collection
     put :update_ability, on: :member
     resources :characters do
       post :create_and_links, on: :collection
@@ -19,4 +24,7 @@ Rails.application.routes.draw do
     end
   end
   resource :session, only: [ :new, :create, :destroy ]
+  
+  get 'auth/facebook/callback', to: "sessions#callback"
+  get "auth/failure", to: "sessions#failure"
 end

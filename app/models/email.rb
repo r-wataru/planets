@@ -18,6 +18,7 @@
 require 'securerandom'
 class Email < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
-
   belongs_to :user
+
+  validates :address, presence: true, uniqueness: true, email: { allow_blank: true }
 end

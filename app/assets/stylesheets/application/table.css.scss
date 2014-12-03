@@ -55,6 +55,12 @@ table {
 .table-striped > tbody > tr:nth-child(odd) > th {
   background: #EEEEEE;
 }
+.col-sm-12 {
+  select.date-select {
+    display: inline-block;
+    max-width: 75px;
+  }
+}
 
 .col-sm-10 {
   input[type=text] { max-width: 300px; min-width: 200px; }

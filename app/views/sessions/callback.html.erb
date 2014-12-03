@@ -1,0 +1,22 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    var div = document.getElementById("flash_callback");
+    if (div && window.opener) {
+      <% if @user %>
+        window.close();
+        window.opener.$.testFunc("/users/new");
+      <% elsif current_user %>
+        window.close();
+        window.opener.location.href = "/";
+      <% else %>
+        window.close();
+        window.opener.location.href = "auth/failure";
+      <% end %>
+    }
+  });
+</script>
+
+<div id="flash_callback" style="color:red">
+  <a href="#" onClick="window.close();
+    return false;"><%= t('.close') %></a>
+</div>

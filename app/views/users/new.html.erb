@@ -1,0 +1,18 @@
+<div class="panel panel-default session-form">
+  <div class="panel-heading">Wellcome to Planets Web Site!</div>
+  <div class="panel-body">
+    <%= form_for @user, url: :step2_users, html: { class: "form-horizontal", role: 'form' } do |f| %>
+      <%= markup do |m|
+        p = HorizontalFormPresenter.new(f, self)
+        p.with_options(required: true) do |q|
+          m << p.select_box(:id, 'ユーザー選択', @users, :display_name,
+            new_user: true, add_select: [ "該当無し", 0 ], include_blank: false)
+          if params[:token].present?
+            m << q.hidden_field_block(:token, "", value: params[:token], columns: 10)
+          end
+        m << p.submit_button
+        end
+      end %>
+    <% end %>
+  </div>
+</div>

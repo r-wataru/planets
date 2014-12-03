@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104081138) do
+ActiveRecord::Schema.define(version: 20141203021938) do
 
   create_table "breaking_ball_user_links", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -69,6 +69,21 @@ ActiveRecord::Schema.define(version: 20141104081138) do
   end
 
   add_index "games", ["season_id"], name: "index_games_on_season_id", using: :btree
+
+  create_table "new_emails", force: true do |t|
+    t.integer  "user_id"
+    t.string   "address",                    null: false
+    t.string   "value",                      null: false
+    t.boolean  "used",       default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "passwords", force: true do |t|
+    t.string   "hashed_password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pitchers", force: true do |t|
     t.integer  "user_id",                         null: false

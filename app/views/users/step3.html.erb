@@ -1,0 +1,24 @@
+<div class="panel panel-default session-form">
+  <div class="panel-heading">Wellcome to Planets Web Site!</div>
+  <div class="panel-body">
+    <%= form_for @user, html: { class: "", role: 'form' } do |f| %>
+      <%= markup do |m|
+        p = HorizontalFormPresenter.new(f, self)
+        p.with_options(required: true) do |q|
+          m << q.hidden_field_block(:number, '', value: @user.number)
+          if @from_email
+            m << q.hidden_field_block(:login_name, '', value: @user.login_name)
+            m << q.hidden_field_block(:password, '', value: params[:user][:password])
+          end
+          m << q.hidden_field_block(:display_name, '', value: @user.display_name)
+          m << q.hidden_field_block(:birthday, "", value: @user.birthday)
+          if params[:user][:token].present?
+            m << q.hidden_field_block(:token, "", value: params[:user][:token])
+          end
+          m << q.password_field_block(:planets_password, "プラネッツのパスワード", columns: 10, new_user: true)
+          m << p.submit_button
+        end
+      end %>
+    <% end %>
+  </div>
+</div>

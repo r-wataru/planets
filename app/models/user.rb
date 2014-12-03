@@ -40,13 +40,17 @@ class User < ActiveRecord::Base
   has_many :breaking_balls, through: :breaking_ball_user_links, source: :breaking_ball
   has_one :image, class_name: "UserImage", dependent: :destroy
 
-  validate :display_name, presence: true
+  validates :display_name, presence: true
+  validates :number, presence: true, uniqueness: true, numericality: true, inclusion: { in: (1..99) }
+  validates :login_name, uniqueness: { allow_blank: true }, format: { with: /\A[A-Za-z0-9]+\z/, allow_blank: true }
 
   scope :alive, ->{ where(deleted_at: nil) }
   scope :member, -> { where(helper: false) }
 
   store :ability, accessors: [ :shot, :meet, :power, :run, :shoulder, :defend, :stamina, :speed, :control, :throw, :hit ]
   store :range, accessors: [ :one, :two, :three, :four, :five, :six, :seven, :eight, :nine ]
+
+  attr_accessor :token, :planets_password
 
   before_save do
     unless self.birthday.nil?
@@ -119,7 +123,7 @@ class User < ActiveRecord::Base
         display_name: name,
         helper: true)
     end
-    
+
     def test_mailer
       AccountMailer.test_user.deliver
     end

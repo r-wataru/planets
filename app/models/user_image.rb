@@ -4,9 +4,9 @@
 #
 #  id                     :integer          not null, primary key
 #  user_id                :integer          not null
-#  data                   :binary
+#  data                   :binary(214748364
 #  content_type           :string(255)
-#  thumbnail              :binary
+#  thumbnail              :binary(214748364
 #  thumbnail_content_type :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime

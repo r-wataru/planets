@@ -1,0 +1,29 @@
+<div class="panel panel-default session-form">
+  <div class="panel-heading">Wellcome to Planets Web Site!</div>
+  <div class="panel-body">
+    <%= form_for @user, url: :step3_users, html: { class: "", role: 'form' }, method: :post do |f| %>
+      <% unless @new_user %>
+        <p>あなたは<%= @user.display_name %>で間違いないですね？</p>
+      <% end %>
+      <%= markup do |m|
+        p = HorizontalFormPresenter.new(f, self)
+        p.with_options(required: true) do |q|
+          m << q.number_field_block(:number, '背番号', columns: 10, new_user: true)
+          if @from_email
+            m << q.text_field_block(:login_name, 'ログイン名', columns: 10, new_user: true)
+            m << q.password_field_block(:password, 'パスワード', columns: 10, new_user: true)
+          end
+          m << q.text_field_block(:display_name, '表示名', columns: 10, new_user: true)
+          m << q.date_select_block(:birthday, "生年月日", columns: 10, new_user: true)
+          if params[:user][:token].present?
+            m << q.hidden_field_block(:token, "", value: params[:user][:token], columns: 10)
+          end
+          unless @new_user
+            m << q.hidden_field_block(:user_id, "", value: @user.id )
+          end
+        m << p.submit_button(label_text: "決定")
+        end
+      end %>
+    <% end %>
+  </div>
+</div>

@@ -24,18 +24,40 @@ class HorizontalFormPresenter
     [ :autofocus, :disabled, :max, :maxlength, :min, :pattern, :readonly, :required, :step ].each do |attr|
       html_options[attr] = options[attr] if options[attr]
     end
+    html_options[:value] = options[:value] if options[:value]
 
-    input_columns = calculate_columns(options)
-
+    if options[:new_user]
+      input_columns = 12
+    else
+      input_columns = calculate_columns(options)
+    end
+    
+    class_name = options[:type] == "hidden" ? "" : "form-group"
     type = options[:type] || 'text'
 
-    markup(:div, class: 'form-group') do |m|
-      m << decorated_label(name, label_text, options)
+    markup(:div, class: class_name) do |m|
+      m << decorated_label(name, label_text, options) unless type == "hidden"
       m.div(class: "col-sm-#{input_columns}") do
         m << send("#{type}_field", name, html_options)
         m << error_messages_for(name)
       end
     end
+  end
+
+  def number_field_block(name, label_text, options = {})
+    text_field_block(name, label_text, options.merge(type: 'number'))
+  end
+
+  def hidden_field_block(name, label_text, options = {})
+    text_field_block(name, label_text, options.merge(type: 'hidden'))
+  end
+
+  def email_field_block(name, label_text, options = {})
+    text_field_block(name, label_text, options.merge(type: 'email'))
+  end
+
+  def password_field_block(name, label_text, options = {})
+    text_field_block(name, label_text, options.merge(type: 'password'))
   end
 
   def date_select_block(name, label_text, options = {})
@@ -48,7 +70,11 @@ class HorizontalFormPresenter
     select_options = {}
     select_options[:start_year] = 1940
     select_options[:end_year] = Time.now.year
-    input_columns = calculate_columns(options)
+    if options[:new_user]
+      input_columns = 12
+    else
+      input_columns = calculate_columns(options)
+    end
 
     markup(:div, class: 'form-group') do |m|
       m << decorated_label(name, label_text, options)
@@ -212,18 +238,29 @@ class HorizontalFormPresenter
   def select_box(name, label_text, objects, method_name, options = {})
     main_options = {}
     main_options[:include_blank] = options[:include_blank] || false
-    main_options[:prompt] = ''
+    main_options[:prompt] = options[:prompt] || false
     html_options = {}
     html_options[:class] = 'form-control normal-select'
     html_options[:class] += " #{options[:class]}" if options[:class].present?
     html_options[:required] = options[:required]
     html_options[:placeholder] = options[:placeholder] || label_text
     choices = objects.map { |o| [ o.send(method_name), o.id ] }
+    if options[:add_select].present?
+      choices << options[:add_select]
+    end
 
-    input_columns = calculate_columns(options)
+    if options[:new_user]
+      input_columns = 12
+    else
+      input_columns = calculate_columns(options)
+    end
 
     markup(:div, class: 'form-group') do |m|
-      m << decorated_label(name, label_text, options)
+      if options[:new_user]
+        m.div(label_text, class: "col-sm-#{input_columns}")
+      else
+        m << decorated_label(name, label_text, options)
+      end
       m.div(class: "col-sm-#{input_columns}") do
         m << select(name, choices, main_options, html_options)
         m << error_messages_for(name)
@@ -256,13 +293,14 @@ class HorizontalFormPresenter
 
     label_text = object.persisted? ? label_text2 : label_text1
     type = object.persisted? ? type2 : type1
+    label_text = options[:label_text] ? options[:label_text] : label_text
+    data = options[:confirm] == true ? 'return confirm("Are You Sure?");' : nil
 
     columns_num = columns == 12 ? 0 : 2
 
     markup(:div, class: 'form-group') do |m|
-      m.div(class: "col-sm-#{columns_num}")
-      m.div(class: "col-sm-#{columns - columns_num}") do
-        m.button(label_text, type: 'submit', class: "btn btn-#{type}")
+      m.div(class: "col-sm-12") do
+        m.button(label_text, type: 'submit', class: "btn btn-#{type}",  onclick: data)
       end
     end
   end
@@ -283,7 +321,11 @@ class HorizontalFormPresenter
   private
   def decorated_label(name, label_text, options = {})
     label_columns = options[:label_columns] || @default_label_columns
-    html_class = "col-sm-#{label_columns} control-label"
+    if options[:new_user]
+      html_class = "col-sm-12 control-label"
+    else
+      html_class = "col-sm-#{label_columns} control-label"
+    end
     html_class << ' required' if options[:required]
     label(name, label_text, class: html_class)
   end

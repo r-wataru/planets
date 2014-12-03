@@ -12,3 +12,5 @@ ja:
       user_image:
         uploaded_thumbnail: サムネイル
         uploaded_image: カバー
+      user:
+        planets_password: プラネッツのパスワード

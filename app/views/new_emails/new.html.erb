@@ -1,0 +1,14 @@
+<div class="panel panel-default session-form">
+  <div class="panel-heading">Wellcome to Planets Web Site!</div>
+  <div class="panel-body">
+    <%= form_for @email, url: :new_email, html: { class: "", role: 'form' } do |f| %>
+      <% markup do |m|
+        p = HorizontalFormPresenter.new(f, self)
+        p.with_options(required: true) do |q|
+          m << q.email_field_block(:address, "メールアドレス", columns: 10, new_user: true)
+          m << q.submit_button
+        end
+      end %>
+    <% end %>
+  </div>
+</div>

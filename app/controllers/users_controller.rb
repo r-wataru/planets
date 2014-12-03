@@ -61,6 +61,124 @@ class UsersController < ApplicationController
     end
   end
 
+  def new
+    if current_user
+      raise
+    else
+      if NewEmail.not_userd.exists?(value: params[:token]) || session[:omniauth_provider].present?
+        @users = User.where(checked: false)
+        @user = User.new
+        render :new, layout: "before_authentication"
+      else
+        raise
+       end
+    end
+  end
+
+  def step2
+    if request.post?
+      if current_user
+        redirect_to :root
+      else
+        if NewEmail.not_userd.exists?(value: params[:user][:token]) || session[:omniauth_provider].present?
+          if params[:user][:id] == "0"
+            @user = User.new
+            @new_user = true
+            # Email or Facebook
+            @from_email = session[:omniauth_provider].present? ? false : true
+          elsif params[:user][:id].blank?
+            @users = User.where(checked: false)
+            @user = User.new
+            render action: :new
+          else
+            @user = User.find(params[:user][:id])
+            # Email or Facebook
+            @from_email = session[:omniauth_provider].present? ? false : true
+          end
+        else
+          raise
+        end
+      end
+    else
+      raise
+    end
+  end
+
+  def step3
+    if !request.post? || current_user
+      raise
+    else
+      if params[:user][:user_id]
+        @user = User.find(params[:user][:user_id])
+        @user.assign_attributes user_params
+      else
+        @user = User.new user_params
+      end
+      if @user.valid?
+        render action: :step3
+      else
+        render action: :step2
+      end
+      if NewEmail.not_userd.exists?(value: @user.token)
+        @from_email = true
+      elsif session[:omniauth_provider].blank?
+        raise
+      end
+    end
+  end
+
+  def create
+    if current_user
+      redirect_to :root
+    else
+      # パスワード確認
+      @user = User.new user_params
+      if AuthenticateMember.new.authenticate(@user.planets_password)
+        @user.checked = true
+        if @user.save
+          if session[:omniauth_provider].present?
+            # Facebook
+            facebook_new_user
+          else
+            # Email
+            new_user_from_email
+          end
+          redirect_to :root
+        else
+          render action: :step2
+        end
+      else
+        render action: :step3
+      end
+    end
+  end
+
+  def update
+    if current_user
+      redirect_to :root
+    else
+      # パスワード確認
+      @user = User.find(params[:id])
+      @user.assign_attributes user_params
+      if AuthenticateMember.new(@user).authenticate(@user.planets_password)
+        @user.checked = true
+        if @user.save
+          # Email
+          if session[:omniauth_provider].present?
+            facebook_new_user
+          else
+            new_user_from_email
+          end
+          redirect_to :root
+        else
+          render action: :step2
+        end
+      else
+        render action: :step3
+      end
+    end
+  end
+
   private
   def send_cover_image
     if @user.image.present?
@@ -78,5 +196,33 @@ class UsersController < ApplicationController
     else
       raise NotFound
     end
+  end
+
+  def user_params
+    params.require(:user).permit(
+      :number, :login_name, :display_name, :birthday,
+      :token, :password, :planets_password)
+  end
+
+  def facebook_new_user
+    ui = UserIdentity.create!(
+      user: @user,
+      provider: session[:omniauth_provider],
+      uid: session[:omniauth_uid],
+      info: session[:omniauth_info]
+    )
+    ui.user.emails << Email.new(address: session[:omniauth_info], main: true)
+    session.delete(:omniauth_provider)
+    session.delete(:omniauth_uid)
+    session.delete(:omniauth_info)
+    session[:current_user_id] = ui.user_id
+    ui.user.update_column(:logged_at, Time.current)
+  end
+
+  def new_user_from_email
+    new_email = NewEmail.find_by(value: @user.token)
+    @user.emails.create(address: new_email.address, main: true)
+    new_email.update_column(:used, true)
+    session[:current_user_id] = @user.id
   end
 end

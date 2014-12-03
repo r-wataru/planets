@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        new_email:
+          already: は既に登録済みです。
+    attributes:
+      new_email:
+        address: メールアドレス
