@@ -88,10 +88,14 @@
     <div class="col-md-6">
       <% if current_user == @user %>
         <div class="col-md-12" style="margin: 20px 0;">
-          <p>メールアドレス一覧</p>
+          <p>メールアドレス一覧（<%= link_to "メールアドレス追加", [ :new, @user, :new_email ] %>）</p>
           <ul>
             <% @user.emails.each do |email| %>
-              <li><%= email.address %></li>
+              <li>
+                <%= email.address %>
+                <%= link_to "メイン", [ :main, @user, email ] if email.has_emails? && !email.main? %>
+                <%= link_to "削除", [ @user, email ], method: :delete if email.has_emails? %>
+              </li>
             <% end %>
           </ul>
           <p>ログインパスワード</p>

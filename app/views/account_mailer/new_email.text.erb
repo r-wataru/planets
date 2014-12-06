@@ -1,7 +1,11 @@
 登録のお願い
 --------------------------------------------------------
 
-<%= new_user_path(token: @new_email.value, only_path: false, :protocol => "http") %>
+<% if @new_email.user.present? %>
+  <%= add_emails_path(token: @new_email.value, only_path: false, :protocol => "http") %>
+<% else %>
+  <%= new_user_path(token: @new_email.value, only_path: false, :protocol => "http") %>
+<% end %>
 
 使用期限
 <%= @new_email.created_at.advance(days: 1).strftime("%Y-%m-%d %H:%M") %>

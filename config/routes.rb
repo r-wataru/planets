@@ -24,6 +24,10 @@ Rails.application.routes.draw do
     resources :breaking_ball_user_links do
       post :create_breaking_ball, on: :collection
     end
+    resources :emails, only: [ :destroy ] do
+      get :main, on: :member
+    end
+    resources :new_emails, only: [ :new, :create ]
   end
   resource :session, only: [ :new, :create, :destroy ]
   resources :passwords, only: [ :new, :create ]
@@ -31,6 +35,7 @@ Rails.application.routes.draw do
     post :forgot_send_mail, on: :collection
     get :forgot_password, on: :collection
     get :thanks, on: :collection
+    get :add, on: :collection
   end
 
   get 'auth/facebook/callback', to: "sessions#callback"

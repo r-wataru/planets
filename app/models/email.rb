@@ -21,4 +21,15 @@ class Email < ActiveRecord::Base
   belongs_to :user
 
   validates :address, presence: true, uniqueness: true, email: { allow_blank: true }
+
+  def has_emails?
+    self.user.emails.count > 1
+  end
+
+  def all_update_main
+    self.user.emails.each do |email|
+      email.update_column(:main, false)
+    end
+    self.update_column(:main, true)
+  end
 end

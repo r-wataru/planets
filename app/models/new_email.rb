@@ -12,6 +12,8 @@
 #
 
 class NewEmail < ActiveRecord::Base
+  belongs_to :user
+
   scope :not_userd, -> { where(used: false) }
 
   validates :address, presence: true, email: { allow_blank: true }

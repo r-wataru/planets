@@ -63,7 +63,9 @@ table {
 }
 
 .col-sm-10 {
-  input[type=text],input[type=password] { max-width: 300px; min-width: 200px; }
+  input[type=text],
+  input[type=password],
+  input[type=email] { max-width: 300px; min-width: 200px; }
   input[type=radio] { max-width: 40px; vertical-align: super; }
   select.normal-select { max-width: 300px; }
   select.date-select {
