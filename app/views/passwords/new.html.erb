@@ -1,0 +1,16 @@
+<div class="panel panel-default session-form">
+  <div class="panel-heading">Wellcome to Planets Web Site!</div>
+  <div class="panel-body">
+    <%= form_for @change_password_form, url: :passwords, html: { class: "", role: 'form' }, method: :post do |f| %>
+      <%= markup do |m|
+        p = HorizontalFormPresenter.new(f, self)
+        p.with_options(required: true) do |q|
+          m << q.password_field_block(:new_password, 'パスワード', columns: 10, new_user: true)
+          m << q.password_field_block(:new_password_confirmation, 'パスワード確認', columns: 10, new_user: true)
+          m << q.hidden_field_block(:token, '', value: @user_token.value)
+          m << p.submit_button(label_text: "決定")
+        end
+      end %>
+    <% end %>
+  </div>
+</div>

@@ -24,7 +24,13 @@ Rails.application.routes.draw do
     end
   end
   resource :session, only: [ :new, :create, :destroy ]
-  
+  resources :passwords, only: [ :new, :create, :edit, :update ]
+  resources :emails, only: [] do
+    post :forgot_send_mail, on: :collection
+    get :forgot_password, on: :collection
+    get :thanks, on: :collection
+  end
+
   get 'auth/facebook/callback', to: "sessions#callback"
   get "auth/failure", to: "sessions#failure"
 end
