@@ -179,6 +179,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_password
+    @change_password_form = ChangePasswordForm.new(object: current_user)
+  end
+
+  def update_password
+    @change_password_form = ChangePasswordForm.new(password_params)
+    @change_password_form.not_current_user = false
+    @change_password_form.object = current_user
+    if @change_password_form.save
+      redirect_to current_user
+    else
+      render action: :edit_password
+    end
+  end
+
   private
   def send_cover_image
     if @user.image.present?
@@ -224,5 +239,11 @@ class UsersController < ApplicationController
     @user.emails.create(address: new_email.address, main: true)
     new_email.update_column(:used, true)
     session[:current_user_id] = @user.id
+  end
+
+  def password_params
+    params.require(:change_password_form).permit(
+      :current_password,
+      :new_password, :new_password_confirmation)
   end
 end

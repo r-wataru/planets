@@ -14,3 +14,16 @@ ja:
         uploaded_image: カバー
       user:
         planets_password: プラネッツのパスワード
+        current_password: 現在のパスワード
+  activemodel:
+    errors:
+      models:
+        change_password_form:
+          attributes:
+            current_password:
+              wrong: のパスワードが間違っています。
+    attributes:
+      change_password_form:
+        current_password: 現在のパスワード
+        new_password: 新しいパスワード
+        new_password_confirmation: 新しいパスワード確認

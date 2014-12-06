@@ -9,7 +9,7 @@ class ChangePasswordForm
 
   validate do
     unless not_current_user
-      unless Authenticator.new(object).authenticate(current_password)
+      unless Authenticator.new(object.emails.first).authenticate(current_password)
         errors.add(:current_password, :wrong)
       end
     end

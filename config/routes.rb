@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     post :step2, on: :collection
     post :step3, on: :collection
     put :update_ability, on: :member
+    get :edit_password, on: :member
+    patch :update_password, on: :member
     resources :characters do
       post :create_and_links, on: :collection
     end
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
     end
   end
   resource :session, only: [ :new, :create, :destroy ]
-  resources :passwords, only: [ :new, :create, :edit, :update ]
+  resources :passwords, only: [ :new, :create ]
   resources :emails, only: [] do
     post :forgot_send_mail, on: :collection
     get :forgot_password, on: :collection

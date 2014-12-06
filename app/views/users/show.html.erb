@@ -95,10 +95,10 @@
             <% end %>
           </ul>
           <p>ログインパスワード</p>
-          <p>表示出来ません  <%= link_to "パスワード編集", "#" %></p>
+          <p>表示出来ません  <%= link_to "パスワード編集", [ :edit_password, @user ] %></p>
         </div>
       <% end %>
-      
+
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading">
