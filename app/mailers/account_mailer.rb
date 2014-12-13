@@ -14,4 +14,11 @@ class AccountMailer < ActionMailer::Base
     @user_token = user_token
     mail(to: user_token.email.address, subject: "Planets パスワード再設定")
   end
+  
+  def internal_server_error(exception, request, current_user)
+    @exception = exception
+    @current_user = current_user
+    @request = request
+    mail(to: Planets::DeveloperMail, subject: "[Paglloidea] - Internal Server Error")
+  end
 end

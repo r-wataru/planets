@@ -36,6 +36,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   
   Planets::MailFrom = "no-reply@planets-nine.com"
+  Planets::DeveloperMail = [ "test@example.com" ]
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
   config.action_mailer.delivery_method = :test
 end

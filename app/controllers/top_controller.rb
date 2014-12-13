@@ -6,4 +6,8 @@ class TopController < ApplicationController
       render :index, layout: "before_authentication"
     end
   end
+  
+  def internal_server_error
+    raise StandardError
+  end
 end

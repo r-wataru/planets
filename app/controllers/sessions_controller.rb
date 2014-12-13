@@ -16,7 +16,11 @@ class SessionsController < ApplicationController
     if Authenticator.new(email).authenticate(@form.password)
       session[:current_user_id] = email.user.id
       email.user.update_attribute(:logged_at, Time.current)
-      redirect_to :root
+      if params[:from]
+        redirect_to params[:from]
+      else
+        redirect_to :root
+      end
     else
       render action: :new
     end

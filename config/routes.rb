@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'top#index'
+  get 'internal_server_error', to: 'top#internal_server_error'
   resources :results
   resources :games do
     patch :update_reflection, on: :member

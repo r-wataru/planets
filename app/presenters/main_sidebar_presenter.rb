@@ -31,7 +31,11 @@ class MainSidebarPresenter < Presenter
       end
 
     markup(:li, class: html_class) do |m|
-      m << link_to(fa_icon('dashboard', text: 'ダッシュボード'), view_context.root_path)
+      if current_user
+        m << link_to(fa_icon('user', text: truncate(current_user.display_name, length: 12, omission: "...")), view_context.user_path(current_user))
+      else
+        m << link_to(fa_icon('dashboard', text: "トップ"), view_context.root_path)
+      end
     end
   end
   
