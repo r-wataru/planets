@@ -3,10 +3,10 @@
 # Table name: user_tokens
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer
-#  email_id   :integer
+#  user_id    :integer          not null
+#  email_id   :integer          not null
 #  value      :string(255)
-#  used       :boolean
+#  used       :boolean          default(FALSE), not null
 #  created_at :datetime
 #  updated_at :datetime
 #

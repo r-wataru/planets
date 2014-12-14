@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206001013) do
+ActiveRecord::Schema.define(version: 20141214064500) do
 
   create_table "breaking_ball_user_links", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -104,6 +104,25 @@ ActiveRecord::Schema.define(version: 20141206001013) do
   end
 
   add_index "pitchers", ["user_id"], name: "index_pitchers_on_user_id", using: :btree
+
+  create_table "plan_details", force: true do |t|
+    t.integer  "plan_id",                  null: false
+    t.string   "name",        default: "", null: false
+    t.text     "description"
+    t.time     "starts_on"
+    t.time     "ends_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "plan_details", ["plan_id"], name: "index_plan_details_on_plan_id", using: :btree
+
+  create_table "plans", force: true do |t|
+    t.date     "starts_on",              null: false
+    t.integer  "plan_count", default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "results", force: true do |t|
     t.integer  "user_id",                           null: false
@@ -200,5 +219,7 @@ ActiveRecord::Schema.define(version: 20141206001013) do
   end
 
   add_index "users", ["number"], name: "index_users_on_number", unique: true, using: :btree
+
+  add_foreign_key "plan_details", "plans", name: "plan_details_plan_id_fk"
 
 end

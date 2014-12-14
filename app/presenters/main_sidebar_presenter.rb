@@ -38,16 +38,16 @@ class MainSidebarPresenter < Presenter
       end
     end
   end
-  
+
   def power
     markup(:li, class: '') do |m|
       m << link_to(fa_icon('power-off', text: 'ログイン'), view_context.new_session_path)
     end
   end
-  
+
   def power_off
     markup(:li, class: '') do |m|
-      m << link_to(fa_icon('power-off', text: 'ログアウト'), view_context.session_path, 
+      m << link_to(fa_icon('power-off', text: 'ログアウト'), view_context.session_path,
         method: :delete, data: { confirm: "Are You Sure?" })
     end
   end
@@ -67,9 +67,9 @@ class MainSidebarPresenter < Presenter
   end
 
   def schedule
-    #html_class = params[:controller] == 'schedules' ? 'active' : ''
-    markup(:li, class: "disabled not_yet") do |m|
-      m << link_to(fa_icon('table', text: 'スケジュール'), "")
+    html_class = params[:controller] == 'schedules' ? 'active' : ''
+    markup(:li, class: html_class) do |m|
+      m << link_to(fa_icon('table', text: 'スケジュール'), view_context.schedules_path)
     end
   end
 

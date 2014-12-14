@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= @plan.starts_on.strftime("%Y年%m月%d日") %>のスケジュール
+  </div>
+  <div class="panel-body">
+    <% if @plan.plan_details.size > 0 %>
+      <ul>
+        <% @plan.plan_details.each do |p| %>
+          <li>
+            <%= link_to schedule_plan_detail_path(schedule_id: @plan.starts_on, id: p ) do %>
+              <%= p.starts_on.strftime("%H:%M") %>〜
+              <%= p.ends_on.strftime("%H:%M") %>
+              <%= content_tag :span, p.name, title: p.description %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>予定がありません。</p>
+    <% end %>
+
+    <%= link_to "新規作成", "", class: "btn btn-success", type: "button" %>
+  </div>
+</div>

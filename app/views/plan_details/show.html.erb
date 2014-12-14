@@ -1,0 +1,11 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= @plan.starts_on.strftime("%Y年%m月%d日") %>のスケジュール
+  </div>
+  <div class="panel-body">
+    <%= @plan_detail.starts_on.try(:strftime, "%H:%M") %>
+    <%= @plan_detail.ends_on.try(:strftime, "%H:%M") %>
+    <%= @plan_detail.name %>
+    <%= @plan_detail.description %>
+  </div>
+</div>

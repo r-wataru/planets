@@ -74,22 +74,22 @@ table {
   }
   button { max-width: 300px; }
   textarea { max-width: 300px; height: 80px; }
-/*  .file-input-wrapper {
+  /*  .file-input-wrapper {
     overflow: hidden;
     position: relative;
     cursor: pointer;
     z-index: 1;
     position: absolute;
     input[type=file] {
-      opacity: 0;
-      z-index: 99;
-      outline: 0;
-      cursor: pointer;
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      height: 40px;
+    opacity: 0;
+    z-index: 99;
+    outline: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: 40px;
     }
   }*/
 }
@@ -222,6 +222,20 @@ select.name_batter_selecter { width: 200px; }
   display: inline-block;
   list-style-type: none;
   padding-left: 20px;
+}
+
+table.schedule {
+  width: 100%;
+  th.sat, td.sat { background: #3399FF; }
+  th.sun, td.sun { background: #FF82B2;}
+  th { text-align: center; }
+  td {
+    height: 50px;
+    max-width: 100px;
+    min-width: 50px;
+    overflow: scroll;
+  }
+  .schedule_count { color: red; }
 }
 
 /*.panel-warning > .panel-heading {

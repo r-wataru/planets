@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     get :thanks, on: :collection
     get :add, on: :collection
   end
+  resources :schedules, only: [ :index, :show ] do
+    resources :plan_details
+  end
 
   get 'auth/facebook/callback', to: "sessions#callback"
   get "auth/failure", to: "sessions#failure"
