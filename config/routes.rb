@@ -39,7 +39,9 @@ Rails.application.routes.draw do
     get :add, on: :collection
   end
   resources :schedules, only: [ :index, :show ] do
-    resources :plan_details
+    resources :plan_details do
+      post :add_or_delete, on: :member
+    end
   end
 
   get 'auth/facebook/callback', to: "sessions#callback"

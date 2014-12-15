@@ -12,21 +12,18 @@
     <%= @plan.starts_on.strftime("%Y年%m月%d日") %>のスケジュール
   </div>
   <div class="panel-body">
-    <b>タイトル</b><br/>
-    <div style="margin-left: 10px;">
-      <%= @plan_detail.name %><br/>
-    </div>
-    <b>説明</b><br/>
-    <div style="margin-left: 10px;">
-      <%= simple_format(@plan_detail.description) %><br/>
-    </div>
-    <b>時間</b><br/>
-    <div style="margin-left: 10px;">
-      <%= @plan_detail.starts_on.try(:strftime, "%H:%M") %> 〜
-      <%= @plan_detail.ends_on.try(:strftime, "%H:%M") %><br/>
-    </div>
-    <br/>
-    <%= link_to "編集", edit_schedule_plan_detail_path(id: @plan_detail.id, schedule_id: @plan.id), class: "btn btn-primary", type: "buttom" %>
+    <%= form_for @plan_detail, url: schedule_plan_detail_path(id: @plan_detail.id, schedule_id: @plan.id) do |f| %>
+      <%= markup do |m|
+        p = HorizontalFormPresenter.new(f, self)
+        p.with_options(required: true) do |q|
+          m << q.text_field_block(:name, 'タイトル', columns: 10)
+          m << q.text_area_block(:description, "詳細", columns: 10)
+          m << q.time_select_block(:starts_on, "開始時刻", columns: 10, style: "margin: 10px 0;")
+          m << q.time_select_block(:ends_on, "終了時刻", columns: 10, style: "margin: 10px 0;")
+        end
+        m << p.submit_button
+      end %>
+    <% end %>
   </div>
 </div>
 

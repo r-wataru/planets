@@ -18,6 +18,10 @@
 
 class PlanDetail < ActiveRecord::Base
   belongs_to :plan
+  has_many :users, through: :user_plan_detail_links
+  has_many :user_plan_detail_links
+
+  validates :name, presence: true
 
   after_save do
     count = self.plan.plan_details.count

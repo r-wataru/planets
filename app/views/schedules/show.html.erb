@@ -1,5 +1,75 @@
 <div class="panel panel-default">
   <div class="panel-heading">
+    <div class="row">
+      <div class="col-xs-4">
+        <span style="float: left;">
+          <%= link_to "<<", schedules_path(change: "#{@now_month.last_month.strftime('%Y%m')}") %>
+        </span>
+      </div>
+      <div class="col-xs-4">
+        <span style="text-align: center; display: block; font-weight: bold;"><%= @year %>年<%= @month %>月</span>
+      </div>
+      <div class="col-xs-4">
+        <span style="float: right;"><%= link_to ">>", schedules_path(change: "#{@now_month.next_month.strftime('%Y%m')}") %></span>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table schedule">
+        <tr class="statsTable01">
+        <th class="sun">日</th>
+        <th>月</th>
+        <th>火</th>
+        <th>水</th>
+        <th>木</th>
+        <th>金</th>
+        <th class="sat">土</th>
+      </tr>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <% schedule.each_with_index do |day, i| %>
+            <% if i == 0 %>
+              <td class="sun">
+                <b><%= link_to day, schedule_path("#{@year}-#{@month}-#{day}") if day %></b>
+                <% if Plan.exists?(starts_on: "#{@year}-#{@month}-#{day}") %>
+                  <p>予定
+                    <span class="schedule_count"><%= Plan.find_by(starts_on: "#{@year}-#{@month}-#{day}").try(:plan_count) %></span>
+                    件
+                  </p>
+                <% end %>
+              </td>
+            <% elsif i == 6 %>
+              <td class="sat">
+                <b><%= link_to day, schedule_path("#{@year}-#{@month}-#{day}") if day %></b>
+                <% if Plan.exists?(starts_on: "#{@year}-#{@month}-#{day}") %>
+                  <p>予定
+                    <span class="schedule_count"><%= Plan.find_by(starts_on: "#{@year}-#{@month}-#{day}").try(:plan_count) %></span>
+                    件
+                  </p>
+                <% end %>
+              </td>
+            <% else %>
+              <td>
+                <b><%= link_to day, schedule_path("#{@year}-#{@month}-#{day}") if day %></b>
+                <% if Plan.exists?(starts_on: "#{@year}-#{@month}-#{day}") %>
+                  <p>予定
+                    <span class="schedule_count"><%= Plan.find_by(starts_on: "#{@year}-#{@month}-#{day}").try(:plan_count) %></span>
+                    件
+                  </p>
+                <% end %>
+              </td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
     <%= @plan.starts_on.strftime("%Y年%m月%d日") %>のスケジュール
   </div>
   <div class="panel-body">
@@ -19,6 +89,6 @@
       <p>予定がありません。</p>
     <% end %>
 
-    <%= link_to "新規作成", "", class: "btn btn-success", type: "button" %>
+    <%= link_to "新規作成", new_schedule_plan_detail_path(schedule_id: @plan.starts_on), class: "btn btn-success", type: "button" %>
   </div>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141214064500) do
+ActiveRecord::Schema.define(version: 20141215002936) do
 
   create_table "breaking_ball_user_links", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -189,6 +189,14 @@ ActiveRecord::Schema.define(version: 20141214064500) do
   end
 
   add_index "user_images", ["user_id"], name: "index_user_images_on_user_id", using: :btree
+
+  create_table "user_plan_detail_links", force: true do |t|
+    t.integer  "user_id",                    null: false
+    t.integer  "plan_detail_id",             null: false
+    t.integer  "status",         default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_tokens", force: true do |t|
     t.integer  "user_id",                    null: false

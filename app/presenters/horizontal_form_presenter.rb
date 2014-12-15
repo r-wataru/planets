@@ -4,7 +4,7 @@ class HorizontalFormPresenter
   attr_reader :form_builder, :view_context
   delegate :label, :text_field, :password_field, :check_box, :radio_button,
     :email_field, :number_field, :password_field, :text_area, :hidden_field,
-    :date_select, :file_field, :object, :select, to: :form_builder
+    :date_select, :time_select, :file_field, :object, :select, to: :form_builder
   delegate :link_to, :image_tag, to: :view_context
 
   def initialize(form_builder, view_context, default_label_columns = 2)
@@ -31,7 +31,7 @@ class HorizontalFormPresenter
     else
       input_columns = calculate_columns(options)
     end
-    
+
     class_name = options[:type] == "hidden" ? "" : "form-group"
     type = options[:type] || 'text'
 
@@ -80,6 +80,29 @@ class HorizontalFormPresenter
       m << decorated_label(name, label_text, options)
       m.div(class: "col-sm-#{input_columns}") do
         m << date_select(name, select_options, html_options)
+        m << error_messages_for(name)
+      end
+    end
+  end
+
+  def time_select_block(name, label_text, options = {})
+    html_options = {}
+    html_options[:class] = 'form-control date-select'
+    html_options[:class] += " #{options[:class]}" if options[:class].present?
+    [ :disabled, :max, :maxlength, :min, :pattern, :readonly, :required, :step ].each do |attr|
+      html_options[attr] = options[attr] if options[attr]
+    end
+    select_options = {}
+    if options[:new_user]
+      input_columns = 12
+    else
+      input_columns = calculate_columns(options)
+    end
+
+    markup(:div, class: 'form-group') do |m|
+      m << decorated_label(name, label_text, options)
+      m.div(class: "col-sm-#{input_columns}", style: "margin: 10px 0;") do
+        m << time_select(name, select_options, html_options)
         m << error_messages_for(name)
       end
     end
@@ -326,8 +349,9 @@ class HorizontalFormPresenter
     else
       html_class = "col-sm-#{label_columns} control-label"
     end
+
     html_class << ' required' if options[:required]
-    label(name, label_text, class: html_class)
+    label(name, label_text, class: html_class, style: options[:style])
   end
 
   def checkbox_label(name, label_text, options = {})
