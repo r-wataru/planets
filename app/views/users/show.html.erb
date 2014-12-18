@@ -54,15 +54,16 @@
                 <% end %>
               </div>
             <% end %>
+            <canvas id="picherCanvas" width="250" height="250"></canvas>
             <!-- 投手能力 -->
             <% hash = {"速球"=>"speed", "コントロール"=>"control", "スタミナ"=>"stamina"} %>
             <% hash.each do |h| %>
               <% next if !@user.ability.has_key?(h.last.to_sym) %>
               <span class="jquery-title"><%= h.first %></span>
               <div class="progress">
-                <div class="progress-bar progress-bar-primary progress-bar-striped"
+                <div class="progress-bar progress-bar-primary progress-bar-striped value-name-<%= h.last %>"
                      role="progressbar" aria-valuenow="<%= @user.ability[h.last] %>"
-                     aria-valuemin="0" aria-valuemax="100"
+                     aria-valuemin="0" aria-valuemax="100" data-int="<%= @user.ability[h.last] %>"
                      style="width: <%= @user.ability[h.last].to_s + '%' %>;">
                   <span class="sr-only">40% Complete (success)</span>
                 </div>
@@ -122,14 +123,15 @@
                 <% end %>
               </div>
             <% end %>
+            <canvas id="batterCanvas" width="250" height="250"></canvas>
             <% hash = {"弾丸"=>"shot", "ミート"=>"meet", "パワー"=>"power", "走力"=>"run", "肩力"=>"shoulder", "守力"=>"defend"} %>
             <% hash.each do |h| %>
               <% next if !@user.ability.has_key?(h.last.to_sym) %>
               <span class="jquery-title"><%= h.first %></span>
               <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped"
+                <div class="progress-bar progress-bar-success progress-bar-striped value-name-<%= h.last %>"
                      role="progressbar" aria-valuenow="<%= @user.ability[h.last] %>"
-                     aria-valuemin="0" aria-valuemax="100"
+                     aria-valuemin="0" aria-valuemax="100" data-int="<%= @user.ability[h.last] %>"
                      style="width: <%= @user.ability[h.last].to_s + '%' %>;">
                   <span class="sr-only">40% Complete (success)</span>
                 </div>

@@ -18,4 +18,5 @@
 //= require jquery.ui.widget
 //= require jquery.ui.mouse
 //= require bootstrap-sprockets
+//= require Chart
 //= require_tree .

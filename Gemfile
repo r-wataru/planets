@@ -16,7 +16,7 @@ gem 'rails-i18n'
 gem "omniauth", "~> 1.2.2"
 gem 'omniauth-facebook', '~> 2.0.0'
 gem 'rmagick', '~> 2.13.3', :require => 'RMagick'
-
+gem 'chart-js-rails'
 gem "mail-iso-2022-jp", '~> 2.0.0'
 
 # Database related gems
