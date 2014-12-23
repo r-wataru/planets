@@ -13,7 +13,6 @@
         <%= @post.title %>
       </div>
       <div class="panel-body">
-
         <div>
           <% if @post.user.present? %>
             <% if @post.user.image && @post.user.image.thumbnail.present? %>
@@ -27,8 +26,17 @@
           <b style="margin-left: 10px;"><%= @post.user.present? ? @post.user.display_name : "名無しさん" %></b>
           <hr>
         </div>
-
-        <%= @post.description %>
+        <%= simple_format(@post.description) %>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <%= content_tag :p, style: "margin: 0; text-align: right;" do %>
+              <%= link_to fa_icon('pencil'), "#", style: "margin-right: 10px;" %>
+              <%= link_to fa_icon('trash'), @post, data: { confirm: "Are Your Sure?" }, method: :delete %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -51,6 +59,18 @@
           <%= image_tag comment_image_path(comment.image, format: comment.image.extension),
             style: "max-width: 100%;" if comment.image.present? && comment.image.data.present? %>
           <%= simple_format(comment.comment) %>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <%= link_to "いいね", "#" %>
+            </div>
+            <div class="col-md-6">
+              <%= content_tag :p, style: "margin: 0; text-align: right;" do %>
+                <%= link_to fa_icon('trash'), [ @post, comment ], data: { confirm: "Are You Sure?" }, method: :delete %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>

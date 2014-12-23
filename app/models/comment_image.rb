@@ -15,6 +15,10 @@
 #
 
 class CommentImage < ActiveRecord::Base
+  belongs_to :comment
+
+  validate :check_image
+
   IMAGE_TYPES = { "image/jpeg" => "jpg", "image/gif" => "gif","image/png" => "png" }
 
   def extension
@@ -35,6 +39,17 @@ class CommentImage < ActiveRecord::Base
     when "image/jpg"   then "image/jpeg"
     when "image/x-png" then "image/png"
     else ctype
+    end
+  end
+
+  def check_image
+    if @uploaded_image
+      if data.size > 5.megabytes
+        errors.add(:uploaded_image, :too_big_image)
+      end
+      unless IMAGE_TYPES.has_key?(content_type)
+        errors.add(:uploaded_image, :invalid_image)
+      end
     end
   end
 end
