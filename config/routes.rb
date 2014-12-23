@@ -43,6 +43,12 @@ Rails.application.routes.draw do
       post :add_or_delete, on: :member
     end
   end
+  resources :posts, except: [ :show ] do
+    resources :comments, except: [ :show ] do
+      post :create_image, on: :collection
+    end
+  end
+  resources :comment_images, only: [ :show ]
 
   get 'auth/facebook/callback', to: "sessions#callback"
   get "auth/failure", to: "sessions#failure"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215002936) do
+ActiveRecord::Schema.define(version: 20141219005113) do
 
   create_table "breaking_ball_user_links", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -42,6 +42,27 @@ ActiveRecord::Schema.define(version: 20141215002936) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comment_images", force: true do |t|
+    t.integer  "comment_id",                      null: false
+    t.binary   "data",         limit: 2147483647, null: false
+    t.string   "content_type",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comment_images", ["comment_id"], name: "index_comment_images_on_comment_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "post_id",    null: false
+    t.integer  "user_id",    null: false
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "emails", force: true do |t|
     t.integer  "user_id",                    null: false
@@ -124,6 +145,16 @@ ActiveRecord::Schema.define(version: 20141215002936) do
     t.datetime "updated_at"
   end
 
+  create_table "posts", force: true do |t|
+    t.integer  "user_id",     null: false
+    t.string   "title",       null: false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["user_id", "title"], name: "index_posts_on_user_id_and_title", using: :btree
+
   create_table "results", force: true do |t|
     t.integer  "user_id",                           null: false
     t.integer  "game_id",                           null: false
@@ -166,6 +197,16 @@ ActiveRecord::Schema.define(version: 20141215002936) do
   end
 
   add_index "seasons", ["year"], name: "index_seasons_on_year", unique: true, using: :btree
+
+  create_table "user_comment_links", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "comment_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_comment_links", ["comment_id"], name: "index_user_comment_links_on_comment_id", using: :btree
+  add_index "user_comment_links", ["user_id"], name: "index_user_comment_links_on_user_id", using: :btree
 
   create_table "user_identities", force: true do |t|
     t.integer  "user_id",    null: false
@@ -228,6 +269,14 @@ ActiveRecord::Schema.define(version: 20141215002936) do
 
   add_index "users", ["number"], name: "index_users_on_number", unique: true, using: :btree
 
+  add_foreign_key "comment_images", "comments", name: "comment_images_comment_id_fk"
+
+  add_foreign_key "comments", "posts", name: "comments_post_id_fk"
+
   add_foreign_key "plan_details", "plans", name: "plan_details_plan_id_fk"
+
+  add_foreign_key "posts", "users", name: "posts_user_id_fk"
+
+  add_foreign_key "user_comment_links", "comments", name: "user_comment_links_comment_id_fk"
 
 end

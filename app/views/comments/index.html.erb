@@ -1,0 +1,37 @@
+<%
+  new_form_options = {
+    url: [ @post, :comments ],
+    html: { class: "form-horizontal", role: 'form' },
+    method: :post
+  }
+%>
+
+<ul>
+<% @comments.each do |comment| %>
+  <li>
+    <%= comment.comment %>
+    <%= image_tag comment_image_path(comment.image, format: comment.image.extension) if comment.image.present? %>
+  </li>
+<% end %>
+</ul>
+
+<%= form_for @comment_form, new_form_options do |f| %>
+  <%= f.fields_for :comment, f.object.comment do |ff| %>
+    <%= markup do |m|
+      p = HorizontalFormPresenter.new(ff, self)
+      p.with_options(required: true) do |q|
+        m << q.text_area_block(:comment, "コメント", columns: 10)
+      end
+    end %>
+  <% end %>
+
+  <%= f.fields_for :image, f.object.comment.image do |fff| %>
+    <%= markup do |m|
+      p = HorizontalFormPresenter.new(fff, self)
+      p.with_options(required: false) do |q|
+        m << q.file_block(:uploaded_image, "画像", "", "", collumns: 10)
+      end
+      m << p.submit_button
+    end %>
+  <% end %>
+<% end %>

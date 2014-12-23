@@ -74,9 +74,9 @@ class MainSidebarPresenter < Presenter
   end
 
   def blog
-    #html_class = params[:controller] == 'schedules' ? 'active' : ''
-    markup(:li, class: "disabled not_yet") do |m|
-      m << link_to(fa_icon('book', text: 'ブログ'), "")
+    html_class = params[:controller] == 'posts' ? 'active' : ''
+    markup(:li, class: html_class) do |m|
+      m << link_to(fa_icon('book', text: 'ブログ'), view_context.posts_path)
     end
   end
 
