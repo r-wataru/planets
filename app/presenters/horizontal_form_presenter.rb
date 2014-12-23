@@ -111,6 +111,7 @@ class HorizontalFormPresenter
   def file_block(name, label_text, path, alt, options = {})
     html_options = {}
     html_options[:title] = "Search for a file to add"
+    html_options[:style] = options[:style] if options[:style]
     input_columns = calculate_columns(options)
 
     markup(:div, class: 'form-group') do |m|

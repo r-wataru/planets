@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20141219005113) do
 
   create_table "comment_images", force: true do |t|
     t.integer  "comment_id",                      null: false
-    t.binary   "data",         limit: 2147483647, null: false
-    t.string   "content_type",                    null: false
+    t.binary   "data",         limit: 2147483647
+    t.string   "content_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

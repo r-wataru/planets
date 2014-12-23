@@ -13,8 +13,9 @@ class CommentForm
   def assign_attributes(params = {})
     @params = params
     comment.assign_attributes(comment_params)
-    comment.image.assign_attributes(image_params)
-    if params[:image][:uploaded_image_destroy].present? &&
+    comment.image.assign_attributes(image_params) if params[:image]
+    if params[:image] &&
+      params[:image][:uploaded_image_destroy].present? &&
         params[:image][:uploaded_image_destroy] == "1"
       comment.image.data = nil
       comment.image.content_type = nil
