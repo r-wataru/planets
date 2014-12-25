@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var input = $("#comment_form_image_uploaded_image");
-  input.after("<span></span>");
+  input.after("<span class='confirmImage'></span>");
 
   // test(複数上げる場合)
   // 以下をviewに
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
     // 画像以外は処理を停止
     if (!file.type.match('image.*')) {
-      $('span').html('');
+      $('span.confirmImage').html('');
       return;
     }
 
@@ -37,8 +37,8 @@ $(document).ready(function() {
     if (file.size < 5242880) {
       reader.onload = function() {
         var img_src = $('<img>').attr('src', reader.result).attr('style', 'max-width: 100%;');
-        $('span').html(img_src).hide();
-        $('span').slideDown(2000);
+        $('span.confirmImage').html(img_src).hide();
+        $('span.confirmImage').slideDown(2000);
       };
       reader.readAsDataURL(file);
     } else {

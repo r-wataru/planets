@@ -88,9 +88,9 @@ class MainSidebarPresenter < Presenter
   end
 
   def attendance
-    #html_class = params[:controller] == 'schedules' ? 'active' : ''
-    markup(:li, class: "disabled not_yet") do |m|
-      m << link_to(fa_icon('send', text: '出席表'), "")
+    html_class = params[:action] == 'still' ? 'active' : ''
+    markup(:li, class: html_class) do |m|
+      m << link_to(fa_icon('send', text: '出席表'), view_context.still_schedules_path)
     end
   end
 end

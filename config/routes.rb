@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     get :add, on: :collection
   end
   resources :schedules, only: [ :index, :show ] do
+    get :still, on: :collection
     resources :plan_details do
       post :add_or_delete, on: :member
     end

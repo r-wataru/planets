@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-heading">これからの予定</div>
+    <div class="panel-body">
+      <ul>
+        <% @still.each do |still| %>
+          <li><%= still.starts_on %></li>
+          <ul>
+            <% still.plan_details.each do |plan| %>
+              <%= link_to schedule_plan_detail_path(schedule_id: still.starts_on, id: plan ) do %>
+                <li><%= plan.name %>(
+                  <%= plan.starts_on.strftime("%H:%M") %>~
+                  <%= plan.ends_on.strftime("%H:%M") %>)
+                </li>
+              <% end %>
+              <ul>
+                <% plan.users.each do |user| %>
+                  <li><%= user.display_name %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </ul>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
