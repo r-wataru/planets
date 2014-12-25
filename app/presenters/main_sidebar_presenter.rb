@@ -74,16 +74,16 @@ class MainSidebarPresenter < Presenter
   end
 
   def blog
-    html_class = params[:controller] == 'posts' ? 'active' : ''
+    html_class = (params[:controller] == 'posts' or params[:controller] == 'comments') ? 'active' : ''
     markup(:li, class: html_class) do |m|
-      m << link_to(fa_icon('book', text: 'ブログ'), view_context.posts_path)
+      m << link_to(fa_icon('book', text: '掲示板'), view_context.posts_path)
     end
   end
 
   def vote
-    #html_class = params[:controller] == 'schedules' ? 'active' : ''
-    markup(:li, class: "disabled not_yet") do |m|
-      m << link_to(fa_icon('bullhorn', text: '投票'), "")
+    html_class = params[:controller] == 'votes' ? 'active' : ''
+    markup(:li, class: html_class) do |m|
+      m << link_to(fa_icon('bullhorn', text: '投票'), view_context.votes_path)
     end
   end
 

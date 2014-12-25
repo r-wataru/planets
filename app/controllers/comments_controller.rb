@@ -30,4 +30,22 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to [ @post, :comments ]
   end
+
+  # Ajax Post
+  def like_add_or_delete
+    if request.post?
+      comment = Comment.find(params[:like][:comment_id])
+      user = User.find(params[:like][:user_id])
+      if like = UserCommentLink.find_by(user: user, comment: comment)
+        add = false
+        like.destroy
+      else
+        add = true
+        UserCommentLink.create(user: user, comment: comment)
+      end
+      render json: { add: add }
+    else
+      raise NotFound
+    end
+  end
 end

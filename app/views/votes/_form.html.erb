@@ -1,0 +1,8 @@
+<%= markup do |m|
+  p = HorizontalFormPresenter.new(f, self)
+  p.with_options(required: false) do |q|
+    m << q.text_field_block(:title, 'タイトル', columns: 10)
+    m << q.text_area_block(:description, "説明", columns: 10)
+  end
+  m << p.submit_button
+end %>

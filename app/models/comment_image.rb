@@ -4,8 +4,8 @@
 #
 #  id           :integer          not null, primary key
 #  comment_id   :integer          not null
-#  data         :binary(214748364 not null
-#  content_type :string(255)      not null
+#  data         :binary(214748364
+#  content_type :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
 #

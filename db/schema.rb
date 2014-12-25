@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219005113) do
+ActiveRecord::Schema.define(version: 20141225075049) do
 
   create_table "breaking_ball_user_links", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20141219005113) do
     t.integer  "post_id",    null: false
     t.integer  "user_id",    null: false
     t.text     "comment"
+    t.integer  "number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -146,9 +147,10 @@ ActiveRecord::Schema.define(version: 20141219005113) do
   end
 
   create_table "posts", force: true do |t|
-    t.integer  "user_id",     null: false
-    t.string   "title",       null: false
+    t.integer  "user_id",                    null: false
+    t.string   "title",                      null: false
     t.text     "description"
+    t.boolean  "publication", default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -268,6 +270,19 @@ ActiveRecord::Schema.define(version: 20141219005113) do
   end
 
   add_index "users", ["number"], name: "index_users_on_number", unique: true, using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "user_id",                     null: false
+    t.string   "title",       default: "",    null: false
+    t.text     "description"
+    t.integer  "number",      default: 0,     null: false
+    t.boolean  "possible",    default: true,  null: false
+    t.boolean  "result",      default: false, null: false
+    t.string   "period"
+    t.boolean  "gold",        default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   add_foreign_key "comment_images", "comments", name: "comment_images_comment_id_fk"
 

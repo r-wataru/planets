@@ -42,6 +42,8 @@ class User < ActiveRecord::Base
   has_many :user_plan_detail_links
   has_many :user_comment_links
   has_many :comments, through: :user_comment_links, source: :comment
+  has_many :posts
+  has_many :votes
   has_one :image, class_name: "UserImage", dependent: :destroy
 
   validates :display_name, presence: true

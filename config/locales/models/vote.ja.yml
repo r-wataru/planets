@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      vote:
+        title: タイトル
+        description: 説明

@@ -255,6 +255,7 @@ class HorizontalFormPresenter
       m << decorated_label(name, label_text, options)
       m.div(class: "col-sm-#{input_columns} radio-box") do
         m << text_area(name, html_options)
+        m << error_messages_for(name)
       end
     end
   end
