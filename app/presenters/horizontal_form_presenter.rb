@@ -148,9 +148,9 @@ class HorizontalFormPresenter
     helper_options[:class] += " #{options[:class]}" if options[:class].present?
     helper_options[:required] = false
     helper_options[:placeholder] = "助っ人名"
-
+    
     choices = objects.map { |o| [ o.send(:display_user_name), o.id ] }
-    choices = choices << [ "助っ人", 0 ]
+    choices = choices << [ "助っ人", 0 ] if options[:new_record]
 
     markup(:div) do |m|
       m.div(class: "table-responsive", style: "overflow: scroll") do
@@ -164,7 +164,7 @@ class HorizontalFormPresenter
                 m.td do
                   if i == 0
                     m << select(name, choices, main_options, html_options2)
-                    m << send("text_field", :helper_member, helper_options)
+                    m << send("text_field", :helper_member, helper_options) if options[:new_record]
                   else
                     m << select(name, num_values, main_options, html_options)
                   end

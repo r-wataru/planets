@@ -1,3 +1,13 @@
+<%
+@page_title_icon = 'user'
+@page_title_text = "#{@user.display_name}の詳細"
+@javascript = 'ChartDisplay'
+
+@breadcrumbs = [
+  [ 'home', 'トップ', :root ],
+  [ 'users', 'ユーザー一覧', :users ]]
+%>
+
 <div class="row">
   <!-- ユーザー情報とデータ -->
   <div class="col-md-12">

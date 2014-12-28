@@ -1,31 +1,41 @@
+<%
+@page_title_icon = 'pencil'
+@page_title_text = "#{@user.display_name}の能力編集"
+@javascript = 'UserAbility'
+
+@breadcrumbs = [
+  [ 'home', 'トップ', :root ],
+  [ 'users', 'ユーザー一覧', :users ]]
+%>
+
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong># <%= @user.number %></strong>
-          <%= @user.display_name %>(野手)
-        </div>
-        <div class="panel-body">
-          <%= render "users/d_check" %>
-          <%= render "users/d_radio" %>
-          <%= render "users/d_slider" %>
-          <%= render "users/d_selecter" %>
-        </div>
+      <div class="panel-heading">
+        <strong># <%= @user.number %></strong>
+        <%= @user.display_name %>(野手)
       </div>
+      <div class="panel-body">
+        <%= render "users/d_check" %>
+        <%= render "users/d_radio" %>
+        <%= render "users/d_slider" %>
+        <%= render "users/d_selecter" %>
+      </div>
+    </div>
   </div>
 
   <div class="col-md-6">
     <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong># <%= @user.number %></strong>
-          <%= @user.display_name %>(投手)
-        </div>
-        <div class="panel-body">
-          <%= render "users/p_radio" %>
-          <%= render "users/p_slider" %>
-          <%= render "users/p_selecter" %>
-          <%= render "users/p_add" %>
-        </div>
+      <div class="panel-heading">
+        <strong># <%= @user.number %></strong>
+        <%= @user.display_name %>(投手)
       </div>
+      <div class="panel-body">
+        <%= render "users/p_radio" %>
+        <%= render "users/p_slider" %>
+        <%= render "users/p_selecter" %>
+        <%= render "users/p_add" %>
+      </div>
+    </div>
   </div>
 </div>

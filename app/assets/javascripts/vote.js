@@ -1,5 +1,8 @@
-$(document).ready(function(){
-  $(".vote_count_button").click(function(){
+// 投票する
+function TakeVote(content) {
+  var button = content.find(".vote_count_button");
+
+  button.on("click", function() {
     var vote_id = $(this).data("int");
     var class_name = ".vote_count" + vote_id;
     var count_num = parseInt($(class_name).text());
@@ -8,13 +11,13 @@ $(document).ready(function(){
     $.ajax({
       type: "POST",
       url: "/votes/" + vote_id + "/update_count",
-      data: { vote: { number: clicked_num }},
-      success: function(json){
+      data: {vote: {number: clicked_num}},
+      success: function(json) {
         $(class_name).text(json.num);
       },
-      error: function(){
+      error: function() {
         alert("Has Error!!");
       }
     });
   });
-});
+}

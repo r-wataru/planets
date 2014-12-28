@@ -6,6 +6,7 @@ class PlanDetailsController < ApplicationController
 
   def new
     @plan = Plan.find_by(starts_on: params[:schedule_id])
+    @plan = Plan.create(starts_on: params[:schedule_id]) if @plan.nil?
     @plan_detail = @plan.plan_details.new
   end
 

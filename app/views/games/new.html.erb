@@ -1,14 +1,22 @@
-<%= render "games/header" %>
 <%
-  new_form_options = {
-    url: :games,
-    method: :post,
-    html: { class: "form-horizontal", role: 'form' }
-  }
+@page_title_icon = 'pencil'
+@page_title_text = "試合結果作成"
+@breadcrumbs = [
+  [ 'home', 'トップ', :root ],
+  [ 'line-chart', '成績表', :results ]]
+@javascript = 'DataPickerValue'
+
+new_form_options = {
+  url: :games,
+  method: :post,
+  html: { class: "form-horizontal", role: 'form' }
+    }
 %>
 
+<%= render "games/header" %>
+
 <div class="panel panel-default">
-  <div class="panel-heading">試合結果編集</div>
+  <div class="panel-heading">試合結果作成</div>
   <div class="panel-body">
     <%= form_for @game, new_form_options do |f| %>
       <%= render "games/form", f: f, game: @game %>

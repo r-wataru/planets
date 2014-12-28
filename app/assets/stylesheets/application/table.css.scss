@@ -39,6 +39,15 @@ table {
       word-break: break-all;
       white-space: nowrap;
     }
+    /*    td.actions {
+      a, span.link {
+      border-right: 1px solid $gray-light;
+      padding-right: 0.4em;
+      }
+      a:last-child, span.link:last-child {
+      border-right: none;
+      }
+    }*/
   }
   tr.odd {
     td { background: #EEEEEE }

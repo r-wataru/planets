@@ -5,6 +5,13 @@
   a_array = @plan_detail.user_plan_detail_links.where(status: 1).map{|u| [ u.user.display_name, u.user.id ]}
   b_array = @plan_detail.user_plan_detail_links.where(status: 2).map{|u| [ u.user.display_name, u.user.id ]}
   c_array = @plan_detail.user_plan_detail_links.where(status: 3).map{|u| [ u.user.display_name, u.user.id ]}
+  
+  @javascript = 'AttendanceChange'
+  @page_title_icon = 'send'
+  @page_title_text = "出席表"
+  @breadcrumbs = [
+      [ 'home', 'トップ', :root ],
+      [ 'table', 'スケジュール', schedule_path(id: params[:schedule_id])]]
 %>
 
 <div class="panel panel-default">

@@ -1,7 +1,7 @@
 <%= markup do |m|
   p = HorizontalFormPresenter.new(f, self)
   p.with_options(required: true) do |q|
-    m << q.table_form_block(@b_keys, @b_labels, @num, @names, columns: 12, data: "batter")
+    m << q.table_form_block(@b_keys, @b_labels, @num, @names, columns: 12, data: "batter", new_record: result.new_record?)
     end
   if result.new_record?
     m << p.submit_button(columns: 12)

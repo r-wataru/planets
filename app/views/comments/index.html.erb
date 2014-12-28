@@ -1,9 +1,17 @@
 <%
-  new_form_options = {
-    url: [ @post, :comments ],
-    html: { class: "form-horizontal", role: 'form' },
-    method: :post
-  }
+@page_title_icon = 'book'
+@page_title_text = "掲示板"
+@javascript = 'CommentAction'
+
+@breadcrumbs = [
+  [ 'home', 'トップ', :root ],
+  [ 'paper-plane', '掲示板', :posts ]]
+
+new_form_options = {
+  url: [ @post, :comments ],
+  html: { class: "form-horizontal", role: 'form' },
+  method: :post
+}
 %>
 
 <div class="row">

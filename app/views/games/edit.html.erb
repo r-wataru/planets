@@ -1,9 +1,11 @@
-<%= render "games/header" %>
 <%
   edit_form_options = {
     html: { class: "form-horizontal", role: 'form' }
   }
+  @javascript = 'PitcherBatterHelper'
 %>
+
+<%= render "games/header" %>
 
 <div class="panel panel-default">
   <div class="panel-heading">試合結果入力</div>
@@ -17,7 +19,6 @@
 <!-- 投手結果 -->
 <%= render "pitchers/pitchers" %>
 
-<div class="result-p-form-js"></div>
 <div class="panel panel-default">
   <div class="panel-heading">投手成績入力</div>
   <div class="panel-body">
@@ -30,7 +31,6 @@
 <!-- 野手結果 -->
 <%= render "results/results" %>
 
-<div class="result-b-form-js"></div>
 <div class="panel panel-default">
   <div class="panel-heading">野手成績</div>
   <div class="panel-body">

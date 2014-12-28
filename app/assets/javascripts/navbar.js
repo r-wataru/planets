@@ -1,3 +1,4 @@
+// パンクズリスト
 var ready;
 ready = function() {
   $('#main-menu-toggle i.fa-caret-right').css('visibility', 'hidden');

@@ -1,32 +1,28 @@
-$(document).ready(function() {
-  if ($(".result-p-form-js").length > 0) {
-    var p_select = $(".name_pitcher_selecter");
-    var p_field = $(".helper_pitcher_form_field");
-    var p_selected_options = $(".name_pitcher_selecter option:selected").val();
-  }
-
-  if ($(".result-b-form-js").length > 0) {
-    var b_select = $(".name_batter_selecter");
-    var b_field = $(".helper_batter_form_field");
-    var b_selected_options = $(".name_batter_selecter option:selected").val();
-  }
+// 助っ人の入力Js
+function PitcherBatterHelper(content) {
+  var p_select = content.find(".name_pitcher_selecter");
+  var p_field = content.find(".helper_pitcher_form_field");
+  var p_selected_options = content.find(".name_pitcher_selecter option:selected").val();
+  var b_select = content.find(".name_batter_selecter");
+  var b_field = content.find(".helper_batter_form_field");
+  var b_selected_options = content.find(".name_batter_selecter option:selected").val();
 
   window.onload = function() {
-    p_display_text_field(p_selected_options, "show");
-    b_display_text_field(b_selected_options, "show");
+    PitcherShowField(p_selected_options, "show");
+    BatterShowField(b_selected_options, "show");
   };
 
-  $(p_select).change(function() {
+  p_select.on("change", function() {
     var p_changed_selected = $(this).val();
-    p_display_text_field(p_changed_selected, "change");
+    PitcherShowField(p_changed_selected, "change");
   });
 
-  $(b_select).change(function() {
+  b_select.on("change", function() {
     var b_changed_selected = $(this).val();
-    b_display_text_field(b_changed_selected, "change");
+    BatterShowField(b_changed_selected, "change");
   });
 
-  var p_display_text_field = function(selected, event) {
+  function PitcherShowField(selected, event) {
     if (selected === "0") {
       if (event === "show") {
         $(p_field).prop('required', true).show();
@@ -40,9 +36,9 @@ $(document).ready(function() {
         $(p_field).removeAttr('required').slideUp(500);
       }
     }
-  };
+  }
 
-  var b_display_text_field = function(selected, event) {
+  function BatterShowField(selected, event) {
     if (selected === "0") {
       if (event === "show") {
         $(b_field).prop('required', true).show();
@@ -56,5 +52,5 @@ $(document).ready(function() {
         $(b_field).removeAttr('required').slideUp(500);
       }
     }
-  };
-});
+  }
+}

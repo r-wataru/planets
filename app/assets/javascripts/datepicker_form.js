@@ -1,5 +1,6 @@
-$(document).on("page:load ready", function() {
+// 成績作成時のDatapicker
+function DataPickerValue() {
   $("input.datepicker").datepicker({
     dateFormat: 'yy/mm/dd'
   });
-});
+}
