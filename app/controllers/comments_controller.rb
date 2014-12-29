@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def index
     @post = Post.find(params[:post_id])
-    @comments = @post.comments
+    @comments = @post.comments.page(params[:page]).per(10)
     @comment = Comment.new
     @comment_form = CommentForm.new(@comment)
   end

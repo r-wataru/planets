@@ -50,6 +50,7 @@ new_form_options = {
       </div>
     </div>
 
+    <div class="paginate"><%= paginate @comments %></div>
     <% @comments.each do |comment| %>
       <div class="panel panel-default">
         <div class="panel-body">
@@ -127,6 +128,7 @@ new_form_options = {
         </div>
       </div>
     <% end %>
+    <div class="paginate"><%= paginate @comments %></div>
 
     <div class="panel panel-default">
       <div class="panel-heading">コメントを書く</div>
