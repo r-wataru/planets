@@ -64,9 +64,14 @@
                 <% end %>
               </div>
             <% end %>
-            <canvas id="picherCanvas" width="250" height="250"></canvas>
-            <!-- 投手能力 -->
             <% hash = {"速球"=>"speed", "コントロール"=>"control", "スタミナ"=>"stamina"} %>
+            <% has_p_keys = hash.map{|k,v| @user.ability.has_key?(v)}.uniq %>
+            <% if has_p_keys.count == 1 && has_p_keys.first == true %>
+              <canvas id="picherCanvas" width="250" height="250"></canvas>
+            <% else %>
+              <p>能力を全て入力すればグラフが表示されます。</p>
+            <% end %>
+            <!-- 投手能力 -->
             <% hash.each do |h| %>
               <% next if !@user.ability.has_key?(h.last.to_sym) %>
               <span class="jquery-title"><%= h.first %></span>
@@ -133,8 +138,14 @@
                 <% end %>
               </div>
             <% end %>
-            <canvas id="batterCanvas" width="250" height="250"></canvas>
             <% hash = {"弾丸"=>"shot", "ミート"=>"meet", "パワー"=>"power", "走力"=>"run", "肩力"=>"shoulder", "守力"=>"defend"} %>
+            <% has_b_keys = hash.map{|k,v| @user.ability.has_key?(v)}.uniq %>
+            <% if has_b_keys.count == 1 && has_b_keys.first == true %>
+              <canvas id="batterCanvas" width="250" height="250"></canvas>
+            <% else %>
+              <p>能力を全て入力すればグラフが表示されます。</p>
+            <% end %>
+
             <% hash.each do |h| %>
               <% next if !@user.ability.has_key?(h.last.to_sym) %>
               <span class="jquery-title"><%= h.first %></span>
