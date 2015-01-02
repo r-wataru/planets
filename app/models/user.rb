@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
 
   validates :display_name, presence: true
   validates :number, presence: true, uniqueness: true, numericality: true, inclusion: { in: (1..99) }
-  validates :login_name, uniqueness: { allow_blank: true }, format: { with: /\A[A-Za-z0-9]+\z/, allow_blank: true }
+  validates :login_name, uniqueness: { if: -> { helper == false }, allow_blank: true }, format: { with: /\A[A-Za-z0-9]+\z/, allow_blank: true }
 
   scope :alive, ->{ where(deleted_at: nil) }
   scope :member, -> { where(helper: false) }
