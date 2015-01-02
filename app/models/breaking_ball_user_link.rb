@@ -13,4 +13,16 @@
 class BreakingBallUserLink < ActiveRecord::Base
   belongs_to :user
   belongs_to :breaking_ball
+
+  validate :check_ball_id
+
+  private
+  def check_ball_id
+    if new_record?
+      if BreakingBallUserLink.exists?(
+          user_id: self.user_id, breaking_ball_id: self.breaking_ball_id)
+        errors.add(:user, :already)
+      end
+    end
+  end
 end

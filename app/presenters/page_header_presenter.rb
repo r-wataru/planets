@@ -1,6 +1,6 @@
 class PageHeaderPresenter < Presenter
   def render
-    markup(:div, class: 'page-header', style: "border-bottom: none; padding-bottom: 0px;") do |m|
+    markup(:div, class: 'page-header', style: "border-bottom: none;") do |m|
       m.div(class: 'breadcrumb breadcrumb-page', style: 'display: block;') do
         breadcrumbs.each do |bc|
           if bc[2].present?

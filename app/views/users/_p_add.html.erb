@@ -1,5 +1,7 @@
 <%
+  already = current_user.breaking_balls.map{|b| [b.name, b.id]}
   balls = @breaking_balls.map{|a| [ a.name, a.id ]}
+  balls = balls - already
   balls = balls << [ "新規作成", 0 ]
   levels = (0..10)
 %>
@@ -11,7 +13,7 @@
     </div>
     <div class="col-md-8">
       <%= select_tag :breaking_ball,
-        options_for_select(balls, ball.breaking_ball_id), class: "form-control breaking-ball-#{ball.id} breaking-select" %>
+        options_for_select(already, ball.breaking_ball_id), class: "form-control breaking-ball-#{ball.id} breaking-select", disabled: true %>
       <%= select_tag :breaking_ball_level,
         options_for_select(levels, ball.level), class: "form-control breaking-level-#{ball.id} breaking-select" %>
       <button type="button" class="btn btn-default navbar-btn add-breaking-button" data-int="<%= ball.id %>">更新</button>

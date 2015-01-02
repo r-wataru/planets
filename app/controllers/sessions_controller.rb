@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
       redirect_to :root
     else
       @form = LoginForm.new
-      render action: 'new'
+      render action: 'new', layout: "session_form"
     end
   end
 
