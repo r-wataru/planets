@@ -39,7 +39,7 @@ body {
 
 #page-content-wrapper {
   width: 100%;
-  padding: 0px 15px 15px 15px;
+  padding: 15px;
 }
 
 #wrapper.toggled {
@@ -63,7 +63,7 @@ body {
   }
 
   #page-content-wrapper {
-    padding: 0 20px 20px 20px;
+    padding: 20px;
   }
 
   #wrapper.toggled {
@@ -75,5 +75,12 @@ body {
       position: relative;
       margin-right: 0;
     }
+  }
+}
+
+.col-sm-12 {
+  select.date-select {
+    display: inline-block;
+    max-width: 75px;
   }
 }

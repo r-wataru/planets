@@ -1,4 +1,6 @@
 class PasswordsController < ApplicationController
+  layout "session_form"
+
   def new
     if params[:token].present?
       if @user_token = UserToken.active.find_by(value: params[:token])
@@ -21,7 +23,9 @@ class PasswordsController < ApplicationController
       session[:current_user_id] = @user_token.user.id
       redirect_to @user_token.user
     else
-      render action: :new
+      unless current_user
+        render action: :new
+      end
     end
   end
 

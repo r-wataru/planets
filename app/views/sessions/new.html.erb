@@ -1,21 +1,21 @@
 <div class="panel panel-default">
   <div class="panel-heading">Wellcome to Planets Web Site!</div>
   <div class="panel-body">
-    <%= form_for @form, url: :session, html: { class: "form-horizontal", role: 'form' } do |f| %>
+    <%= form_for @form, url: :session, html: { class: "form-signin", role: 'form' } do |f| %>
       <%= f.email_field :email, class: 'form-control', placeholder: 'メールアドレス', required: true, autofocus: true %>
       <%= f.password_field :password, class: 'form-control', placeholder: 'パスワード', required: true %>
       <button class="btn btn-primary btn-block" type="submit">
         ログイン
       </button>
     <% end %>
-    <button class="btn btn-primary btn-block" type="submit"
+    <button class="btn btn-primary btn-block session-form-button" type="submit"
             onClick="window.open('/auth/facebook','fb','width=700,height=300');return false;">
       <%= fa_icon('facebook-square', text: "Facebookでログイン") %>
     </button>
-    <button class="btn btn-success btn-block" type="submit">
+    <button class="btn btn-success btn-block session-form-button" type="submit">
       <%= link_to fa_icon('plug', text: "新規作成"), :new_new_email %>
     </button>
-    <p><%= link_to "パスワード忘れた？", :forgot_password_emails %></p>
+    <p><%= link_to "パスワード忘れた？", :forgot_password_emails, class: "session-form-button" %></p>
   </div>
 </div>
 

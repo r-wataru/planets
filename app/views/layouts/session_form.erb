@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Planets</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'session_form', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <link rel="shortcut icon" href="/sapphire.ico" type="image/vnd.microsoft.icon" />
@@ -17,7 +17,6 @@
       </div>
       <%= content_tag :div, id: "page-content-wrapper",
             data: (@javascript.present? ? { javascript: @javascript } : nil) do %>
-        <%= PageHeaderPresenter.new(self).render %>
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
             <%= flash_messages %>

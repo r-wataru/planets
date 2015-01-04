@@ -1,16 +1,18 @@
 <%
-  @page_title_icon = 'pencil'
-  @page_title_text = "#{current_user.display_name}のメールアドレス追加"
+  if current_user
+    @page_title_icon = 'pencil'
+    @page_title_text = "#{current_user.display_name}のメールアドレス追加"
 
-  @breadcrumbs = [
-    [ 'home', 'トップ', :root ],
-    [ 'users', 'ユーザー一覧', :users ],
-    [ 'user', "#{current_user.display_name}の詳細", current_user ]]
+    @breadcrumbs = [
+      [ 'home', 'トップ', :root ],
+      [ 'users', 'ユーザー一覧', :users ],
+      [ 'user', "#{current_user.display_name}の詳細", current_user ]]
+  end
 
   form_options = { url: :new_email,
         html: { class: "form-horizontal", role: 'form' }}
 
-  new_form_options = { url: :new_email, html: { class: "", role: 'form' }}
+  new_form_options = { url: :new_email, html: { class: "form-signin", role: 'form' }}
 %>
 
 
@@ -19,7 +21,7 @@
     <%= render 'add', form_options: form_options %>
   </div>
 <% else %>
-  <div class="panel panel-default session-form">
+  <div class="panel panel-default">
     <%= render 'new', new_form_options: new_form_options %>
   </div>
 <% end %>

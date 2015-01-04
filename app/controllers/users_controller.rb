@@ -68,7 +68,7 @@ class UsersController < ApplicationController
       if NewEmail.not_userd.exists?(value: params[:token]) || session[:omniauth_provider].present?
         @users = User.where(checked: false)
         @user = User.new
-        render :new, layout: "before_authentication"
+        render :new, layout: "session_form"
       else
         raise
        end
@@ -98,6 +98,7 @@ class UsersController < ApplicationController
         else
           raise
         end
+        render "step2", layout: "session_form"
       end
     else
       raise
@@ -115,9 +116,9 @@ class UsersController < ApplicationController
         @user = User.new user_params
       end
       if @user.valid?
-        render action: :step3
+        render "step3", layout: "session_form"
       else
-        render action: :step2
+        render "step2", layout: "session_form"
       end
       if NewEmail.not_userd.exists?(value: @user.token)
         @from_email = true

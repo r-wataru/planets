@@ -5,6 +5,6 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-%w(before_authentication).each do |name|
+%w(before_authentication session_form).each do |name|
   Rails.application.config.assets.precompile += [ "#{name}.css", "#{name}.js" ]
 end

@@ -1,7 +1,7 @@
-<div class="panel panel-default session-form">
+<div class="panel panel-default">
   <div class="panel-heading">Wellcome to Planets Web Site!</div>
   <div class="panel-body">
-    <%= form_for @user, url: :step2_users, html: { class: "form-horizontal", role: 'form' } do |f| %>
+    <%= form_for @user, url: :step2_users, html: { class: "form-signin", role: 'form' } do |f| %>
       <%= markup do |m|
         p = HorizontalFormPresenter.new(f, self)
         p.with_options(required: true) do |q|

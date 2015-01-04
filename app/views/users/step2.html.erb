@@ -1,7 +1,7 @@
-<div class="panel panel-default session-form">
+<div class="panel panel-default">
   <div class="panel-heading">Wellcome to Planets Web Site!</div>
   <div class="panel-body">
-    <%= form_for @user, url: :step3_users, html: { class: "", role: 'form' }, method: :post do |f| %>
+    <%= form_for @user, url: :step3_users, html: { class: "form-signin", role: 'form' }, method: :post do |f| %>
       <% unless @new_user %>
         <p>あなたは<%= @user.display_name %>で間違いないですね？</p>
       <% end %>

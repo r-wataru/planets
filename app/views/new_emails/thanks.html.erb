@@ -1,11 +1,13 @@
 <%
-  @page_title_icon = 'pencil'
-  @page_title_text = "#{current_user.display_name}へメール送信"
+  if current_user
+    @page_title_icon = 'pencil'
+    @page_title_text = "#{current_user.display_name}へメール送信"
 
-  @breadcrumbs = [
-    [ 'home', 'トップ', :root ],
-    [ 'users', 'ユーザー一覧', :users ],
-    [ 'user', "#{current_user.display_name}の詳細", current_user ]]
+    @breadcrumbs = [
+      [ 'home', 'トップ', :root ],
+      [ 'users', 'ユーザー一覧', :users ],
+      [ 'user', "#{current_user.display_name}の詳細", current_user ]]
+  end
 %>
 
 <% if current_user %>
@@ -16,7 +18,7 @@
     </div>
   </div>
 <% else %>
-  <div class="panel panel-default session-form">
+  <div class="panel panel-default">
     <div class="panel-heading">Wellcome to Planets Web Site!</div>
     <div class="panel-body">
       <p>メールを送りました</p>

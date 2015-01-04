@@ -1,6 +1,9 @@
 class NewEmailsController < ApplicationController
   def new
     @email = NewEmail.new
+    unless current_user
+      render "new", layout: "session_form"
+    end
   end
 
   def create
@@ -18,6 +21,9 @@ class NewEmailsController < ApplicationController
   end
 
   def thanks
+    unless current_user
+      render "thanks", layout: "session_form"
+    end
   end
 
   private

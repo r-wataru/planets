@@ -7,6 +7,7 @@ class EmailsController < ApplicationController
 
   def forgot_password
     @form = ForgotForm.new
+    render "forgot_password", layout: "session_form"
   end
 
   def forgot_send_mail
@@ -14,11 +15,12 @@ class EmailsController < ApplicationController
     if @form.send_token
       redirect_to :thanks_emails
     else
-      render action: :forgot_password
+      render "forgot_password", layout: "session_form"
     end
   end
 
   def thanks
+    render "thanks", layout: "session_form"
   end
 
   def main
