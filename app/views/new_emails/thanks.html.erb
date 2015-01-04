@@ -1,6 +1,16 @@
+<%
+  @page_title_icon = 'pencil'
+  @page_title_text = "#{current_user.display_name}へメール送信"
+
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ],
+    [ 'users', 'ユーザー一覧', :users ],
+    [ 'user', "#{current_user.display_name}の詳細", current_user ]]
+%>
+
 <% if current_user %>
   <div class="panel panel-default">
-    <div class="panel-heading">Wellcome to Planets Web Site!</div>
+    <div class="panel-heading">メール送信完了</div>
     <div class="panel-body">
       <p>メールを送りました</p>
     </div>

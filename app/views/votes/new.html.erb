@@ -1,5 +1,14 @@
+<%
+  @page_title_icon = 'pencil'
+  @page_title_text = "流行語の作成"
+
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ],
+    [ 'hand-o-right', '流行語', :votes]]
+%>
+
 <div class="panel panel-default">
-  <div class="panel-heading">現在の流行語一覧</div>
+  <div class="panel-heading">流行語作成</div>
   <div class="panel-body">
     <%= form_for @vote, method: :post do |f| %>
       <%= render "form", f: f %>

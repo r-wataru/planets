@@ -1,0 +1,27 @@
+<div class="panel-body">
+  <div class="row">
+    <div id="planDetailUserLinkId" data-int="<%= @plan_detail.id %>" data-schedule-int="<%= @plan.id %>"></div>
+    <div class="col-sm-3">
+      <%= select_tag :user_detail_link,
+        options_for_select(select_array, ""), class: "form-control selecting-condition", size: "6" %>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary selected_user_link" data-int="1" style="margin: 10px 0;">参加</button>
+      <button type="button" class="btn btn-danger delete_user_link" data-int="1" style="margin: 10px 0;">削除</button>
+      <%= select_tag :user_detail_link_selected,
+        options_for_select(a_array, ""), class: "form-control selecting-condition", size: "6" %>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary selected_user_link" data-int="2"  style="margin: 10px 0;">欠席</button>
+      <button type="button" class="btn btn-danger delete_user_link" data-int="2" style="margin: 10px 0;">削除</button>
+      <%= select_tag :user_detail_link_absence,
+        options_for_select(b_array, ""), class: "form-control selecting-condition", size: "6" %>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-primary selected_user_link" data-int="3" style="margin: 10px 0;">保留</button>
+      <button type="button" class="btn btn-danger delete_user_link" data-int="3" style="margin: 10px 0;">削除</button>
+      <%= select_tag :user_detail_link_hold,
+        options_for_select(c_array, ""), class: "form-control selecting-condition", size: "6" %>
+    </div>
+  </div>
+</div>

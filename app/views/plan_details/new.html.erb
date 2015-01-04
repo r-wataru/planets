@@ -1,19 +1,24 @@
+<%
+  @javascript = 'AttendanceChange'
+  @page_title_icon = 'send'
+  @page_title_text = "#{@plan.starts_on.strftime("%Y年%m月%d日")}の予定作成"
+
+  @breadcrumbs = [
+      [ 'home', 'トップ', :root ],
+      [ 'table', 'スケジュール', schedule_path(id: params[:schedule_id])],
+      [ 'send', "#{@plan.starts_on.strftime('%Y年%m月%d日')}のスケジュール", schedule_path(@plan.starts_on.strftime('%Y-%m-%d'))]]
+
+  form_options = { url: schedule_plan_details_path(schedule_id: @plan.id), method: :post }
+  required = false
+%>
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= @plan.starts_on.strftime("%Y年%m月%d日") %>のスケジュール
+    <%= @plan.starts_on.strftime("%Y年%m月%d日") %>の予定作成
   </div>
   <div class="panel-body">
-    <%= form_for @plan_detail, url: schedule_plan_details_path(schedule_id: @plan.id), method: :post do |f| %>
-      <%= markup do |m|
-        p = HorizontalFormPresenter.new(f, self)
-        p.with_options(required: false) do |q|
-          m << q.text_field_block(:name, 'タイトル', columns: 10)
-          m << q.text_area_block(:description, "詳細", columns: 10)
-          m << q.time_select_block(:starts_on, "開始時刻", columns: 10, style: "margin: 10px 0;")
-          m << q.time_select_block(:ends_on, "終了時刻", columns: 10, style: "margin: 10px 0;")
-        end
-        m << p.submit_button
-      end %>
+    <%= form_for @plan_detail, form_options do |f| %>
+      <%= render 'form', f: f, required: required %>
     <% end %>
   </div>
 </div>

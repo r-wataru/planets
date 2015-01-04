@@ -5,6 +5,19 @@
   a_array = @plan_detail.user_plan_detail_links.where(status: 1).map{|u| [ u.user.display_name, u.user.id ]}
   b_array = @plan_detail.user_plan_detail_links.where(status: 2).map{|u| [ u.user.display_name, u.user.id ]}
   c_array = @plan_detail.user_plan_detail_links.where(status: 3).map{|u| [ u.user.display_name, u.user.id ]}
+
+  @javascript = 'AttendanceChange'
+  @page_title_icon = 'send'
+  @page_title_text = "#{@plan.starts_on.strftime("%Y年%m月%d日")}の予定編集"
+
+  @breadcrumbs = [
+      [ 'home', 'トップ', :root ],
+      [ 'table', 'スケジュール', schedule_path(id: params[:schedule_id])],
+      [ 'send', "#{@plan.starts_on.strftime('%Y年%m月%d日')}のスケジュール", schedule_path(@plan.starts_on.strftime('%Y-%m-%d'))],
+      [ 'send', "#{@plan.starts_on.strftime('%Y年%m月%d日')}のスケジュールの予定詳細", schedule_plan_detail_path(schedule_id: @plan.starts_on, id: @plan_detail.id)]]
+
+  form_options = { url: schedule_plan_detail_path(id: @plan_detail.id, schedule_id: @plan.id) }
+  required = true
 %>
 
 <div class="panel panel-default">
@@ -12,17 +25,8 @@
     <%= @plan.starts_on.strftime("%Y年%m月%d日") %>のスケジュール
   </div>
   <div class="panel-body">
-    <%= form_for @plan_detail, url: schedule_plan_detail_path(id: @plan_detail.id, schedule_id: @plan.id) do |f| %>
-      <%= markup do |m|
-        p = HorizontalFormPresenter.new(f, self)
-        p.with_options(required: true) do |q|
-          m << q.text_field_block(:name, 'タイトル', columns: 10)
-          m << q.text_area_block(:description, "詳細", columns: 10)
-          m << q.time_select_block(:starts_on, "開始時刻", columns: 10, style: "margin: 10px 0;")
-          m << q.time_select_block(:ends_on, "終了時刻", columns: 10, style: "margin: 10px 0;")
-        end
-        m << p.submit_button
-      end %>
+    <%= form_for @plan_detail, form_options do |f| %>
+      <%= render 'form', f: f, required: required %>
     <% end %>
   </div>
 </div>
@@ -31,31 +35,6 @@
   <div class="panel-heading">
     メンバー
   </div>
-  <div class="panel-body">
-    <div class="row">
-      <div id="planDetailUserLinkId" data-int="<%= @plan_detail.id %>" data-schedule-int="<%= @plan.id %>"></div>
-      <div class="col-sm-3">
-        <%= select_tag :user_detail_link,
-          options_for_select(select_array, ""), class: "form-control selecting-condition", size: "6" %>
-      </div>
-      <div class="col-sm-3">
-        <button type="button" class="btn btn-primary selected_user_link" data-int="1" style="margin: 10px 0;">参加</button>
-        <button type="button" class="btn btn-danger delete_user_link" data-int="1" style="margin: 10px 0;">削除</button>
-        <%= select_tag :user_detail_link_selected,
-          options_for_select(a_array, ""), class: "form-control selecting-condition", size: "6" %>
-      </div>
-      <div class="col-sm-3">
-        <button type="button" class="btn btn-primary selected_user_link" data-int="2"  style="margin: 10px 0;">欠席</button>
-        <button type="button" class="btn btn-danger delete_user_link" data-int="2" style="margin: 10px 0;">削除</button>
-        <%= select_tag :user_detail_link_absence,
-          options_for_select(b_array, ""), class: "form-control selecting-condition", size: "6" %>
-      </div>
-      <div class="col-sm-3">
-        <button type="button" class="btn btn-primary selected_user_link" data-int="3" style="margin: 10px 0;">保留</button>
-        <button type="button" class="btn btn-danger delete_user_link" data-int="3" style="margin: 10px 0;">削除</button>
-        <%= select_tag :user_detail_link_hold,
-          options_for_select(c_array, ""), class: "form-control selecting-condition", size: "6" %>
-      </div>
-    </div>
-  </div>
+  <%= render 'member',
+    a_array: a_array, b_array: b_array, c_array: c_array, select_array: select_array %>
 </div>

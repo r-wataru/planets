@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= content_tag :span, @post.publication? ? "OPEN" : "CLOSE",
+      class: "label label-#{ @post.publication? ? 'success' : 'danger'}" %>
+    <%= @post.title %>
+  </div>
+  <div class="panel-body">
+    <div>
+      <% if @post.user.present? %>
+        <% if @post.user.image && @post.user.image.thumbnail.present? %>
+          <%= image_tag thumbnail_user_path(@post.user, format: @post.user.image.extension), size: "40x40" %>
+        <% else %>
+          <%= image_tag "user.png", alt: "logo", size: "40x40" %>
+        <% end %>
+      <% else %>
+        <%= image_tag "user.png", alt: "logo", size: "40x40" %>
+      <% end %>
+      <b style="margin-left: 10px;"><%= @post.user.present? ? @post.user.display_name : "名無しさん" %></b>
+      <hr>
+    </div>
+    <%= simple_format(@post.description) %>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <%= content_tag :p, style: "margin: 0; text-align: right;" do %>
+          <%= link_to fa_icon('pencil'), [ :edit, @post ], style: "margin-right: 10px;" %>
+          <%= link_to fa_icon('trash'), @post, data: { confirm: "Are Your Sure?" }, method: :delete %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

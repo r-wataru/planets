@@ -1,0 +1,13 @@
+<div class="panel-heading"><%= current_user.display_name %>のメールアドレス追加</div>
+<div class="panel-body">
+  <%= form_for @email, form_options do |f| %>
+    <%= markup do |m|
+      p = HorizontalFormPresenter.new(f, self)
+      p.with_options(required: true) do |q|
+        m << q.email_field_block(:address, "メールアドレス", columns: 10)
+        m << q.hidden_field_block(:user_id, "", value: current_user.id)
+        m << p.submit_button(label_text: "決定")
+      end
+    end %>
+  <% end %>
+</div>

@@ -1,0 +1,75 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div>
+      <% if comment.user.present? %>
+        <% if comment.user.image && comment.user.image.thumbnail.present? %>
+          <%= image_tag thumbnail_user_path(comment.user, format: comment.user.image.extension), size: "40x40" %>
+        <% else %>
+          <%= image_tag "user.png", alt: "logo", size: "40x40" %>
+        <% end %>
+      <% else %>
+        <%= image_tag "user.png", alt: "logo", size: "40x40" %>
+      <% end %>
+      <b style="margin-left: 10px;"><%= comment.user.present? ? comment.user.display_name : "名無しさん" %></b>
+      <hr>
+    </div>
+    <%= image_tag comment_image_path(comment.image, format: comment.image.extension),
+      style: "max-width: 100%;" if comment.image.present? && comment.image.data.present? %>
+    <%= simple_format(comment.comment) %>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-md-6">
+        <% if current_user %>
+          <% if current_user.user_comment_links.exists?(comment: comment) %>
+            <span class="goodAddOrDeleteButton" data-int="<%= comment.id %>" data-user-int="<%= current_user.id %>">いいねを取り消す</span>
+          <% else %>
+            <span class="goodAddOrDeleteButton" data-int="<%= comment.id %>" data-user-int="<%= current_user.id %>">いいね</span>
+          <% end %>
+        <% end %>
+        <%= fa_icon("thumbs-o-up") %>
+        <span id="goodCount<%= comment.id %>" class="goodCountButton" data-int="<%= comment.id %>" data-toggle="modal" data-target=".bs-example-modal-sm-<%= comment.id %>"><%= UserCommentLink.where(comment: comment).count %></span>
+
+        <div class="modal fade bs-example-modal-sm-<%= comment.id %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">いいねリスト</h4>
+              </div>
+              <div class="modal-body">
+                <div class="mainImage<%= comment.id %>">
+
+                </div>
+                <% if UserCommentLink.exists?(comment: comment) %>
+                  <% UserCommentLink.where(comment: comment).each do |like| %>
+                    <% if like.user.present? %>
+                      <% if like.user.image && like.user.image.thumbnail.present? %>
+                        <%= image_tag thumbnail_user_path(like.user, format: like.user.image.extension), size: "40x40" %>
+                      <% else %>
+                        <%= image_tag "user.png", alt: "logo", size: "40x40" %>
+                      <% end %>
+                    <% else %>
+                      <%= image_tag "user.png", alt: "logo", size: "40x40" %>
+                    <% end %>
+                    <b style="margin-left: 10px;"><%= like.user.display_name %></b>
+                    <hr>
+                  <% end %>
+                <% else %>
+                  <p>まだ誰もいません。</p>
+                <% end %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <%= content_tag :p, style: "margin: 0; text-align: right;" do %>
+          <%= link_to fa_icon('trash'), [ @post, comment ], data: { confirm: "Are You Sure?" }, method: :delete %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

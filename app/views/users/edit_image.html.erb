@@ -3,6 +3,14 @@
     url: [:update_image, @user],
     html: { class: "form-horizontal", role: 'form' }
   }
+
+  @page_title_icon = 'pencil'
+  @page_title_text = "#{current_user.display_name}の編集"
+
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ],
+    [ 'users', 'ユーザー一覧', :users ],
+    [ 'user', "#{current_user.display_name}の詳細", current_user ]]
 %>
 
 <div class="row">
@@ -10,7 +18,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong># <%= @user.number %></strong>
-        <%= @user.display_name %>(野手)
+        <%= current_user.display_name %>の編集
       </div>
       <div class="panel-body">
         <div id="generic-form">

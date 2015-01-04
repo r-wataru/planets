@@ -54,10 +54,9 @@ function CommentAction(content) {
     var reader = new FileReader();
     if (file.size < 5242880) {
       reader.onload = function() {
-        alert("BB")
         var img_src = $('<img>').attr('src', reader.result).attr('style', 'max-width: 100%;');
         $('span.confirmImage').html(img_src).hide();
-        $('span.confirmImage').slideDown(2000);
+        $('span.confirmImage').slideDown(1000);
       };
       reader.readAsDataURL(file);
     } else {

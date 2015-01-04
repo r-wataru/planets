@@ -1,16 +1,24 @@
+<%
+  @page_title_icon = 'send'
+  @page_title_text = "出席表"
+
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ]]
+%>
+
 <div class="panel panel-default">
   <div class="panel-heading">これからの予定</div>
   <div class="panel-body">
-    <ul>
+    <ul class="list-none">
       <% @still.each do |still| %>
-        <li><%= still.starts_on %></li>
-        <ul>
-          <% still.plan_details.each do |plan| %>
-            <%= link_to schedule_plan_detail_path(schedule_id: still.starts_on, id: plan ) do %>
-              <li><%= plan.name %>(
+        <li><%= fa_icon('dot-circle-o', text: still.starts_on) %></li>
+        <div class="list-group">
+          <% still.plan_details.each_with_index do |plan,i| %>
+            <%= link_to schedule_plan_detail_path(schedule_id: still.starts_on, id: plan ),
+              class: i.odd? ? "list-group-item" : "list-group-item list-group-item-warning" do %>
+              <%= plan.name %>(
                 <%= plan.starts_on.strftime("%H:%M") %>~
                 <%= plan.ends_on.strftime("%H:%M") %>)
-              </li>
             <% end %>
             <ul>
               <% plan.users.each do |user| %>
@@ -18,7 +26,7 @@
               <% end %>
             </ul>
           <% end %>
-        </ul>
+        </div>
       <% end %>
     </ul>
   </div>

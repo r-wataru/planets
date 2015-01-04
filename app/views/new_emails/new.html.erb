@@ -1,33 +1,25 @@
+<%
+  @page_title_icon = 'pencil'
+  @page_title_text = "#{current_user.display_name}のメールアドレス追加"
+
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ],
+    [ 'users', 'ユーザー一覧', :users ],
+    [ 'user', "#{current_user.display_name}の詳細", current_user ]]
+
+  form_options = { url: :new_email,
+        html: { class: "form-horizontal", role: 'form' }}
+
+  new_form_options = { url: :new_email, html: { class: "", role: 'form' }}
+%>
+
+
 <% if current_user %>
   <div class="panel panel-default">
-    <div class="panel-heading">パスワード編集</div>
-    <div class="panel-body">
-      <%= form_for @email, url: :new_email,
-        html: { class: "form-horizontal", role: 'form' } do |f| %>
-        <%= markup do |m|
-          p = HorizontalFormPresenter.new(f, self)
-          p.with_options(required: true) do |q|
-            m << q.email_field_block(:address, "メールアドレス", columns: 10)
-            m << q.hidden_field_block(:user_id, "", value: current_user.id)
-            m << p.submit_button(label_text: "決定")
-          end
-        end %>
-      <% end %>
-    </div>
+    <%= render 'add', form_options: form_options %>
   </div>
 <% else %>
   <div class="panel panel-default session-form">
-    <div class="panel-heading">Wellcome to Planets Web Site!</div>
-    <div class="panel-body">
-      <%= form_for @email, url: :new_email, html: { class: "", role: 'form' } do |f| %>
-        <% markup do |m|
-          p = HorizontalFormPresenter.new(f, self)
-          p.with_options(required: true) do |q|
-            m << q.email_field_block(:address, "メールアドレス", columns: 10, new_user: true)
-            m << q.submit_button
-          end
-        end %>
-      <% end %>
-    </div>
+    <%= render 'new', new_form_options: new_form_options %>
   </div>
 <% end %>
