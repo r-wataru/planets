@@ -13,16 +13,19 @@ class UserForm
   def assign_attributes(params = {})
     @params = params
     user.assign_attributes(user_params)
-    user.image.assign_attributes(image_params)
-    if params[:image][:uploaded_image_destroy].present? &&
-        params[:image][:uploaded_image_destroy] == "1"
-      user.image.data = nil
-      user.image.content_type = nil
-    end
-    if params[:image][:uploaded_thumbnail_destroy].present? &&
-        params[:image][:uploaded_thumbnail_destroy] == "1"
-      user.image.thumbnail = nil
-      user.image.thumbnail_content_type = nil
+    if params[:user][:image].present?
+      user.image.assign_attributes(image_params)
+      if params[:image][:uploaded_image_destroy].present? &&
+          params[:image][:uploaded_image_destroy] == "1"
+        user.image.data = nil
+        user.image.content_type = nil
+      end
+
+      if params[:image][:uploaded_thumbnail_destroy].present? &&
+          params[:image][:uploaded_thumbnail_destroy] == "1"
+        user.image.thumbnail = nil
+        user.image.thumbnail_content_type = nil
+      end
     end
   end
 

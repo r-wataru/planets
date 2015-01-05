@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
+  layout "session_form"
   def new
     if current_user
       redirect_to :root
     else
       @form = LoginForm.new
-      render action: 'new', layout: "session_form"
     end
   end
 
@@ -12,6 +12,10 @@ class SessionsController < ApplicationController
     @form = LoginForm.new(params[:login_form])
     if @form.email.present?
       email = Email.find_by(address: @form.email)
+      if email.nil?
+        user = User.find_by(login_name: @form.email)
+        email = user.emails.find_by(main: true) if user
+      end
     end
     if Authenticator.new(email).authenticate(@form.password)
       session[:current_user_id] = email.user.id
