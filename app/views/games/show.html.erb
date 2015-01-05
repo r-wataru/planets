@@ -1,5 +1,9 @@
-<%= render "games/header" %>
 <%
+  @page_title_icon = 'line-chart'
+  @page_title_text = "#{@game.name}の詳細"
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ],
+    [ 'line-chart', '成績表', :results ]]
   @javascript = 'PitcherBatterHelper'
 
   game_form_options = {
@@ -7,6 +11,8 @@
     html: { class: "form-horizontal", role: 'form' }
   }
 %>
+
+<%= render "games/header" %>
 
 <!-- 試合結果 -->
 <%= render "games/game" %>

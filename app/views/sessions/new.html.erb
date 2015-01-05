@@ -1,7 +1,12 @@
+<%
+  form_options = { url: :session, 
+    html: { class: "form-signin", role: 'form' }}
+%>
+
 <div class="panel panel-default">
   <div class="panel-heading">Wellcome to Planets Web Site!</div>
   <div class="panel-body">
-    <%= form_for @form, url: :session, html: { class: "form-signin", role: 'form' } do |f| %>
+    <%= form_for @form, form_options do |f| %>
       <%= f.text_field :email, class: 'form-control', placeholder: 'メールアドレスもしくはログイン名', required: true, autofocus: true %>
       <%= f.password_field :password, class: 'form-control', placeholder: 'パスワード', required: true %>
       <button class="btn btn-primary btn-block" type="submit">

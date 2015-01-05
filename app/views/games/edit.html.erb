@@ -1,8 +1,13 @@
 <%
-  edit_form_options = {
-    html: { class: "form-horizontal", role: 'form' }
-  }
   @javascript = 'PitcherBatterHelper'
+  @page_title_icon = 'pencil'
+  @page_title_text = "#{@game.name}の編集"
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ],
+    [ 'line-chart', '成績表', :results ],
+    [ 'line-chart', "#{@game.name}の詳細", @game ]]
+  edit_form_options = {
+    html: { class: "form-horizontal", role: 'form' }}
 %>
 
 <%= render "games/header" %>

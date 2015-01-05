@@ -1,7 +1,12 @@
+<%
+  form_options = { url: :passwords,
+    html: { class: "form-signin", role: 'form' }, method: :post }
+%>
+
 <div class="panel panel-default">
   <div class="panel-heading">Wellcome to Planets Web Site!</div>
   <div class="panel-body">
-    <%= form_for @change_password_form, url: :passwords, html: { class: "form-signin", role: 'form' }, method: :post do |f| %>
+    <%= form_for @change_password_form, form_options do |f| %>
       <%= markup do |m|
         p = HorizontalFormPresenter.new(f, self)
         p.with_options(required: true) do |q|

@@ -1,16 +1,15 @@
 <%
-@page_title_icon = 'pencil'
-@page_title_text = "試合結果作成"
-@breadcrumbs = [
-  [ 'home', 'トップ', :root ],
-  [ 'line-chart', '成績表', :results ]]
-@javascript = 'DataPickerValue'
+  @page_title_icon = 'pencil'
+  @page_title_text = "試合結果作成"
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ],
+    [ 'line-chart', '成績表', :results ]]
+  @javascript = 'DataPickerValue'
 
-new_form_options = {
-  url: :games,
-  method: :post,
-  html: { class: "form-horizontal", role: 'form' }
-    }
+  new_form_options = {
+    url: :games,
+    method: :post,
+    html: { class: "form-horizontal", role: 'form' }}
 %>
 
 <%= render "games/header" %>

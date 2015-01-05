@@ -1,7 +1,11 @@
+<%
+  form_options = { html: { class: "form-signin", role: 'form' }}
+%>
+
 <div class="panel panel-default">
   <div class="panel-heading">Wellcome to Planets Web Site!</div>
   <div class="panel-body">
-    <%= form_for @user, html: { class: "form-signin", role: 'form' } do |f| %>
+    <%= form_for @user, form_options do |f| %>
       <%= markup do |m|
         p = HorizontalFormPresenter.new(f, self)
         p.with_options(required: true) do |q|

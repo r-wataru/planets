@@ -1,10 +1,10 @@
 <%
-@page_title_icon = 'line-chart'
-@page_title_text = "成績表"
-@javascript = 'SelectYear'
+  @page_title_icon = 'line-chart'
+  @page_title_text = "成績表"
+  @javascript = 'SelectYear'
 
-@breadcrumbs = [
-  [ 'home', 'トップ', :root ]]
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ]]
 %>
 
 <%  select_array = @seasons.map{|a| [a.year,a.id] } %>

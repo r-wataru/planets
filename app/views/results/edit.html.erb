@@ -1,5 +1,11 @@
 <%
   @javascript = 'PitcherBatterHelper'
+  @page_title_icon = 'pencil'
+  @page_title_text = "野手の編集"  
+  @breadcrumbs = [
+    [ 'home', 'トップ', :root ],
+    [ 'line-chart', '成績表', :results ],
+    [ 'line-chart', "#{@game.name}の詳細", @game ]]
 %>
 
 <%= render "results/header" %>
