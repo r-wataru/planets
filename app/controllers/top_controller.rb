@@ -3,7 +3,7 @@ class TopController < ApplicationController
     if current_user
       render :index, layout: "application"
     else
-      render :index, layout: "before_authentication"
+      render :index, layout: "session_form"
     end
   end
   

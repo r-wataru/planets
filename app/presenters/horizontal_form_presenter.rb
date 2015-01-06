@@ -153,7 +153,7 @@ class HorizontalFormPresenter
     choices = choices << [ "助っ人", 0 ] if options[:new_record]
 
     markup(:div) do |m|
-      m.div(class: "table-responsive", style: "overflow: scroll") do
+      m.div(class: "table-responsive") do
         m.table(class: "table table-hover table-striped") do
           m.tr(class: "statsTable01") do
             label_texts.each do |label|
@@ -199,7 +199,7 @@ class HorizontalFormPresenter
     markup(:div, class: 'form-group') do |m|
       m << decorated_label(name, label_text, options)
       m.div(class: "col-sm-#{input_columns}") do
-        m.div(class: "table-responsive", style: "overflow: scroll;") do
+        m.div(class: "table-responsive") do
           m.table(class: "table table-hover table-striped") do
             m.tr(class: "statsTable01") do
               m.td("チーム名")

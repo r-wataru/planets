@@ -12,19 +12,19 @@
   <!-- ユーザー情報とデータ -->
   <div class="col-md-12">
     <% if @user.image && @user.image.data.present? %>
-      <div style="width: 100%; margin-bottom: 20px;">
+      <div class="cover-wrappper">
         <%= image_tag cover_user_path(@user, format: @user.image.extension), width: "100%" %>
       </div>
     <% end %>
     <div class="col-md-6">
-      <div class="col-md-12" style="margin-bottom: 20px;">
+      <div class="col-md-12 margin-bottom">
         <% @user.range.each do |r| %>
           <span class="label label-<%= color_position(r) %>"><%= display_position(r) %></span>
         <% end %>
         <%= content_tag :span, @user.hitting_name, class: "label label-danger" if @user.ability.has_key?(:hit) %>
         <%= content_tag :span, @user.throwing_name, class: "label label-primary" if @user.ability.has_key?(:throw) %>
       </div>
-      <div class="col-md-12" style="padding: 0;">
+      <div class="col-md-12 padding0">
         <% if @user.image && @user.image.thumbnail.present? %>
           <%= image_tag thumbnail_user_path(@user, format: @user.image.extension) %>
         <% else %>
@@ -45,7 +45,7 @@
         <%= @user.description %>
       </div>
 
-      <div class="col-md-12" style="padding: 0;">
+      <div class="col-md-12 padding0">
         <div class="panel panel-default">
           <div class="panel-heading">
             <strong># <%= @user.number %></strong>
@@ -56,7 +56,7 @@
           </div>
           <div class="panel-body">
             <% if @characters.pitcher.present? %>
-              <div class="col-md-12" style="margin-bottom: 20px;">
+              <div class="col-md-12 margin-bottom">
                 <% @characters.pitcher.each do |character| %>
                   <%= content_tag :span, character.name, class: "label label-success" if character.condition == 0 %>
                   <%= content_tag :span, character.name, class: "label label-default" if character.condition == 1 %>
@@ -130,7 +130,7 @@
           </div>
           <div class="panel-body">
             <% if @characters.result.present? %>
-              <div class="col-md-12" style="margin-bottom: 20px;">
+              <div class="col-md-12 margin-bottom">
                 <% @characters.result.each do |character| %>
                   <%= content_tag :span, character.name, class: "label label-success" if character.condition == 0 %>
                   <%= content_tag :span, character.name, class: "label label-default" if character.condition == 1 %>

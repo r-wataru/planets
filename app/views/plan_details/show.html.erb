@@ -21,15 +21,15 @@
   </div>
   <div class="panel-body">
     <b>タイトル</b><br/>
-    <div style="margin-left: 10px;">
+    <div class="left-margin">
       <%= @plan_detail.name %><br/>
     </div>
     <b>説明</b><br/>
-    <div style="margin-left: 10px;">
+    <div class="left-margin">
       <%= simple_format(@plan_detail.description) %><br/>
     </div>
     <b>時間</b><br/>
-    <div style="margin-left: 10px;">
+    <div class="left-margin">
       <%= @plan_detail.starts_on.try(:strftime, "%H:%M") %> 〜
       <%= @plan_detail.ends_on.try(:strftime, "%H:%M") %><br/>
     </div>

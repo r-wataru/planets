@@ -1,10 +1,10 @@
-/* app/assets/stylesheets/staff/page_header.css.scss */
+/* page_header */
 
 .page-header {
   margin: 0px -20px 20px -20px;
-  border-bottom: noen;
+  border-bottom: none;
   padding-bottom: 0px;
-  
+
   .breadcrumb {
     background: transparent;
     border-bottom: 1px solid #eee;
@@ -15,7 +15,8 @@
     border-radius: 0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
-    
+    display: block;
+
     > li + li:before {
       content: "\f054";
       font-family: FontAwesome;

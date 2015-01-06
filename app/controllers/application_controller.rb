@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
       @form = LoginForm.new
       @from = request.url
       render template: 'errors/login_required',
-        layout: "before_authentication"
+        layout: "session_form"
     else
       render "errors/forbidden", status: 403
     end

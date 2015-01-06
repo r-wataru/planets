@@ -15,7 +15,7 @@
       <% else %>
         <%= image_tag "user.png", alt: "logo", size: "40x40" %>
       <% end %>
-      <b style="margin-left: 10px;"><%= @post.user.present? ? @post.user.display_name : "名無しさん" %></b>
+      <b class="bold-name"><%= @post.user.present? ? @post.user.display_name : "名無しさん" %></b>
       <hr>
     </div>
     <%= simple_format(@post.description) %>
