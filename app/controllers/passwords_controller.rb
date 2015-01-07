@@ -4,13 +4,20 @@ class PasswordsController < ApplicationController
   def new
     if params[:token].present?
       if @user_token = UserToken.active.find_by(value: params[:token])
-        @change_password_form = ChangePasswordForm.new(object: @user_token.user)
+        if Time.current < (@user_token.created_at + 1.hour)
+          @change_password_form = ChangePasswordForm.new(object: @user_token.user)
+        else
+          render action: :failure
+        end
       else
         raise
       end
     else
       raise
     end
+  end
+
+  def failure
   end
 
   def create

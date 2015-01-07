@@ -66,13 +66,26 @@ class UsersController < ApplicationController
       raise
     else
       if NewEmail.not_userd.exists?(value: params[:token]) || session[:omniauth_provider].present?
-        @users = User.where(checked: false)
-        @user = User.new
-        render :new, layout: "session_form"
+        if new_email = NewEmail.not_userd.find_by(value: params[:token])
+          if Time.current < (new_email.created_at + 1.hour)
+            @users = User.where(checked: false)
+            @user = User.new
+            render :new, layout: "session_form"
+          else
+            render :failure, layout: "session_form"
+          end
+        else
+          @users = User.where(checked: false)
+          @user = User.new
+          render :new, layout: "session_form"
+        end
       else
         raise
-       end
+      end
     end
+  end
+
+  def failure
   end
 
   def step2

@@ -29,18 +29,28 @@ class EmailsController < ApplicationController
     redirect_to current_user
   end
 
+  def failure
+  end
+
   def add
     if params[:token].present?
-      @new_email = NewEmail.not_userd.find_by(value: params[:token])
-      if current_user
-        if current_user == @new_email.user
-          current_user.emails.create(address: @new_email.address)
+      if @new_email = NewEmail.not_userd.find_by(value: params[:token])
+        if Time.current < (@new_email.created_at + 1.hour)
+          if current_user
+            if current_user == @new_email.user
+              current_user.emails.create(address: @new_email.address)
+            end
+          else
+            Email.create(address: @new_email.address, user_id: @new_email.user_id)
+            session[:current_user_id] = @new_email.user_id
+          end
+          redirect_to @new_email.user
+        else
+          render :failure, layout: "session_form"
         end
       else
-        Email.create(address: @new_email.address, user_id: @new_email.user_id)
-        session[:current_user_id] = @new_email.user_id
+        raise
       end
-      redirect_to @new_email.user
     else
       raise
     end
