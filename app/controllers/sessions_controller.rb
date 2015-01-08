@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   layout "session_form"
+
+  skip_before_filter :authenticate_user
+
   def new
     if current_user
       redirect_to :root

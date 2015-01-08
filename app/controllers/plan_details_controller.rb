@@ -1,4 +1,6 @@
 class PlanDetailsController < ApplicationController
+  skip_before_filter :authenticate_user, only: [ :show ]
+
   def show
     @plan = Plan.find_by(starts_on: params[:schedule_id])
     @plan_detail = @plan.plan_details.find(params[:id])

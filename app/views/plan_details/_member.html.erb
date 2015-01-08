@@ -6,20 +6,26 @@
         options_for_select(select_array, ""), class: "form-control selecting-condition", size: "6" %>
     </div>
     <div class="col-sm-3">
-      <button type="button" class="btn btn-primary selected_user_link select-button" data-int="1">参加</button>
-      <button type="button" class="btn btn-danger delete_user_link select-button" data-int="1">削除</button>
+      <% if current_user %>
+        <button type="button" class="btn btn-primary selected_user_link select-button" data-int="1">参加</button>
+        <button type="button" class="btn btn-danger delete_user_link select-button" data-int="1">削除</button>
+      <% end %>
       <%= select_tag :user_detail_link_selected,
         options_for_select(a_array, ""), class: "form-control selecting-condition", size: "6" %>
     </div>
     <div class="col-sm-3">
-      <button type="button" class="btn btn-primary selected_user_link select-button" data-int="2" >欠席</button>
-      <button type="button" class="btn btn-danger delete_user_link select-button" data-int="2">削除</button>
+      <% if current_user %>
+        <button type="button" class="btn btn-primary selected_user_link select-button" data-int="2" >欠席</button>
+        <button type="button" class="btn btn-danger delete_user_link select-button" data-int="2">削除</button>
+      <% end %>
       <%= select_tag :user_detail_link_absence,
         options_for_select(b_array, ""), class: "form-control selecting-condition", size: "6" %>
     </div>
     <div class="col-sm-3">
-      <button type="button" class="btn btn-primary selected_user_link select-button" data-int="3">保留</button>
-      <button type="button" class="btn btn-danger delete_user_link select-button" data-int="3">削除</button>
+      <% if current_user %>
+        <button type="button" class="btn btn-primary selected_user_link select-button" data-int="3">保留</button>
+        <button type="button" class="btn btn-danger delete_user_link select-button" data-int="3">削除</button>
+      <% end %>
       <%= select_tag :user_detail_link_hold,
         options_for_select(c_array, ""), class: "form-control selecting-condition", size: "6" %>
     </div>

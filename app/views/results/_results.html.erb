@@ -31,7 +31,13 @@
           <% @results.each_with_index do |result, idx| %>
           <% next if result.id.blank? %>
             <tr>
-              <td><%= link_to result.user.display_name, [ :edit, @game, result ] %></td>
+              <td>
+                <% if current_user %>
+                  <%= link_to result.user.display_name, [ :edit, @game, result ] %>
+                <% else %>
+                  <%= link_to result.user.display_name, result.user %>
+                <% end %>
+              </td>
               <td><%= result.plate_appearances %></td>
               <td><%= result.at_bats %></td>
               <td><%= result.single_hits %></td>

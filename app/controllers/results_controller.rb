@@ -1,4 +1,6 @@
 class ResultsController < ApplicationController
+  skip_before_filter :authenticate_user, only: [ :index ]
+
   def index
     @seasons = Season.all
     @season = params[:season].present? ? Season.find(params[:season]) : Season.last

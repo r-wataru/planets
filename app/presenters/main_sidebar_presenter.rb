@@ -5,13 +5,13 @@ class MainSidebarPresenter < Presenter
     markup(:div, class: 'sidebar-nav') do |m|
       m.ul(class: 'nav nav-sidebar') do
         m << dashboard
+        m << result
+        m << member
+        m << schedule
+        m << blog
+        m << vote
+        m << attendance
         if current_user
-          m << result
-          m << member
-          m << schedule
-          m << blog
-          m << vote
-          m << attendance
           m << power_off
         else
           m << power
@@ -53,7 +53,7 @@ class MainSidebarPresenter < Presenter
   end
 
   def result
-    html_class = params[:controller] == 'results' ? 'active' : ''
+    html_class = (params[:controller] == 'results' || params[:controller] == 'games' || params[:controller] == "pitchers") ? 'active' : ''
     markup(:li, class: html_class) do |m|
       m << link_to(fa_icon('line-chart', text: '成績表'), view_context.results_path)
     end
@@ -67,7 +67,7 @@ class MainSidebarPresenter < Presenter
   end
 
   def schedule
-    html_class = params[:controller] == 'schedules' ? 'active' : ''
+    html_class = (params[:controller] == 'schedules' || params[:controller] == "plan_details") ? 'active' : ''
     markup(:li, class: html_class) do |m|
       m << link_to(fa_icon('table', text: 'スケジュール'), view_context.schedules_path)
     end

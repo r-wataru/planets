@@ -29,6 +29,6 @@
       <p>予定がありません。</p>
     <% end %>
 
-    <%= link_to "新規作成", new_schedule_plan_detail_path(schedule_id: @plan.starts_on), class: "btn btn-success", type: "button" %>
+    <%= link_to "新規作成", new_schedule_plan_detail_path(schedule_id: @plan.starts_on), class: "btn btn-success", type: "button" if current_user %>
   </div>
 </div>

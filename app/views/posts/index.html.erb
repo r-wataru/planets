@@ -11,7 +11,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">掲示板一覧</div>
       <div class="panel-body">
-        <%= link_to "新規作成", :new_post, class: "btn btn-primary link-bottom", type: "button" %>
+        <%= link_to "新規作成", :new_post, class: "btn btn-primary link-bottom", type: "button" if current_user %>
         <table class="table table-striped table-hover" style="table-layout: auto;">
           <tr>
             <td>種別</td>
@@ -20,6 +20,7 @@
             <td>最新更新日時</td>
           </tr>
           <% @posts.each do |post| %>
+          <% next if !post.publication? if !current_user  %>
           <tr>
             <td>
               <%= content_tag :span, post.publication? ? "OPEN" : "CLOSE",

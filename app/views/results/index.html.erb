@@ -20,4 +20,4 @@
 <!-- 野手 -->
 <%= render "results/averages/average" %>
 
-<%= link_to "新規作成", :new_game, class: "btn btn-primary", role: "button" %>
+<%= link_to "新規作成", :new_game, class: "btn btn-primary", role: "button" if current_user %>

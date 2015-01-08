@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  skip_before_filter :authenticate_user, only: [ :index, :update_count ]
+
   def index
     @votes = Vote.active
     @past_votes = Vote.not_active

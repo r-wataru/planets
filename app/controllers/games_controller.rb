@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  skip_before_filter :authenticate_user, only: [ :show ]
+
   def show
     @game = Game.find(params[:id])
     @pitchers = @game.pitchers

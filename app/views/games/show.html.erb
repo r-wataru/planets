@@ -19,23 +19,27 @@
 <!-- 投手結果 -->
 <%= render "pitchers/pitchers" %>
 
-<div class="panel panel-default">
-  <div class="panel-heading">投手成績入力</div>
-  <div class="panel-body">
-    <%= form_for [ @game, @new_pitcher ], @new_p_form_options do |f| %>
-      <%= render "pitchers/form", f: f, pitcher: @new_pitcher %>
-    <% end %>
+<% if current_user %>
+  <div class="panel panel-default">
+    <div class="panel-heading">投手成績入力</div>
+    <div class="panel-body">
+      <%= form_for [ @game, @new_pitcher ], @new_p_form_options do |f| %>
+        <%= render "pitchers/form", f: f, pitcher: @new_pitcher %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <!-- 野手結果 -->
 <%= render "results/results" %>
 
-<div class="panel panel-default">
-  <div class="panel-heading">野手成績</div>
-  <div class="panel-body">
-    <%= form_for [ @game, @new_result ], @new_b_form_options do |f| %>
-      <%= render "results/form", f: f, result: @new_result %>
-    <% end %>
+<% if current_user %>
+  <div class="panel panel-default">
+    <div class="panel-heading">野手成績</div>
+    <div class="panel-body">
+      <%= form_for [ @game, @new_result ], @new_b_form_options do |f| %>
+        <%= render "results/form", f: f, result: @new_result %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

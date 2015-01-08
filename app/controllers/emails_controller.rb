@@ -1,4 +1,6 @@
 class EmailsController < ApplicationController
+  skip_before_filter :authenticate_user, except: [ :destroy, :main ]
+
   def destroy
     @email = current_user.emails.find(params[:id])
     @email.destroy

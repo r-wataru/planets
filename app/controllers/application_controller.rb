@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_filter :authenticate_user
+
   class Forbidden < StandardError; end
   class NotFound < StandardError; end
   class BadRequest < StandardError; end
@@ -36,7 +38,7 @@ class ApplicationController < ActionController::Base
 
   def rescue_403(exception)
     if request.xhr?
-      render_error "errors/forbidden", 403
+      render "errors/forbidden", status: 403
     elsif request.get? && !current_user
       @form = LoginForm.new
       @from = request.url
@@ -48,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   def rescue_404(exception)
-    render_error "errors/not_found", 404
+    render "errors/not_found", status: 404
   end
 
   def rescue_500(exception)

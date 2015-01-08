@@ -1,4 +1,6 @@
 class SchedulesController < ApplicationController
+  skip_before_filter :authenticate_user
+
   def index
     if params[:change].present?
       day_array = params[:change].unpack("a4a2")
@@ -29,7 +31,7 @@ class SchedulesController < ApplicationController
       @plan = Plan.new(starts_on: params[:id])
     end
   end
-  
+
   def still
     @still = Plan.where("#{Date.today} <= starts_on")
   end

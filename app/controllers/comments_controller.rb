@@ -1,9 +1,21 @@
 class CommentsController < ApplicationController
+  skip_before_filter :authenticate_user, only: [ :index, :create ]
+
   def index
     @post = Post.find(params[:post_id])
-    @comments = @post.comments.page(params[:page]).per(10)
-    @comment = Comment.new
-    @comment_form = CommentForm.new(@comment)
+    if @post.publication?
+      @comments = @post.comments.page(params[:page]).per(10)
+      @comment = Comment.new
+      @comment_form = CommentForm.new(@comment)
+    else
+      if current_user
+        @comments = @post.comments.page(params[:page]).per(10)
+        @comment = Comment.new
+        @comment_form = CommentForm.new(@comment)
+      else
+        raise NotFound
+      end
+    end
   end
 
   def create_image

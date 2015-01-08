@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  skip_before_filter :authenticate_user, only: [
+    :new, :step2, :step3, :update, :create,
+    :index, :show, :thumbnail, :cover, :failure ]
+
   def index
     @users = User.member.order("number ASC")
   end
@@ -63,7 +67,7 @@ class UsersController < ApplicationController
 
   def new
     if current_user
-      raise
+      raise NotFound
     else
       if NewEmail.not_userd.exists?(value: params[:token]) || session[:omniauth_provider].present?
         if new_email = NewEmail.not_userd.find_by(value: params[:token])
@@ -80,7 +84,7 @@ class UsersController < ApplicationController
           render :new, layout: "session_form"
         end
       else
-        raise
+        raise NotFound
       end
     end
   end
@@ -109,18 +113,18 @@ class UsersController < ApplicationController
             @from_email = session[:omniauth_provider].present? ? false : true
           end
         else
-          raise
+          raise NotFound
         end
         render "step2", layout: "session_form"
       end
     else
-      raise
+      raise NotFound
     end
   end
 
   def step3
     if !request.post? || current_user
-      raise
+      raise BadRequest
     else
       if params[:user][:user_id]
         @user = User.find(params[:user][:user_id])
@@ -136,7 +140,7 @@ class UsersController < ApplicationController
       if NewEmail.not_userd.exists?(value: @user.token)
         @from_email = true
       elsif session[:omniauth_provider].blank?
-        raise
+        raise BadRequest
       end
     end
   end
@@ -147,7 +151,7 @@ class UsersController < ApplicationController
     else
       # パスワード確認
       @user = User.new user_params
-      if AuthenticateMember.new.authenticate(@user.planets_password)
+      if AuthenticateMember.new(@user).authenticate(@user.planets_password)
         @user.checked = true
         if @user.save
           if session[:omniauth_provider].present?

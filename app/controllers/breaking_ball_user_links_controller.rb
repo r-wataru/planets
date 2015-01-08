@@ -2,7 +2,6 @@ class BreakingBallUserLinksController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @link = @user.breaking_ball_user_links.find(params[:id])
-    p @link.level
     breaking_ball_id = params[:ball][:select_value]
     level = params[:ball][:select_level]
     @link.breaking_ball_id = breaking_ball_id.to_i

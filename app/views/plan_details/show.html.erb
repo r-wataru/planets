@@ -34,7 +34,7 @@
       <%= @plan_detail.ends_on.try(:strftime, "%H:%M") %><br/>
     </div>
     <br/>
-    <%= link_to "編集", edit_schedule_plan_detail_path(id: @plan_detail.id, schedule_id: @plan.id), class: "btn btn-primary", type: "buttom" %>
+    <%= link_to "編集", edit_schedule_plan_detail_path(id: @plan_detail.id, schedule_id: @plan.id), class: "btn btn-primary", type: "buttom" if current_user %>
   </div>
 </div>
 

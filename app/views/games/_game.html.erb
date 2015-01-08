@@ -64,6 +64,6 @@
       </table>
     </div>
 
-    <%= link_to "編集", [ :edit, @game ], class: "btn btn-primary", role: "button" %>
+    <%= link_to "編集", [ :edit, @game ], class: "btn btn-primary", role: "button" if current_user %>
   </div>
 </div>
