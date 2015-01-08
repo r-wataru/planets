@@ -18,7 +18,9 @@
       </div>
       <%= content_tag :div, id: "page-content-wrapper",
             data: (@javascript.present? ? { javascript: @javascript } : nil) do %>
-        <%= PageHeaderPresenter.new(self).render %>
+        <% if @exception.blank? %>
+          <%= PageHeaderPresenter.new(self).render %>
+        <% end %>
         <div class="row">
           <div class="col-lg-12">
             <%= flash_messages %>

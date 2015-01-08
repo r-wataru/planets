@@ -1,5 +1,5 @@
 <%
-  form_options = { url: :session, 
+  form_options = { url: :session,
     html: { class: "form-signin", role: 'form' }}
 %>
 
@@ -17,9 +17,8 @@
             onClick="window.open('/auth/facebook','fb','width=700,height=300');return false;">
       <%= fa_icon('facebook-square', text: "Facebookでログイン") %>
     </button>
-    <button class="btn btn-success btn-block session-form-button" type="submit">
-      <%= link_to fa_icon('plug', text: "新規作成"), :new_new_email %>
-    </button>
+    <%= link_to fa_icon('plug', text: "新規作成"), :new_new_email,
+      class: "btn btn-success btn-block session-form-button", type: "button" %>
     <p><%= link_to "パスワード忘れた？", :forgot_password_emails, class: "session-form-button" %></p>
   </div>
 </div>

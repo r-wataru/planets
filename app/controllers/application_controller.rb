@@ -33,10 +33,12 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def rescue_400(exception)
+    @exception = exception
     render "errors/bad_request", status: 400
   end
 
   def rescue_403(exception)
+    @exception = exception
     if request.xhr?
       render "errors/forbidden", status: 403
     elsif request.get? && !current_user
@@ -50,6 +52,7 @@ class ApplicationController < ActionController::Base
   end
 
   def rescue_404(exception)
+    @exception = exception
     render "errors/not_found", status: 404
   end
 
