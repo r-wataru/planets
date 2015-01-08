@@ -51,10 +51,10 @@ class EmailsController < ApplicationController
           render :failure, layout: "session_form"
         end
       else
-        raise
+        raise NotFound
       end
     else
-      raise
+      raise NotFound
     end
   end
 end

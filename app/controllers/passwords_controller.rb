@@ -12,10 +12,10 @@ class PasswordsController < ApplicationController
           render action: :failure
         end
       else
-        raise
+        raise NotFound
       end
     else
-      raise
+      raise NotFound
     end
   end
 
