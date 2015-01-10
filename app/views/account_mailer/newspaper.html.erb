@@ -1,0 +1,26 @@
+サイト内情報が更新されました。
+--------------------------------------------------------
+
+今すぐ下記をCheck!!
+<%= @news.message %>
+
+<% if @news.vote.present? %>
+  <%= votes_path(only_path: false, :protocol => "http") %>
+<% elsif @news.game.present? %>
+  <%= game_path(id: @news.game_id, only_path: false, :protocol => "http") %>
+<% elsif @news.pitcher.present? %>
+  <%= game_path(id: @news.pitcher.game.id, only_path: false, :protocol => "http") %>
+<% elsif @news.result.present? %>
+  <%= game_path(id: @news.result.game.id, only_path: false, :protocol => "http") %>
+<% elsif @news.post.present? %>
+  <%= post_comments_path(post_id: @news.post_id, only_path: false, :protocol => "http") %>
+<% elsif @news.comment.present? %>
+  <%= post_comments_path(post_id: @news.comment.post_id, only_path: false, :protocol => "http") %>
+<% elsif @news.pitcher.present? %>
+  <%= new_user_path(token: @new_email.value, only_path: false, :protocol => "http") %>
+<% elsif @news.plan_detail.present? %>
+  <%= schedule_plan_detail_path(schedule_id: @news.plan_detail.plan.starts_on.strftime("%Y-%m-%d"), id: @news.plan_detail_id, only_path: false, :protocol => "http") %>
+<% end %>
+
+………………………………………………………………………
+青山Planets

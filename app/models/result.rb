@@ -40,6 +40,8 @@ require 'csv'
 require "kconv"
 require 'nkf'
 class Result < ActiveRecord::Base
+  include AfterNewspaper
+
   belongs_to :game
   belongs_to :user
 

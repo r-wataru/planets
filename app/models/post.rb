@@ -16,6 +16,8 @@
 #
 
 class Post < ActiveRecord::Base
+  include AfterNewspaper
+
   belongs_to :user
   has_many :comments, dependent: :destroy
 

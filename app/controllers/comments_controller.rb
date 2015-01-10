@@ -4,12 +4,12 @@ class CommentsController < ApplicationController
   def index
     @post = Post.find(params[:post_id])
     if @post.publication?
-      @comments = @post.comments.page(params[:page]).per(10)
+      @comments = @post.comments.order("id DESC").page(params[:page]).per(10)
       @comment = Comment.new
       @comment_form = CommentForm.new(@comment)
     else
       if current_user
-        @comments = @post.comments.page(params[:page]).per(10)
+        @comments = @post.comments.order("id DESC").page(params[:page]).per(10)
         @comment = Comment.new
         @comment_form = CommentForm.new(@comment)
       else

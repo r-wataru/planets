@@ -10,5 +10,7 @@
 #
 
 class Plan < ActiveRecord::Base
+  include AfterNewspaper
+
   has_many :plan_details
 end

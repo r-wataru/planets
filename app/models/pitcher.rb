@@ -28,6 +28,8 @@ require 'csv'
 require "kconv"
 require 'nkf'
 class Pitcher < ActiveRecord::Base
+  include AfterNewspaper
+
   belongs_to :user
   belongs_to :game
 

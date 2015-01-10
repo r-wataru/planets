@@ -21,6 +21,8 @@
 # order number DESCで一番大きい者をgoldにする
 
 class Vote < ActiveRecord::Base
+  include AfterNewspaper
+
   belongs_to :user
 
   scope :active, ->{ where(possible: true) }

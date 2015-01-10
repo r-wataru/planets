@@ -17,6 +17,8 @@
 #
 
 class PlanDetail < ActiveRecord::Base
+  include AfterNewspaper
+
   belongs_to :plan
   has_many :users, through: :user_plan_detail_links
   has_many :user_plan_detail_links

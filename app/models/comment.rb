@@ -17,6 +17,8 @@
 #
 
 class Comment < ActiveRecord::Base
+  include AfterNewspaper
+
   belongs_to :post
   belongs_to :user
   has_one :image, class_name: "CommentImage", dependent: :destroy

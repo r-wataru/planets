@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225075049) do
+ActiveRecord::Schema.define(version: 20150108231242) do
 
   create_table "breaking_ball_user_links", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -100,6 +100,29 @@ ActiveRecord::Schema.define(version: 20141225075049) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "news", force: true do |t|
+    t.integer  "vote_id"
+    t.integer  "result_id"
+    t.integer  "post_id"
+    t.integer  "plan_id"
+    t.integer  "plan_detail_id"
+    t.integer  "pitcher_id"
+    t.integer  "game_id"
+    t.integer  "comment_id"
+    t.string   "message"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "news", ["comment_id"], name: "index_news_on_comment_id", using: :btree
+  add_index "news", ["game_id"], name: "index_news_on_game_id", using: :btree
+  add_index "news", ["pitcher_id"], name: "index_news_on_pitcher_id", using: :btree
+  add_index "news", ["plan_detail_id"], name: "index_news_on_plan_detail_id", using: :btree
+  add_index "news", ["plan_id"], name: "index_news_on_plan_id", using: :btree
+  add_index "news", ["post_id"], name: "index_news_on_post_id", using: :btree
+  add_index "news", ["result_id"], name: "index_news_on_result_id", using: :btree
+  add_index "news", ["vote_id"], name: "index_news_on_vote_id", using: :btree
 
   create_table "passwords", force: true do |t|
     t.string   "hashed_password"
@@ -287,6 +310,15 @@ ActiveRecord::Schema.define(version: 20141225075049) do
   add_foreign_key "comment_images", "comments", name: "comment_images_comment_id_fk"
 
   add_foreign_key "comments", "posts", name: "comments_post_id_fk"
+
+  add_foreign_key "news", "comments", name: "news_comment_id_fk"
+  add_foreign_key "news", "games", name: "news_game_id_fk"
+  add_foreign_key "news", "pitchers", name: "news_pitcher_id_fk"
+  add_foreign_key "news", "plan_details", name: "news_plan_detail_id_fk"
+  add_foreign_key "news", "plans", name: "news_plan_id_fk"
+  add_foreign_key "news", "posts", name: "news_post_id_fk"
+  add_foreign_key "news", "results", name: "news_result_id_fk"
+  add_foreign_key "news", "votes", name: "news_vote_id_fk"
 
   add_foreign_key "plan_details", "plans", name: "plan_details_plan_id_fk"
 
