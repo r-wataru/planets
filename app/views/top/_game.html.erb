@@ -1,0 +1,50 @@
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">前回試合結果</div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <tr class="statsTable01">
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>T</th>
+          </tr>
+          <tr>
+            <td><%= @game.top %></td>
+            <td><%= @game.one %></td>
+            <td><%= @game.two %></td>
+            <td><%= @game.three %></td>
+            <td><%= @game.four %></td>
+            <td><%= @game.five %></td>
+            <td><%= @game.six %></td>
+            <td><%= @game.seven %></td>
+            <td><%= @game.eight %></td>
+            <td><%= @game.nine %></td>
+            <td><%= @game.total %></td>
+          </tr>
+          <tr>
+            <td><%= @game.bottom %></td>
+            <td><%= @game.one_2 %></td>
+            <td><%= @game.two_2 %></td>
+            <td><%= @game.three_2 %></td>
+            <td><%= @game.four_2 %></td>
+            <td><%= @game.five_2 %></td>
+            <td><%= @game.six_2 %></td>
+            <td><%= @game.seven_2 %></td>
+            <td><%= @game.eight_2 %></td>
+            <td><%= @game.nine_2 %></td>
+            <td><%= @game.total_2 %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

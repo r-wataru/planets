@@ -5,35 +5,11 @@
 @breadcrumbs = []
 %>
 
-<%= link_to "問い合わせ", :new_inquiry %>
-
 <div class="row">
   <div class="col-md-12">
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">スケジュール</div>
-        <div class="panel-body">
-          スケジュールはありません。
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">ニュース</div>
-        <div class="panel-body">
-          ニュースはありません。
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">前回試合結果</div>
-        <div class="panel-body">
-          試合はありません。
-        </div>
-      </div>
-    </div>
+    <%= render "images" %>
+    <%= render "schedule" %>
+    <%= render "news" %>
+    <%= render "game" %>
   </div>
 </div>

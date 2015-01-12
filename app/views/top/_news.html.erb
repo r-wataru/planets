@@ -1,0 +1,19 @@
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">ニュース</div>
+    <div class="panel-body">
+      <% if @news.present? %>
+        <ul class="list-group">
+          <% @news.each do |new| %>
+          <li class="list-group-item">
+            <%= new.created_at.strftime("%Y/%m/%d %H:%M") %>:
+            <%= new.message %>
+          </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>ニュースはありません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>
