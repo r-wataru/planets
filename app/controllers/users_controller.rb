@@ -214,7 +214,7 @@ class UsersController < ApplicationController
 
   private
   def send_cover_image
-    if @user.image.present?
+    if @user.image.present? && @user.image.data.present?
       send_data @user.image.data,
         type: @user.image.content_type, disposition: "inline"
     else
@@ -223,7 +223,7 @@ class UsersController < ApplicationController
   end
 
   def send_image
-    if @user.image.present?
+    if @user.image.present? && @user.image.thumbnail.present?
       send_data @user.image.thumbnail,
         type: @user.image.thumbnail_content_type, disposition: "inline"
     else

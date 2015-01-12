@@ -26,7 +26,7 @@
       </div>
       <div class="col-md-12 padding0">
         <% if @user.image && @user.image.thumbnail.present? %>
-          <%= image_tag thumbnail_user_path(@user, format: @user.image.extension) %>
+          <%= image_tag thumbnail_user_path(@user, format: @user.image.thumbnail_extension) %>
         <% else %>
           <%= image_tag "user.png", alt: "logo", size: "100x100" %>
         <% end %>

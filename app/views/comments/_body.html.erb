@@ -3,7 +3,7 @@
     <div>
       <% if comment.user.present? %>
         <% if comment.user.image && comment.user.image.thumbnail.present? %>
-          <%= image_tag thumbnail_user_path(comment.user, format: comment.user.image.extension), size: "40x40" %>
+          <%= image_tag thumbnail_user_path(comment.user, format: comment.user.image.thumbnail_extension), size: "40x40" %>
         <% else %>
           <%= image_tag "user.png", alt: "logo", size: "40x40" %>
         <% end %>
@@ -45,7 +45,7 @@
                   <% UserCommentLink.where(comment: comment).each do |like| %>
                     <% if like.user.present? %>
                       <% if like.user.image && like.user.image.thumbnail.present? %>
-                        <%= image_tag thumbnail_user_path(like.user, format: like.user.image.extension), size: "40x40" %>
+                        <%= image_tag thumbnail_user_path(like.user, format: like.user.image.thumbnail_extension), size: "40x40" %>
                       <% else %>
                         <%= image_tag "user.png", alt: "logo", size: "40x40" %>
                       <% end %>

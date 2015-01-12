@@ -1,5 +1,5 @@
 <%
- thumbnail_path = @user.image.thumbnail.present? ? thumbnail_user_path(@user, format: @user.image.extension) : nil
+ thumbnail_path = @user.image.thumbnail.present? ? thumbnail_user_path(@user, format: @user.image.thumbnail_extension) : nil
  cover_path = @user.image.data.present? ? cover_user_path(@user, format: @user.image.thumbnail_extension) : nil
  alt = @user.number
 %>
