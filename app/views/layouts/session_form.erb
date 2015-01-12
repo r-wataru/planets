@@ -5,6 +5,7 @@
     <%= stylesheet_link_tag    'session_form', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <%= render "analytics" if Rails.env.production? %>
     <link rel="shortcut icon" href="/sapphire.ico" type="image/vnd.microsoft.icon" />
     <link rel="icon" href="/planets.ico" type="image/vnd.microsoft.icon" />
     <meta name="viewport" content="width=device-width" />
