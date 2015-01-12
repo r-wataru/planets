@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   resources :votes do
     post :update_count, on: :member
   end
+  resources :administrators, only: [ :index, :create ]
 
   get 'auth/facebook/callback', to: "sessions#callback"
   get "auth/failure", to: "sessions#failure"

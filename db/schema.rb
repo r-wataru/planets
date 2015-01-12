@@ -288,6 +288,7 @@ ActiveRecord::Schema.define(version: 20150108231242) do
     t.boolean  "helper",          default: false, null: false
     t.text     "ability"
     t.text     "range"
+    t.boolean  "admin",           default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

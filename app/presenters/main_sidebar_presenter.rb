@@ -1,5 +1,5 @@
 class MainSidebarPresenter < Presenter
-  delegate :current_user, to: :view_context
+  delegate :current_user, :current_admin, to: :view_context
 
   def render
     markup(:div, class: 'sidebar-nav') do |m|
@@ -15,6 +15,9 @@ class MainSidebarPresenter < Presenter
           m << power_off
         else
           m << power
+        end
+        if current_admin
+          m << admin
         end
       end
     end
@@ -91,6 +94,13 @@ class MainSidebarPresenter < Presenter
     html_class = params[:action] == 'still' ? 'active' : ''
     markup(:li, class: html_class) do |m|
       m << link_to(fa_icon('send', text: '出席表'), view_context.still_schedules_path)
+    end
+  end
+
+  def admin
+    html_class = params[:controller] == 'administrators' ? 'active' : ''
+    markup(:li, class: html_class) do |m|
+      m << link_to(fa_icon('unlock', text: '代理ログイン'), view_context.administrators_path)
     end
   end
 end

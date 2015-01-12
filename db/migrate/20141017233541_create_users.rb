@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :helper, null: false, default: false
       t.text :ability
       t.text :range
+      t.boolean :admin, null: false, default: false
 
       t.timestamps
     end

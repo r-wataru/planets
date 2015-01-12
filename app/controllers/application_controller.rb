@@ -32,6 +32,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def current_admin
+    current_user && current_user.admin?
+  end
+  helper_method :current_admin
+
   def rescue_400(exception)
     @exception = exception
     render "errors/bad_request", status: 400
