@@ -17,6 +17,7 @@
 #  helper          :boolean          default(FALSE), not null
 #  ability         :text
 #  range           :text
+#  admin           :boolean          default(FALSE), not null
 #  created_at      :datetime
 #  updated_at      :datetime
 #

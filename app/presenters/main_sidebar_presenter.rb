@@ -12,6 +12,7 @@ class MainSidebarPresenter < Presenter
         m << vote
         m << attendance
         if current_user
+          m << inquiry
           m << power_off
         else
           m << power
@@ -101,6 +102,13 @@ class MainSidebarPresenter < Presenter
     html_class = params[:controller] == 'administrators' ? 'active' : ''
     markup(:li, class: html_class) do |m|
       m << link_to(fa_icon('unlock', text: '代理ログイン'), view_context.administrators_path)
+    end
+  end
+
+  def inquiry
+    html_class = params[:controller] == 'inquries' ? 'active' : ''
+    markup(:li, class: html_class) do |m|
+      m << link_to(fa_icon('question-circle', text: '問い合わせ一覧'), view_context.inquiries_path)
     end
   end
 end

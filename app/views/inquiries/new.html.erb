@@ -1,0 +1,33 @@
+<%
+  @page_title_icon = 'question_circle'
+  @page_title_text = "問い合わせ"
+
+  @breadcrumbs = [[ 'home', 'トップ', :root ]]
+
+  form_option = {
+  html: { class: "form-horizontal", role: 'form' },
+  method: :post }
+%>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">問い合わせ作成</div>
+      <div class="panel-body">
+        <p align="center">練習試合の申込などにご利用ください。</p>
+        <%= form_for @inquiry, form_option do |f| %>
+          <%= markup do |m|
+            p = HorizontalFormPresenter.new(f, self)
+            p.with_options(required: true) do |q|
+              m << q.text_field_block(:name, 'お名前', columns: 8)
+              m << q.email_field_block(:email, "メールアドレス", columns: 8)
+              m << q.text_field_block(:subject, 'タイトル', columns: 8)
+              m << q.text_area_block(:body, "本文", columns: 8, size: "12x8")
+            end
+            m << p.submit_button(label_text: "送信")
+          end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

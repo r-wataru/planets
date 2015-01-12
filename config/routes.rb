@@ -54,6 +54,9 @@ Rails.application.routes.draw do
     post :update_count, on: :member
   end
   resources :administrators, only: [ :index, :create ]
+  resources :inquiries, only: [ :new, :create, :index, :show ] do
+    get :thanks, on: :collection
+  end
 
   get 'auth/facebook/callback', to: "sessions#callback"
   get "auth/failure", to: "sessions#failure"

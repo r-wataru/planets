@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108231242) do
+ActiveRecord::Schema.define(version: 20150128231242) do
 
   create_table "breaking_ball_user_links", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -92,6 +92,15 @@ ActiveRecord::Schema.define(version: 20150108231242) do
 
   add_index "games", ["season_id"], name: "index_games_on_season_id", using: :btree
 
+  create_table "inquiries", force: true do |t|
+    t.string   "name",       null: false
+    t.string   "email",      null: false
+    t.string   "subject",    null: false
+    t.text     "body",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "new_emails", force: true do |t|
     t.integer  "user_id"
     t.string   "address",                    null: false
@@ -110,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150108231242) do
     t.integer  "pitcher_id"
     t.integer  "game_id"
     t.integer  "comment_id"
+    t.integer  "inquiry_id"
     t.string   "message"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -117,6 +127,7 @@ ActiveRecord::Schema.define(version: 20150108231242) do
 
   add_index "news", ["comment_id"], name: "index_news_on_comment_id", using: :btree
   add_index "news", ["game_id"], name: "index_news_on_game_id", using: :btree
+  add_index "news", ["inquiry_id"], name: "index_news_on_inquiry_id", using: :btree
   add_index "news", ["pitcher_id"], name: "index_news_on_pitcher_id", using: :btree
   add_index "news", ["plan_detail_id"], name: "index_news_on_plan_detail_id", using: :btree
   add_index "news", ["plan_id"], name: "index_news_on_plan_id", using: :btree
@@ -314,6 +325,7 @@ ActiveRecord::Schema.define(version: 20150108231242) do
 
   add_foreign_key "news", "comments", name: "news_comment_id_fk"
   add_foreign_key "news", "games", name: "news_game_id_fk"
+  add_foreign_key "news", "inquiries", name: "news_inquiry_id_fk"
   add_foreign_key "news", "pitchers", name: "news_pitcher_id_fk"
   add_foreign_key "news", "plan_details", name: "news_plan_detail_id_fk"
   add_foreign_key "news", "plans", name: "news_plan_id_fk"

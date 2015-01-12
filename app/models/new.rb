@@ -36,6 +36,7 @@ class New < ActiveRecord::Base
   belongs_to :pitcher
   belongs_to :game
   belongs_to :comment
+  belongs_to :inquiry
 
   after_commit do
     AccountMailer.newspaper(self).deliver
@@ -80,6 +81,10 @@ class New < ActiveRecord::Base
       n.message = "掲示板を更新しました。"
       update_already = self.exists?(comment_id: data.id,
         created_at: (Date.today.beginning_of_day..Date.today.end_of_day))
+    when "Inquiry"
+      n.inquiry = data
+      n.message = "問い合わせを受け付けました。"
+      update_already = false
     else
       nil
     end

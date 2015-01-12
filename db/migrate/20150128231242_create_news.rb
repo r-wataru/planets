@@ -9,6 +9,7 @@ class CreateNews < ActiveRecord::Migration
       t.references :pitcher
       t.references :game
       t.references :comment
+      t.references :inquiry
       t.string :message
 
       t.timestamps null: false
@@ -22,6 +23,7 @@ class CreateNews < ActiveRecord::Migration
     add_index :news, :pitcher_id
     add_index :news, :game_id
     add_index :news, :comment_id
+    add_index :news, :inquiry_id
     add_foreign_key :news, :votes
     add_foreign_key :news, :results
     add_foreign_key :news, :posts
@@ -30,5 +32,6 @@ class CreateNews < ActiveRecord::Migration
     add_foreign_key :news, :pitchers
     add_foreign_key :news, :games
     add_foreign_key :news, :comments
+    add_foreign_key :news, :inquiries
   end
 end

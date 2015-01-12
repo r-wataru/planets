@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    attributes:
+      inquiry:
+        name: お名前
+        email: メールアドレス
+        subject: 題名
+        body: 本文

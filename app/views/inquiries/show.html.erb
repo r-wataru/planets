@@ -1,0 +1,34 @@
+<%
+  @page_title_icon = 'question_circle'
+  @page_title_text = "問い合わせ"
+
+  @breadcrumbs = [[ 'home', 'トップ', :root ]]
+%>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">問い合わせ詳細</div>
+      <div class="panel-body">
+        <table class="table table-striped table-hover" style="table-layout: auto;">
+          <tr>
+            <td>お名前</td>
+            <td><%= @inquiry.name %></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td><%= @inquiry.email %></td>
+          </tr>
+          <tr>
+            <td>題名</td>
+            <td><%= @inquiry.subject %></td>
+          </tr>
+          <tr>
+            <td>本文</td>
+            <td><%= simple_format(@inquiry.body) %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

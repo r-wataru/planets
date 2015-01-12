@@ -148,7 +148,7 @@ class HorizontalFormPresenter
     helper_options[:class] += " #{options[:class]}" if options[:class].present?
     helper_options[:required] = false
     helper_options[:placeholder] = "助っ人名"
-    
+
     choices = objects.map { |o| [ o.send(:display_user_name), o.id ] }
     choices = choices << [ "助っ人", 0 ] if options[:new_record]
 
@@ -249,6 +249,7 @@ class HorizontalFormPresenter
   def text_area_block(name, label_text, options = {})
     html_options = {}
     html_options[:class] = 'form-control'
+    html_options[:size] = options[:size] if options[:size].present?
     input_columns = calculate_columns(options)
 
     markup(:div, class: "form-group") do |m|
@@ -349,6 +350,10 @@ class HorizontalFormPresenter
     if options[:new_user]
       html_class = "col-sm-12 control-label"
     else
+      if options[:columns].present?
+        columns = calculate_columns(options)
+        label_columns = 12 - columns
+      end
       html_class = "col-sm-#{label_columns} control-label"
     end
 

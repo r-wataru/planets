@@ -27,4 +27,10 @@ class AccountMailer < ActionMailer::Base
     addresses = Email.where(main: true).pluck(:address)
     mail(to: addresses, subject: "Planets サイト更新のお知らせ")
   end
+
+  def inquiry(inquiry)
+    @inquiry = inquiry
+    address = @inquiry.email
+    mail(to: address, subject: "Planets 問い合わせ完了のお知らせ")
+  end
 end
