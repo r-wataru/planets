@@ -4,7 +4,9 @@
   @error_target = [ :top, :bottom, :total, :total_2 ]
   @field_names = [ "先攻", "後攻" ]
   @seasons = Season.all
-  @num = Array(0..99)
+  @num = ["-", "x"]
+  @num << Array(0..99)
+  @num = @num.flatten
   @names = User.all
   @b_keys = Result.result_keys
   @b_labels = Result.result_labels
