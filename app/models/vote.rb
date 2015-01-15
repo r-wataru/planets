@@ -18,6 +18,7 @@
 # cron側 末日に行う
 # model側 4ヶ月毎の末尾かどうか？
 # 0 0 28-31 * * cd /var/rails/planets_production/current/; bin/rails runner -e production "Vote.vote_result_update"
+#               cd /var/rails/planets_production/current/; bin/rails runner -e production "Vote.cron_test"
 # order number DESCで一番大きい者をgoldにする
 
 class Vote < ActiveRecord::Base
@@ -66,6 +67,10 @@ class Vote < ActiveRecord::Base
           vote.save
         end
       end
+    end
+    
+    def cron_test
+      p "A" * 100
     end
 
     def kind_period
