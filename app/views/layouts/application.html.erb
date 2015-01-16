@@ -6,9 +6,13 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <%= render "layouts/analytics" if Rails.env.production? %>
-    <link rel="shortcut icon" href="/sapphire.ico" type="image/vnd.microsoft.icon" />
+    <link rel="shortcut icon" href="/planets.ico" type="image/vnd.microsoft.icon" />
     <link rel="icon" href="/planets.ico" type="image/vnd.microsoft.icon" />
-    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="Author" content="Planets" />
+    <meta name="Keywords" content="草野球,大宮,赤坂,野球,プラネッツ,planets" />
+    <meta name="Description" content="Planets【大宮・青山で活動する草野球チームのWebSiteです】" />
   </head>
   <%= content_tag :body,
     style: params[:controller] == "users" && params[:action] == "show" ? "background: none;" : "" do %>
