@@ -132,15 +132,15 @@ class UsersController < ApplicationController
       else
         @user = User.new user_params
       end
-      if @user.valid?
-        render "step3", layout: "session_form"
-      else
-        render "step2", layout: "session_form"
-      end
       if NewEmail.not_userd.exists?(value: @user.token)
         @from_email = true
       elsif session[:omniauth_provider].blank?
         raise BadRequest
+      end
+      if @user.valid?
+        render "step3", layout: "session_form"
+      else
+        render "step2", layout: "session_form"
       end
     end
   end

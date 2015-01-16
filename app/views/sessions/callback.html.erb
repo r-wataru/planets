@@ -4,7 +4,11 @@
     if (div && window.opener) {
       <% if @user %>
         window.close();
-        window.opener.$.testFunc("/users/new");
+        <% if current_user %>
+          window.opener.$.testFunc("/users/<%= current_user.id %>");
+        <% else %>
+          window.opener.$.testFunc("/users/new");
+        <% end %>
       <% elsif current_user %>
         window.close();
         window.opener.location.href = "/";

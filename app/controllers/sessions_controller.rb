@@ -41,10 +41,23 @@ class SessionsController < ApplicationController
         session[:omniauth_uid] = user_identity.uid
         session[:omniauth_info] = user_identity.info
         @user = user_identity
-        render :callback
+        if current_user
+          @user.user = current_user
+          if @user.save
+            render :callback
+          else
+            render "failure"
+          end
+        else
+          render :callback
+        end
       else
-        session[:current_user_id] = user_identity.user.id
-        render :callback
+        if current_user
+          redirect_to :back
+        else
+          session[:current_user_id] = user_identity.user.id
+          render :callback
+        end
       end
     else
       render "failure"

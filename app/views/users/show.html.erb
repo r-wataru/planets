@@ -116,6 +116,18 @@
           </ul>
           <p>ログインパスワード</p>
           <p>表示出来ません  <%= link_to "パスワード編集", [ :edit_password, @user ] %></p>
+          <p>
+            Facebookでログイン
+            <%= fa_icon("check-square-o") if UserIdentity.exists?(user: current_user) %>
+            <%= content_tag :span, fa_icon("facebook-square") + " 作成",
+              class: "facebookAdd btn btn-primary",
+              onclick: "window.open('/auth/facebook/','fb','width=700,height=300');return false;" unless UserIdentity.exists?(user: current_user) %>
+            <script type="text/javascript">
+              $.testFunc = function(val) {
+                location = (val);
+              };
+            </script>
+          </p>
         </div>
       <% end %>
 
