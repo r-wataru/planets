@@ -30,9 +30,11 @@ class PasswordsController < ApplicationController
     if @change_password_form.save
       @user_token.update_column(:used, true)
       session[:current_user_id] = @user_token.user.id
+      flash.notice = "完了しました。"
       redirect_to @user_token.user
     else
       unless current_user
+        flash.now.alert = "入力に誤りがあります。"
         render action: :new
       end
     end

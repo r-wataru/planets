@@ -16,8 +16,10 @@ class NewEmailsController < ApplicationController
     end
     if @email.save
       @email.delivery_token
+      flash.notice = "メールを送信しました。"
       redirect_to :thanks_new_email
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :new
     end
   end

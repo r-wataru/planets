@@ -24,11 +24,14 @@ class SessionsController < ApplicationController
       session[:current_user_id] = email.user.id
       email.user.update_attribute(:logged_at, Time.current)
       if params[:from]
+        flash.notice = "ログインしました。"
         redirect_to params[:from]
       else
+        flash.notice = "ログインしました。"
         redirect_to :root
       end
     else
+      flash.now.alert = "入力内容が正しくありません。"
       render action: :new
     end
   end

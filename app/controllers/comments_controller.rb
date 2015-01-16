@@ -30,8 +30,10 @@ class CommentsController < ApplicationController
     @comment_form = CommentForm.new(@comment)
     @comment_form.assign_attributes(params[:comment_form])
     if @comment_form.save
+      flash.notice = "掲示板を作成しました。"
       redirect_to [ @post, :comments ]
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :index
     end
   end
@@ -40,6 +42,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.destroy
+    flash.notice = "掲示板を削除しました。"
     redirect_to [ @post, :comments ]
   end
 

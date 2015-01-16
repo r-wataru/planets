@@ -1,4 +1,5 @@
 class BreakingBallUserLinksController < ApplicationController
+  # Ajax PUT
   def update
     @user = User.find(params[:user_id])
     @link = @user.breaking_ball_user_links.find(params[:id])
@@ -13,6 +14,7 @@ class BreakingBallUserLinksController < ApplicationController
     end
   end
 
+  # Ajax POST
   def create
     @user = User.find(params[:user_id])
     breaking_ball_id = params[:ball][:select_value]
@@ -27,6 +29,7 @@ class BreakingBallUserLinksController < ApplicationController
     end
   end
 
+  # Ajax DELETE
   def destroy
     @user = User.find(params[:user_id])
     @ball = @user.breaking_ball_user_links.find(params[:id])
@@ -34,6 +37,7 @@ class BreakingBallUserLinksController < ApplicationController
     render text: "OK"
   end
 
+  # Ajax POST
   # BreakingBallを作成してLinkを作成
   def create_breaking_ball
     @user = User.find(params[:user_id])

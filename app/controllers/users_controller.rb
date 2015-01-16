@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @breaking_balls = BreakingBall.all
   end
 
+  # Ajax PUT
   def update_ability
     @user = User.find(params[:id])
     field = params[:users][:field]
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
     @user_form.assign_attributes(params[:user_form])
     if @user_form.save
       flash.notice = 'ユーザー情報を更新しました。'
-      redirect_to action: 'index'
+      redirect_to @user
     else
       flash.now.alert = '入力に誤りがあります。'
       render action: 'edit_image'
@@ -161,11 +162,14 @@ class UsersController < ApplicationController
             # Email
             new_user_from_email
           end
+          flash.notice = "完了しました。"
           redirect_to :root
         else
+          flash.now.alert = "入力に誤りがあります。"
           render action: :step2
         end
       else
+        flash.now.alert = "入力に誤りがあります。"
         render action: :step3
       end
     end
@@ -187,6 +191,7 @@ class UsersController < ApplicationController
           else
             new_user_from_email
           end
+          flash.notice = "完了しました。"
           redirect_to :root
         else
           render action: :step2
@@ -206,6 +211,7 @@ class UsersController < ApplicationController
     @change_password_form.not_current_user = false
     @change_password_form.object = current_user
     if @change_password_form.save
+      flash.notice = "更新しました。"
       redirect_to current_user
     else
       render action: :edit_password

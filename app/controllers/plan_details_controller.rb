@@ -16,8 +16,10 @@ class PlanDetailsController < ApplicationController
     @plan = Plan.find(params[:schedule_id])
     @plan_detail = @plan.plan_details.new plan_detail_params
     if @plan_detail.save
+      flash.notice = "更新しました。"
       redirect_to schedule_plan_detail_path(id: @plan_detail.id, schedule_id: @plan.starts_on)
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :new
     end
   end
@@ -31,8 +33,10 @@ class PlanDetailsController < ApplicationController
     @plan = Plan.find(params[:schedule_id])
     @plan_detail = @plan.plan_details.find(params[:id])
     if @plan_detail.update_attributes plan_detail_params
+      flash.notice = "更新しました。"
       redirect_to schedule_plan_detail_path(schedule_id: @plan.starts_on, id: @plan_detail)
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :edit
     end
   end

@@ -20,8 +20,10 @@ class GamesController < ApplicationController
     @game = Game.new game_params
     @game.creating_game = true
     if @game.save
+      flash.notice = "作成しました。"
       redirect_to [ :new, @game, :pitcher ]
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :new
     end
   end
@@ -38,8 +40,10 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     if @game.update_attributes game_params
+      flash.notice = "更新しました。"
       redirect_to @game
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :new
     end
   end
@@ -47,6 +51,7 @@ class GamesController < ApplicationController
   def update_reflection
     @game = Game.find(params[:id])
     @game.update_reflection
+    flash.notice = "更新しました。"
     redirect_to :results
   end
 

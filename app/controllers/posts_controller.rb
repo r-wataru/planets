@@ -12,8 +12,10 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new post_params
     if @post.save
+      flash.notice = "作成しました。"
       redirect_to [ @post, :comments ]
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :new
     end
   end
@@ -25,8 +27,10 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes post_params
+      flash.notice = "更新しました。"
       redirect_to [ @post, :comments ]
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :edit
     end
   end
@@ -34,6 +38,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+    flash.notice = "削除しました。"
     redirect_to :posts
   end
 

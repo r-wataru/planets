@@ -13,8 +13,10 @@ class PitchersController < ApplicationController
     @pitchers = @game.pitchers
     @results = @game.results
     if @new_pitcher.save
+      flash.notice = "更新しました。"
       redirect_to [ :new, @game, :result ]
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :new
     end
   end
@@ -36,8 +38,10 @@ class PitchersController < ApplicationController
     @new_pitcher = @game.pitchers.new
     @new_result = @game.results.new
     if @pitcher.update_attributes pitcher_params
+      flash.notice = "更新しました。"
       redirect_to @game
     else
+      flash.now.alert = "入力に誤りがあります。"
       render action: :edit
     end
   end
@@ -46,6 +50,7 @@ class PitchersController < ApplicationController
     @game = Game.find(params[:game_id])
     @pitcher = @game.pitchers.find(params[:id])
     @pitcher.destroy
+    flash.notice = "削除しました。"
     redirect_to @game
   end
 

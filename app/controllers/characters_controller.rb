@@ -1,4 +1,5 @@
 class CharactersController < ApplicationController
+  # Ajax PUT
   def update
     @user = User.find(params[:user_id])
     @character = Character.find(params[:id])
@@ -9,6 +10,7 @@ class CharactersController < ApplicationController
     end
   end
 
+  # Ajax DELETE
   def destroy
     @user = User.find(params[:user_id])
     @character = Character.find(params[:id])
@@ -19,6 +21,7 @@ class CharactersController < ApplicationController
     end
   end
 
+  # Ajax POST
   def create_and_links
     @user = User.find(params[:user_id])
     success,error_message,error_keys,id= Character.new_charcter(params[:users])
