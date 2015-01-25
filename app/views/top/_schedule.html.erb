@@ -2,16 +2,16 @@
   <div class="panel panel-default">
     <div class="panel-heading">スケジュール</div>
     <div class="panel-body">
-      <% if @still.present? %>
+      <% if @still.present? %>      
         <% @still.each_with_index do |still,idx| %>
-          <div class="list-group">
-            <a href="#" class="list-group-item <%= "active" if idx == 0 %>">
+          <ul class="list-group">
+            <li class="list-group-item <%= "active" if idx == 0 %>">
               <h4 class="list-group-item-heading"><%= still.name %></h4>
               <p class="list-group-item-text">
                 <%= still.plan.starts_on.strftime("%Y/%m/%d") %>
               </p>
-            </a>
-          </div>
+            </ul>
+          </ul>
         <% end %>
       <% else %>
         スケジュールはありません。
