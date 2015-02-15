@@ -8,7 +8,7 @@ URL: <%= @request.url %>
 METHOD: <%= @request.method %>
 PARAMS:
 <%= @request.parameters.inspect.gsub(',', ",\n").html_safe %>
-USER: <%= @current_user ? sprintf("%s [%d]", @current_user.screen_name, @current_user.id) : '-' %>
+USER: <%= @current_user ? sprintf("%s [%d]", @current_user.login_name, @current_user.id) : '-' %>
 REFERRER: <%= @request.referrer %>
 
 ================================================================================
